@@ -3,630 +3,794 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ArticleForge — Offline Article AI</title>
+<title>Mystarsnight Quick Search</title>
+<!-- Google AdSense -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114"
+crossorigin="anonymous"></script>
 <style>
-*{box-sizing:border-box}
-:root{
-  --bg:#f5f6f8;
-  --panel:#fff;
-  --text:#17191e;
-  --muted:#707782;
-  --border:#e0e3e8;
-  --accent:#4d5cff;
-  --soft:#eef0ff;
-  --shadow:0 10px 35px rgba(0,0,0,.07);
+* {
+    box-sizing: border-box;
 }
-body.dark{
-  --bg:#101216;
-  --panel:#181b21;
-  --text:#f5f6f8;
-  --muted:#9da3ae;
-  --border:#2b3038;
-  --soft:#232735;
-  --shadow:0 10px 35px rgba(0,0,0,.25);
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6fa;
+    color: #172033;
 }
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+header {
+    background: white;
+    border-bottom: 1px solid #e1e5ed;
+    padding: 20px 24px;
 }
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.app{max-width:1250px;margin:auto;padding:20px}
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 0 24px
+.logo {
+    font-size: 22px;
+    font-weight: 800;
 }
-.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:21px}
-.logo{
-  width:42px;height:42px;border-radius:13px;
-  background:var(--text);color:var(--bg);
-  display:grid;place-items:center;font-weight:1000
+.logo span {
+    color: #5269d8;
 }
-.headerBtns{display:flex;gap:8px}
-.iconBtn{
-  border:1px solid var(--border);background:var(--panel);
-  color:var(--text);border-radius:12px;padding:10px 13px
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 20px;
 }
-.layout{
-  display:grid;grid-template-columns:340px 1fr;gap:20px
+.hero {
+    text-align: center;
 }
-.panel{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:22px;box-shadow:var(--shadow)
+.hero h1 {
+    font-size: clamp(40px, 8vw, 64px);
+    letter-spacing: -3px;
+    margin: 20px 0 10px;
 }
-.controls{padding:22px;height:max-content;position:sticky;top:15px}
-h1{margin:0 0 7px;font-size:30px}
-.subtitle{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:25px}
-label{
-  display:block;font-size:12px;font-weight:800;
-  margin:17px 0 7px;text-transform:uppercase;letter-spacing:.4px
+.hero p {
+    color: #697386;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 650px;
+    margin: auto;
 }
-input,textarea,select{
-  width:100%;border:1px solid var(--border);
-  background:var(--panel);color:var(--text);
-  border-radius:11px;padding:12px;outline:none
+.searchBox {
+    display: flex;
+    gap: 10px;
+    max-width: 720px;
+    margin: 30px auto 10px;
 }
-textarea{resize:vertical;min-height:95px}
-input:focus,textarea:focus,select:focus{border-color:var(--accent)}
-.generate{
-  width:100%;border:0;border-radius:13px;
-  background:var(--accent);color:white;
-  padding:14px;font-weight:900;margin-top:20px
+.searchBox input {
+    flex: 1;
+    min-width: 0;
+    padding: 17px;
+    border-radius: 14px;
+    border: 1px solid #d6dce7;
+    background: white;
+    font-size: 17px;
+    outline: none;
 }
-.smallRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.editor{min-height:700px;display:flex;flex-direction:column}
-.editorTop{
-  padding:18px 22px;border-bottom:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;gap:10px
+.searchBox input:focus {
+    border-color: #5269d8;
 }
-.status{font-size:13px;color:var(--muted)}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.action{
-  border:1px solid var(--border);background:var(--panel);
-  color:var(--text);border-radius:10px;padding:9px 12px;font-weight:700
+.searchBox button {
+    border: none;
+    border-radius: 14px;
+    padding: 0 24px;
+    background: #172033;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
-.article{
-  padding:40px clamp(22px,6vw,65px);
-  line-height:1.75;font-size:17px
+.examples {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
-.article h1{
-  font-size:clamp(32px,5vw,48px);
-  line-height:1.1;margin-bottom:16px
+.example {
+    border: 1px solid #d8deea;
+    background: white;
+    border-radius: 20px;
+    padding: 8px 13px;
+    cursor: pointer;
+    color: #59657a;
 }
-.article h2{
-  margin-top:38px;margin-bottom:10px;
-  font-size:25px;line-height:1.25
+#results {
+    display: none;
+    margin-top: 45px;
 }
-.article h3{font-size:19px}
-.article p{margin:0 0 18px}
-.article ul,.article ol{padding-left:25px}
-.article li{margin:7px 0}
-.meta{
-  color:var(--muted);font-size:13px;
-  border-bottom:1px solid var(--border);
-  padding-bottom:22px;margin-bottom:25px
+.resultTitle {
+    font-size: 22px;
+    margin-bottom: 15px;
 }
-.quote{
-  border-left:4px solid var(--accent);
-  background:var(--soft);padding:15px 18px;
-  margin:25px 0;border-radius:0 12px 12px 0
+.redirectBox {
+    background: #172033;
+    color: white;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 18px;
 }
-.fact{
-  background:var(--soft);border:1px solid var(--border);
-  padding:16px;border-radius:14px;margin:20px 0
+.count {
+    font-size: 30px;
+    font-weight: 800;
 }
-.empty{
-  flex:1;display:grid;place-items:center;
-  text-align:center;padding:60px;color:var(--muted)
+.cancel {
+    margin-top: 10px;
+    padding: 9px 15px;
+    border-radius: 10px;
+    border: 1px solid #69748b;
+    color: white;
+    background: transparent;
+    cursor: pointer;
 }
-.emptyIcon{font-size:55px;margin-bottom:15px}
-.saved{
-  border-top:1px solid var(--border);margin-top:22px;padding-top:18px
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
 }
-.savedItem{
-  padding:10px;border:1px solid var(--border);
-  border-radius:10px;margin-top:7px;
-  display:flex;justify-content:space-between;gap:8px;
-  cursor:pointer;font-size:13px
+.card {
+    background: white;
+    border: 1px solid #dfe4ed;
+    border-radius: 17px;
+    padding: 18px;
 }
-.savedItem:hover{background:var(--soft)}
-.toast{
-  position:fixed;bottom:20px;left:50%;
-  transform:translateX(-50%);
-  background:var(--text);color:var(--bg);
-  padding:11px 17px;border-radius:12px;
-  opacity:0;pointer-events:none;transition:.25s
+.card.best {
+    border: 2px solid #5269d8;
 }
-.toast.show{opacity:1}
-@media(max-width:850px){
-  .layout{grid-template-columns:1fr}
-  .controls{position:static}
+.badge {
+    display: inline-block;
+    background: #edf0ff;
+    color: #5269d8;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 8px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+.card h3 {
+    margin: 0 0 8px;
+}
+.card p {
+    color: #697386;
+    line-height: 1.5;
+    font-size: 14px;
+    min-height: 62px;
+}
+.goButton {
+    width: 100%;
+    padding: 11px;
+    border-radius: 11px;
+    border: 1px solid #d5dbe6;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.best .goButton {
+    background: #172033;
+    color: white;
+}
+/* GAME */
+.gamePrompt {
+    display: none;
+    margin-top: 35px;
+    background: white;
+    border: 1px solid #dfe4ed;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+.gamePrompt h2 {
+    margin: 0 0 8px;
+}
+.gamePrompt p {
+    color: #697386;
+}
+.gameButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.playButton,
+.skipButton {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.playButton {
+    background: #5269d8;
+    color: white;
+}
+.skipButton {
+    background: #eef0f5;
+    color: #39445a;
+}
+/* GAME SCREEN */
+.gameScreen {
+    display: none;
+    margin-top: 20px;
+    background: #172033;
+    color: white;
+    border-radius: 20px;
+    padding: 22px;
+    text-align: center;
+}
+.gameStats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    color: #dce1ee;
+}
+.gameArea {
+    height: 260px;
+    background: #252f48;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.target {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: #7185e8;
+    cursor: pointer;
+    display: none;
+}
+.gameFinished {
+    display: none;
+    padding: 20px;
+}
+.playAgain {
+    border: none;
+    padding: 11px 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.note {
+    text-align: center;
+    color: #8a93a5;
+    font-size: 12px;
+    margin-top: 20px;
+}
+footer {
+    text-align: center;
+    color: #9098a8;
+    padding: 40px 20px;
+}
+@media(max-width:700px) {
+    main {
+        padding-top: 30px;
+    }
+    .searchBox {
+        flex-direction: column;
+    }
+    .searchBox button {
+        height: 52px;
+    }
+    .cards {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 <body>
-<div class="app">
 <header>
-  <div class="brand">
-    <div class="logo">A</div>
-    ArticleForge
-  </div>
-  <div class="headerBtns">
-    <button class="iconBtn" onclick="newArticle()">New</button>
-    <button class="iconBtn" onclick="toggleDark()">◐</button>
-  </div>
-</header>
-<div class="layout">
-<aside class="panel controls">
-<h1>Article AI</h1>
-<div class="subtitle">
-Create detailed articles completely in your browser.
-No account, server, or API key required.
-</div>
-
-Topic
-
-<textarea id="topic" placeholder="Example: Why space exploration matters"></textarea>
-
-Article type
-<option value="explainer">Deep Explainer</option>
-<option value="blog">Blog Article</option>
-<option value="list">List Article</option>
-<option value="guide">How-To Guide</option>
-<option value="comparison">Comparison</option>
-<option value="science">Science Article</option>
-<option value="history">History Article</option>
-<option value="opinion">Opinion Article</option>
-</select>
-
-Tone
-<option>Informative</option>
-<option>Friendly</option>
-<option>Professional</option>
-<option>Exciting</option>
-<option>Simple</option>
-</select>
-<div class="smallRow">
-<div>
-<label>Length</label>
-<select id="length">
-<option value="short">Short</option>
-<option value="medium" selected>Medium</option>
-<option value="long">Long</option>
-</select>
-</div>
-<div>
-<label>Audience</label>
-<select id="audience">
-<option>General readers</option>
-<option>Students</option>
-<option>Beginners</option>
-<option>Tech fans</option>
-<option>Curious readers</option>
-</select>
-</div>
-</div>
-
-Keywords (optional)
-Extra instructions (optional)
-
-<textarea id="instructions" placeholder="Make it surprising and include practical examples."></textarea>
-<button class="generate" onclick="generateArticle()">
-Generate Article
-</button>
-<div class="saved">
-<strong>Saved Articles</strong>
-<div id="savedList"></div>
-</div>
-</aside>
-<main class="panel editor">
-<div class="editorTop">
-  <div class="status" id="status">Ready to write</div>
-  <div class="actions">
-    <button class="action" onclick="copyArticle()">Copy</button>
-    <button class="action" onclick="saveArticle()">Save</button>
-    <button class="action" onclick="downloadHTML()">HTML</button>
-    <button class="action" onclick="downloadTXT()">TXT</button>
-  </div>
-</div>
-<div id="article" class="article">
-<div class="empty">
-<div>
-<div class="emptyIcon">✦</div>
-<h2>Your article will appear here</h2>
-<p>Give ArticleForge a topic and it will build a complete article.</p>
-</div>
-</div>
-</div>
-</main>
-</div>
-</div>
-<div id="toast" class="toast">Done</div>
-<script>
-/*
-  ARTICLEFORGE OFFLINE WRITING ENGINE
-  This is intentionally not a simple sentence spinner.
-  It builds articles from:
-  - topic interpretation
-  - article type
-  - audience
-  - tone
-  - keywords
-  - randomized structures
-  - examples
-  - explanations
-  - counterpoints
-  - conclusions
-*/
-let currentHTML="";
-let currentTitle="";
-let currentTopic="";
-const $=id=>document.getElementById(id);
-function cleanTopic(text){
-  return text.trim().replace(/\s+/g," ");
-}
-function titleCase(text){
-  return text.replace(/\w\S*/g,w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase());
-}
-function pick(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
-}
-function sentence(topic){
-  const t=topic.toLowerCase();
-  if(t.includes("space"))
-    return pick([
-      "Space is one of the few subjects where almost every answer seems to reveal another question.",
-      "What makes space fascinating is not only its enormous scale, but how much it can teach us about our own world.",
-      "Looking beyond Earth changes the way we think about distance, technology, risk, and discovery."
-    ]);
-  if(t.includes("technology")||t.includes("computer")||t.includes("ai"))
-    return pick([
-      "Technology becomes interesting when it stops being a collection of gadgets and starts changing what people can do.",
-      "The most important technological changes are often the ones that quietly become part of everyday life.",
-      "Understanding this subject requires looking beyond the technology itself and asking what it enables people to accomplish."
-    ]);
-  return pick([
-    "The interesting thing about this subject is that it is more complicated than it first appears.",
-    "At first glance, this topic may seem straightforward, but several important ideas are hiding underneath it.",
-    "To understand this properly, it helps to look at both the basic idea and the reasons it matters.",
-    "There is more to this subject than a simple definition can explain."
-  ]);
-}
-function intro(topic,tone,audience){
-  let opening=sentence(topic);
-  if(tone==="Friendly")
-    opening="It is easy to overlook "+topic+", but there is actually a lot more going on than you might expect.";
-  if(tone==="Exciting")
-    opening="There is a reason "+topic+" continues to capture people's attention: once you look closer, things get surprisingly interesting.";
-  if(tone==="Professional")
-    opening="A useful way to understand "+topic+" is to examine how it works, why it matters, and where it may be heading.";
-  if(tone==="Simple")
-    opening="Let's break down "+topic+" in a way that is easy to understand without leaving out the important details.";
-  return `<p>${opening}</p>
-  <p>This article explores the main ideas behind ${topic}, explains why they matter, and looks at some of the less obvious details. The goal is not simply to define the subject, but to give a useful picture of how the pieces fit together.</p>`;
-}
-function explain(topic){
-  return `<p>At its core, ${topic} can be understood as a combination of several connected ideas. Looking at only one part can make the subject seem confusing, while seeing how those parts interact makes the bigger picture much clearer.</p>
-  <p>One useful approach is to start with the basic principle and then ask what happens when that principle is applied in the real world. That is where the subject becomes more than an abstract idea. It begins affecting decisions, creating opportunities, and sometimes introducing unexpected problems.</p>`;
-}
-function whyMatters(topic){
-  return `<h2>Why ${titleCase(topic)} Matters</h2>
-  <p>The importance of ${topic} depends on more than its popularity. A subject becomes genuinely significant when it influences how people understand the world, solve problems, create things, or make decisions.</p>
-  <p>There can also be a ripple effect. A change in one area can create consequences somewhere else, which is why seemingly small developments are sometimes worth paying attention to.</p>
-  <div class="quote"><strong>Key idea:</strong> The real value of understanding a subject is being able to recognize its effects rather than simply remembering its definition.</div>`;
-}
-function examples(topic){
-  return `<h2>Real-World Examples</h2>
-  <p>Examples make ${topic} easier to understand because they turn a general idea into something concrete.</p>
-  <p>Imagine someone encountering the subject for the first time. Instead of presenting a long list of technical terms, consider what the person would actually see, experience, or use. This perspective often reveals which parts of the topic matter most.</p>
-  <p>Another useful example comes from comparing two situations: one where the idea is used effectively and another where it is misunderstood. The difference shows why details and context matter.</p>`;
-}
-function benefits(topic){
-  return `<h2>Potential Benefits</h2>
-  <ul>
-    <li>It can make complicated ideas easier to understand and apply.</li>
-    <li>It can create new ways to solve problems.</li>
-    <li>It can encourage experimentation and new ideas.</li>
-    <li>It can help people make better-informed decisions.</li>
-    <li>It can reveal opportunities that are easy to miss.</li>
-  </ul>
-  <p>These benefits do not happen automatically. They depend on how the subject is used, who is using it, and what goals they are trying to achieve.</p>`;
-}
-function challenges(topic){
-  return `<h2>The Challenges</h2>
-  <p>Every interesting subject has limitations. With ${topic}, one of the biggest challenges is avoiding overly simple explanations. A quick summary may sound convincing while leaving out the details that actually determine the outcome.</p>
-  <p>There are also practical challenges. Cost, time, access to information, technical limitations, and differences between individual situations can all change what works in practice.</p>`;
-}
-function future(topic){
-  return `<h2>What Could Happen Next?</h2>
-  <p>The future of ${topic} is difficult to predict with certainty, but several possibilities are worth considering. Improvements in knowledge and technology can make today's difficult problems easier, while new discoveries can create questions that nobody expected.</p>
-  <p>The most interesting future developments may not be dramatic. Sometimes the biggest change happens gradually as an idea becomes cheaper, easier to use, or available to more people.</p>`;
-}
-function conclusion(topic){
-  return `<h2>Final Thoughts</h2>
-  <p>${titleCase(topic)} is worth understanding because it connects ideas that can have effects far beyond the subject itself. The more closely we examine it, the clearer it becomes that simple answers rarely tell the whole story.</p>
-  <p>Whether you are learning about the topic for the first time or exploring it more deeply, the best approach is to stay curious, question assumptions, and look for connections between the individual pieces.</p>`;
-}
-function listArticle(topic){
-  const items=[
-    ["Start With the Big Picture","Before getting lost in details, understand what the subject is trying to accomplish and why it exists."],
-    ["Look at the Parts","Break the topic into smaller ideas. This makes complicated systems easier to understand."],
-    ["Find Real Examples","Examples reveal how an idea behaves outside of a textbook definition."],
-    ["Question the Assumptions","Ask what has to be true for an explanation to work. This often uncovers the most interesting details."],
-    ["Think About the Future","Consider what could change if the technology, knowledge, or circumstances surrounding the topic develop."]
-  ];
-  return `<h2>5 Things Worth Knowing About ${titleCase(topic)}</h2>`+
-  items.map((x,i)=>`<h3>${i+1}. ${x[0]}</h3><p>${x[1]} When applied to ${topic}, this perspective can reveal details that are easy to miss.</p>`).join("");
-}
-function guide(topic){
-  return `<h2>A Practical Way to Approach ${titleCase(topic)}</h2>
-  <ol>
-    <li><strong>Learn the basic idea.</strong> Make sure you understand the main concept before worrying about advanced details.</li>
-    <li><strong>Break it into parts.</strong> Identify the major components and understand what each one contributes.</li>
-    <li><strong>Study examples.</strong> Look at different situations rather than relying on one example.</li>
-    <li><strong>Try it yourself.</strong> If the subject allows experimentation, practical experience can expose details that theory misses.</li>
-    <li><strong>Review what happened.</strong> Compare the result with what you expected and adjust your understanding.</li>
-  </ol>`;
-}
-function comparison(topic){
-  return `<h2>Two Ways to Look at ${titleCase(topic)}</h2>
-  <p>One way to approach ${topic} is from a practical perspective: what can it actually accomplish? Another approach is to focus on the underlying principles and ask why it works.</p>
-  <p>The practical approach is often easier for beginners, while the deeper approach becomes more valuable when solving unusual problems. Neither is automatically better. They answer different questions.</p>
-  <h2>Which Approach Is Better?</h2>
-  <p>That depends on the goal. Someone trying to use the subject may need clear instructions, while someone studying it may need a detailed explanation of the mechanisms involved.</p>`;
-}
-function makeSEO(topic){
-  return {
-    description:`A detailed guide to ${topic}, including how it works, why it matters, examples, benefits, challenges, and future possibilities.`,
-    slug:topic.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")
-  };
-}
-function generateArticle(){
-  const topic=cleanTopic($("topic").value);
-  if(!topic){
-    toast("Enter a topic first.");
-    return;
-  }
-  currentTopic=topic;
-  const type=$("type").value;
-  const tone=$("tone").value;
-  const audience=$("audience").value;
-  const length=$("length").value;
-  const keywords=$("keywords").value;
-  const instructions=$("instructions").value;
-  $("status").textContent="Writing article…";
-  setTimeout(()=>{
-    let title;
-    const titleOptions=[
-      `The Complete Guide to ${titleCase(topic)}`,
-      `${titleCase(topic)}: What You Should Know`,
-      `Understanding ${titleCase(topic)}`,
-      `Why ${titleCase(topic)} Is More Interesting Than It Seems`,
-      `${titleCase(topic)} Explained: The Bigger Picture`
-    ];
-    if(type==="list")
-      title=`5 Things You Should Know About ${titleCase(topic)}`;
-    if(type==="guide")
-      title=`How to Understand ${titleCase(topic)}`;
-    if(type==="comparison")
-      title=`${titleCase(topic)}: A Practical Comparison`;
-    title=pick(titleOptions);
-    let html=`<h1>${title}</h1>`;
-    const seo=makeSEO(topic);
-    html+=`<div class="meta">
-      ${audience} · ${tone} · ${length} article
-      <br>
-      Estimated reading time: <span id="readTime">—</span>
-    </div>`;
-    html+=intro(topic,tone,audience);
-    if(type==="list"){
-      html+=listArticle(topic);
-      html+=challenges(topic);
-      html+=conclusion(topic);
-    }
-    else if(type==="guide"){
-      html+=guide(topic);
-      html+=explain(topic);
-      html+=challenges(topic);
-      html+=conclusion(topic);
-    }
-    else if(type==="comparison"){
-      html+=comparison(topic);
-      html+=benefits(topic);
-      html+=challenges(topic);
-      html+=conclusion(topic);
-    }
-    else{
-      html+=explain(topic);
-      html+=whyMatters(topic);
-      html+=examples(topic);
-      if(type==="science")
-        html+=`<h2>The Science Behind the Idea</h2>
-        <p>Scientific topics are easiest to understand when observations, evidence, and explanations are kept separate. An observation describes what happens; an explanation proposes why it happens; evidence helps determine whether that explanation holds up.</p>
-        <p>That distinction is important when discussing ${topic}, because a fascinating possibility is not automatically the same thing as an established fact.</p>`;
-      if(type==="history")
-        html+=`<h2>How It Developed</h2>
-        <p>Understanding the history of ${topic} means looking at the sequence of ideas and events that shaped it. Modern versions of a subject rarely appear suddenly. They are usually the result of many smaller changes.</p>
-        <p>Earlier decisions can also have effects that last for decades, making history useful for understanding why the subject looks the way it does today.</p>`;
-      html+=benefits(topic);
-      html+=challenges(topic);
-      if(length!=="short")
-        html+=future(topic);
-      html+=conclusion(topic);
-    }
-    if(keywords){
-      html+=`<div class="fact"><strong>Related ideas:</strong> ${keywords}</div>`;
-    }
-    if(instructions){
-      html+=`<div class="fact"><strong>Writer's note:</strong> This article was generated with the requested direction: ${escapeHTML(instructions)}</div>`;
-    }
-    currentHTML=html;
-    currentTitle=title;
-    $("article").innerHTML=html;
-    const text=$("article").innerText;
-    const words=text.trim().split(/\s+/).length;
-    const mins=Math.max(1,Math.round(words/220));
-    document.getElementById("readTime").textContent=
-      `${mins} min · ${words.toLocaleString()} words`;
-    $("status").textContent=`Generated · ${words.toLocaleString()} words`;
-    toast("Article generated!");
-  },450);
-}
-function escapeHTML(text){
-  return text.replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  }[c]));
-}
-/* SAVING */
-function saveArticle(){
-  if(!currentHTML){
-    toast("Generate an article first.");
-    return;
-  }
-  const saved=JSON.parse(localStorage.getItem("articleForge")||"[]");
-  saved.unshift({
-    title:currentTitle,
-    topic:currentTopic,
-    html:currentHTML,
-    date:new Date().toLocaleString()
-  });
-  localStorage.setItem("articleForge",JSON.stringify(saved.slice(0,20)));
-  renderSaved();
-  toast("Article saved.");
-}
-function renderSaved(){
-  const saved=JSON.parse(localStorage.getItem("articleForge")||"[]");
-  $("savedList").innerHTML=saved.length
-    ? saved.map((a,i)=>`
-      <div class="savedItem" onclick="loadSaved(${i})">
-        <span>${escapeHTML(a.title)}</span>
-        <span>›</span>
-      </div>
-    `).join("")
-    : `<div style="font-size:12px;color:var(--muted);margin-top:8px">No saved articles yet.</div>`;
-}
-function loadSaved(i){
-  const saved=JSON.parse(localStorage.getItem("articleForge")||"[]");
-  const a=saved[i];
-  currentHTML=a.html;
-  currentTitle=a.title;
-  currentTopic=a.topic;
-  $("article").innerHTML=a.html;
-  $("topic").value=a.topic;
-  const words=$("article").innerText.trim().split(/\s+/).length;
-  $("status").textContent=`Saved article · ${words.toLocaleString()} words`;
-  toast("Article opened.");
-}
-function newArticle(){
-  $("topic").value="";
-  $("keywords").value="";
-  $("instructions").value="";
-  $("article").innerHTML=`
-  <div class="empty">
-    <div>
-      <div class="emptyIcon">✦</div>
-      <h2>Your article will appear here</h2>
-      <p>Give ArticleForge a topic and generate something new.</p>
+    <div class="logo">
+        Mystarsnight <span>Quick Search</span>
     </div>
-  </div>`;
-  currentHTML="";
-  currentTitle="";
-  currentTopic="";
-  $("status").textContent="Ready to write";
+</header>
+<main>
+<section class="hero">
+    <h1>Find the right place.</h1>
+    <p>
+        Enter what you're looking for and Quick Search compares useful
+        destinations and recommends where to go.
+    </p>
+    <form class="searchBox" id="searchForm">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Try “learn coding” or “watch videos”"
+            autocomplete="off"
+        >
+        <button type="submit">
+            Quick Search
+        </button>
+    </form>
+    <div class="examples">
+        <button class="example" data-search="watch videos">
+            Watch videos
+        </button>
+        <button class="example" data-search="learn coding">
+            Learn coding
+        </button>
+        <button class="example" data-search="buy books">
+            Buy books
+        </button>
+        <button class="example" data-search="search the web">
+            Search the web
+        </button>
+    </div>
+</section>
+<section id="results">
+    <div class="resultTitle">
+        Results for "<span id="searchText"></span>"
+    </div>
+    <div class="redirectBox" id="redirectBox">
+        <strong>
+            Best match:
+            <span id="bestSite"></span>
+        </strong>
+        <br>
+        Opening in
+        <span class="count" id="count">5</span>
+        seconds...
+        <br>
+        <button class="cancel" id="cancelButton">
+            Cancel redirect
+        </button>
+    </div>
+    <!-- GAME INVITATION -->
+    <div class="gamePrompt" id="gamePrompt">
+        <h2>
+            Wait… you want to play a game first?
+        </h2>
+        <p>
+            Try a super quick game while you decide where you want to go.
+        </p>
+        <div class="gameButtons">
+            <button class="playButton" id="playButton">
+                Play Quick Tap
+            </button>
+            <button class="skipButton" id="skipGame">
+                Skip game
+            </button>
+        </div>
+    </div>
+    <!-- GAME -->
+    <div class="gameScreen" id="gameScreen">
+        <h2>Quick Tap</h2>
+        <div class="gameStats">
+            <div>
+                Score:
+                <strong id="score">0</strong>
+            </div>
+            <div>
+                Time:
+                <strong id="gameTime">10</strong>
+            </div>
+        </div>
+        <div class="gameArea" id="gameArea">
+            <button class="target" id="target"></button>
+        </div>
+        <div class="gameFinished" id="gameFinished">
+            <h2>
+                Nice! Score:
+                <span id="finalScore">0</span>
+            </h2>
+            <button class="playAgain" id="playAgain">
+                Play Again
+            </button>
+        </div>
+    </div>
+    <div class="cards" id="cards"></div>
+    <div class="note">
+        Recommendations are based on your search terms.
+    </div>
+</section>
+</main>
+<footer>
+    © Mystarsnight • Quick Search
+</footer>
+<script>
+const sites = [
+    {
+        name: "Google",
+        url: "https://www.google.com/search?q=",
+        tags: [
+            "search",
+            "web",
+            "internet",
+            "find",
+            "information",
+            "research"
+        ],
+        description:
+            "A broad web search for finding websites and information."
+    },
+    {
+        name: "YouTube",
+        url: "https://www.youtube.com/results?search_query=",
+        tags: [
+            "video",
+            "videos",
+            "watch",
+            "music",
+            "tutorial",
+            "game",
+            "gaming"
+        ],
+        description:
+            "Find videos, tutorials, music, gaming and more."
+    },
+    {
+        name: "Wikipedia",
+        url: "https://en.wikipedia.org/wiki/Special:Search?search=",
+        tags: [
+            "learn",
+            "learning",
+            "facts",
+            "history",
+            "information",
+            "school"
+        ],
+        description:
+            "A useful place to start for facts and explanations."
+    },
+    {
+        name: "GitHub",
+        url: "https://github.com/search?q=",
+        tags: [
+            "coding",
+            "code",
+            "programming",
+            "developer",
+            "software",
+            "projects",
+            "html",
+            "javascript"
+        ],
+        description:
+            "Explore code, projects and developer tools."
+    },
+    {
+        name: "MDN Web Docs",
+        url: "https://developer.mozilla.org/en-US/search?q=",
+        tags: [
+            "html",
+            "css",
+            "javascript",
+            "coding",
+            "programming",
+            "web",
+            "developer"
+        ],
+        description:
+            "Detailed documentation for HTML, CSS and JavaScript."
+    },
+    {
+        name: "Amazon",
+        url: "https://www.amazon.com/s?k=",
+        tags: [
+            "buy",
+            "shop",
+            "shopping",
+            "books",
+            "book",
+            "electronics",
+            "product",
+            "products"
+        ],
+        description:
+            "Search for products, electronics, books and more."
+    },
+    {
+        name: "Google Books",
+        url: "https://www.google.com/search?tbm=bks&q=",
+        tags: [
+            "book",
+            "books",
+            "reading",
+            "read"
+        ],
+        description:
+            "Search for books and book information."
+    },
+    {
+        name: "Reddit",
+        url: "https://www.reddit.com/search/?q=",
+        tags: [
+            "community",
+            "discussion",
+            "reviews",
+            "opinions",
+            "help"
+        ],
+        description:
+            "Find community discussions and opinions."
+    }
+];
+let redirectTimer = null;
+let bestDestination = "";
+let currentQuery = "";
+/* SEARCH */
+document
+    .getElementById("searchForm")
+    .addEventListener("submit", function(event) {
+        event.preventDefault();
+        const query =
+            document
+                .getElementById("searchInput")
+                .value
+                .trim();
+        if (!query) return;
+        performSearch(query);
+    });
+/* EXAMPLES */
+document
+    .querySelectorAll(".example")
+    .forEach(function(button) {
+        button.addEventListener("click", function() {
+            const query =
+                button.dataset.search;
+            document
+                .getElementById("searchInput")
+                .value = query;
+            performSearch(query);
+        });
+    });
+/* SCORE */
+function calculateScore(site, query) {
+    const words =
+        query
+            .toLowerCase()
+            .replace(/[^a-z0-9 ]/g, " ")
+            .split(/\s+/)
+            .filter(Boolean);
+    let score = 0;
+    words.forEach(function(word) {
+        site.tags.forEach(function(tag) {
+            if (word === tag) {
+                score += 10;
+            }
+            else if (
+                word.includes(tag) ||
+                tag.includes(word)
+            ) {
+                score += 4;
+            }
+        });
+    });
+    return score;
 }
-/* EXPORT */
-function copyArticle(){
-  if(!currentHTML){
-    toast("Nothing to copy.");
-    return;
-  }
-  const text=$("article").innerText;
-  navigator.clipboard.writeText(text)
-    .then(()=>toast("Article copied!"));
+/* SEARCH */
+function performSearch(query) {
+    clearInterval(redirectTimer);
+    currentQuery = query;
+    document
+        .getElementById("results")
+        .style.display = "block";
+    document
+        .getElementById("searchText")
+        .textContent = query;
+    let ranked =
+        sites
+            .map(function(site) {
+                return {
+                    ...site,
+                    score: calculateScore(site, query)
+                };
+            })
+            .sort(function(a, b) {
+                return b.score - a.score;
+            });
+    if (ranked[0].score === 0) {
+        ranked.sort(function(a, b) {
+            if (a.name === "Google") return -1;
+            if (b.name === "Google") return 1;
+            return 0;
+        });
+    }
+    const best = ranked[0];
+    bestDestination =
+        best.url +
+        encodeURIComponent(query);
+    document
+        .getElementById("bestSite")
+        .textContent = best.name;
+    const cards =
+        document.getElementById("cards");
+    cards.innerHTML =
+        ranked
+            .slice(0, 3)
+            .map(function(site, index) {
+                return `
+                <article class="card ${index === 0 ? "best" : ""}">
+                    ${
+                        index === 0
+                        ?
+                        '<div class="badge">BEST MATCH</div>'
+                        :
+                        ''
+                    }
+                    <h3>
+                        ${escapeHTML(site.name)}
+                    </h3>
+                    <p>
+                        ${escapeHTML(site.description)}
+                    </p>
+                    <button
+                        class="goButton"
+                        data-url="${escapeHTML(site.url)}"
+                    >
+                        Go here
+                    </button>
+                </article>
+                `;
+            })
+            .join("");
+    cards
+        .querySelectorAll(".goButton")
+        .forEach(function(button) {
+            button.addEventListener("click", function() {
+                clearInterval(redirectTimer);
+                window.location.href =
+                    button.dataset.url +
+                    encodeURIComponent(query);
+            });
+        });
+    /*
+       Start normal 5-second redirect.
+    */
+    startRedirect();
+    /*
+       Show game invitation.
+    */
+    document
+        .getElementById("gamePrompt")
+        .style.display = "block";
+    window.scrollTo({
+        top:
+            document.getElementById("results").offsetTop - 20,
+        behavior: "smooth"
+    });
 }
-function downloadTXT(){
-  if(!currentHTML){
-    toast("Generate an article first.");
-    return;
-  }
-  const text=$("article").innerText;
-  download(
-    currentTitle.replace(/[^a-z0-9]+/gi,"-")+".txt",
-    text,
-    "text/plain"
-  );
+/* REDIRECT */
+function startRedirect() {
+    clearInterval(redirectTimer);
+    let seconds = 5;
+    document
+        .getElementById("count")
+        .textContent = seconds;
+    redirectTimer =
+        setInterval(function() {
+            seconds--;
+            document
+                .getElementById("count")
+                .textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(redirectTimer);
+                window.location.href =
+                    bestDestination;
+            }
+        }, 1000);
 }
-function downloadHTML(){
-  if(!currentHTML){
-    toast("Generate an article first.");
-    return;
-  }
-  const file=`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>${escapeHTML(currentTitle)}</title>
-<style>
-body{max-width:800px;margin:50px auto;padding:20px;font-family:Arial;line-height:1.7}
-h1{font-size:42px;line-height:1.1}
-h2{margin-top:40px}
-</style>
-</head>
-<body>
-${currentHTML}
-</body>
-</html>`;
-
-download(
-currentTitle.replace(/[^a-z0-9]+/gi,”-”)+”.html”,
-file,
-“text/html”
-);
+/* CANCEL */
+document
+    .getElementById("cancelButton")
+    .addEventListener("click", function() {
+        clearInterval(redirectTimer);
+        document
+            .getElementById("redirectBox")
+            .style.display = "none";
+    });
+/* GAME */
+let score = 0;
+let gameSeconds = 10;
+let gameTimer = null;
+const target =
+    document.getElementById("target");
+const gameArea =
+    document.getElementById("gameArea");
+document
+    .getElementById("playButton")
+    .addEventListener("click", startGame);
+document
+    .getElementById("playAgain")
+    .addEventListener("click", startGame);
+function startGame() {
+    /*
+       Stop the automatic redirect while
+       the user is actively playing.
+    */
+    clearInterval(redirectTimer);
+    score = 0;
+    gameSeconds = 10;
+    document
+        .getElementById("score")
+        .textContent = score;
+    document
+        .getElementById("gameTime")
+        .textContent = gameSeconds;
+    document
+        .getElementById("gamePrompt")
+        .style.display = "none";
+    document
+        .getElementById("gameScreen")
+        .style.display = "block";
+    document
+        .getElementById("gameFinished")
+        .style.display = "none";
+    target.style.display = "block";
+    moveTarget();
+    clearInterval(gameTimer);
+    gameTimer =
+        setInterval(function() {
+            gameSeconds--;
+            document
+                .getElementById("gameTime")
+                .textContent = gameSeconds;
+            if (gameSeconds <= 0) {
+                endGame();
+            }
+        }, 1000);
 }
-
-function download(name,data,type){
-
-const blob=new Blob([data],{type});
-const url=URL.createObjectURL(blob);
-
-const a=document.createElement(“a”);
-a.href=url;
-a.download=name;
-a.click();
-
-URL.revokeObjectURL(url);
+/* TARGET CLICK */
+target.addEventListener("click", function() {
+    score++;
+    document
+        .getElementById("score")
+        .textContent = score;
+    moveTarget();
+});
+/* MOVE TARGET */
+function moveTarget() {
+    const maxX =
+        gameArea.clientWidth - 55;
+    const maxY =
+        gameArea.clientHeight - 55;
+    const x =
+        Math.random() * Math.max(0, maxX);
+    const y =
+        Math.random() * Math.max(0, maxY);
+    target.style.left = x + "px";
+    target.style.top = y + "px";
 }
-
-/* UI */
-
-function toggleDark(){
-document.body.classList.toggle(“dark”);
-localStorage.setItem(
-“articleDark”,
-document.body.classList.contains(“dark”)
-);
+/* END GAME */
+function endGame() {
+    clearInterval(gameTimer);
+    target.style.display = "none";
+    document
+        .getElementById("finalScore")
+        .textContent = score;
+    document
+        .getElementById("gameFinished")
+        .style.display = "block";
+    /*
+       After the game, the user can continue
+       normally rather than being trapped.
+    */
 }
-
-function toast(message){
-
-const t=$(“toast”);
-
-t.textContent=message;
-t.classList.add(“show”);
-
-setTimeout(()=>t.classList.remove(“show”),1800);
+/* SKIP */
+document
+    .getElementById("skipGame")
+    .addEventListener("click", function() {
+        document
+            .getElementById("gamePrompt")
+            .style.display = "none";
+        window.location.href =
+            bestDestination;
+    });
+/* ESCAPE HTML */
+function escapeHTML(text) {
+    return text.replace(
+        /[&<>"']/g,
+        function(character) {
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            }[character];
+        }
+    );
 }
-
-if(localStorage.getItem(“articleDark”)===“true”)
-document.body.classList.add(“dark”);
-
-renderSaved();
+</script>
 </body>
 </html>
