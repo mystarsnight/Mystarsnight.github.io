@@ -1,796 +1,1135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mystarsnight Quick Search</title>
-<!-- Google AdSense -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114"
-crossorigin="anonymous"></script>
-<style>
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6fa;
-    color: #172033;
-}
-header {
-    background: white;
-    border-bottom: 1px solid #e1e5ed;
-    padding: 20px 24px;
-}
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-}
-.logo span {
-    color: #5269d8;
-}
-main {
-    max-width: 900px;
-    margin: auto;
-    padding: 50px 20px;
-}
-.hero {
-    text-align: center;
-}
-.hero h1 {
-    font-size: clamp(40px, 8vw, 64px);
-    letter-spacing: -3px;
-    margin: 20px 0 10px;
-}
-.hero p {
-    color: #697386;
-    font-size: 18px;
-    line-height: 1.5;
-    max-width: 650px;
-    margin: auto;
-}
-.searchBox {
-    display: flex;
-    gap: 10px;
-    max-width: 720px;
-    margin: 30px auto 10px;
-}
-.searchBox input {
-    flex: 1;
-    min-width: 0;
-    padding: 17px;
-    border-radius: 14px;
-    border: 1px solid #d6dce7;
-    background: white;
-    font-size: 17px;
-    outline: none;
-}
-.searchBox input:focus {
-    border-color: #5269d8;
-}
-.searchBox button {
-    border: none;
-    border-radius: 14px;
-    padding: 0 24px;
-    background: #172033;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.examples {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.example {
-    border: 1px solid #d8deea;
-    background: white;
-    border-radius: 20px;
-    padding: 8px 13px;
-    cursor: pointer;
-    color: #59657a;
-}
-#results {
-    display: none;
-    margin-top: 45px;
-}
-.resultTitle {
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-.redirectBox {
-    background: #172033;
-    color: white;
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 18px;
-}
-.count {
-    font-size: 30px;
-    font-weight: 800;
-}
-.cancel {
-    margin-top: 10px;
-    padding: 9px 15px;
-    border-radius: 10px;
-    border: 1px solid #69748b;
-    color: white;
-    background: transparent;
-    cursor: pointer;
-}
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-.card {
-    background: white;
-    border: 1px solid #dfe4ed;
-    border-radius: 17px;
-    padding: 18px;
-}
-.card.best {
-    border: 2px solid #5269d8;
-}
-.badge {
-    display: inline-block;
-    background: #edf0ff;
-    color: #5269d8;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 5px 8px;
-    border-radius: 7px;
-    margin-bottom: 10px;
-}
-.card h3 {
-    margin: 0 0 8px;
-}
-.card p {
-    color: #697386;
-    line-height: 1.5;
-    font-size: 14px;
-    min-height: 62px;
-}
-.goButton {
-    width: 100%;
-    padding: 11px;
-    border-radius: 11px;
-    border: 1px solid #d5dbe6;
-    background: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-.best .goButton {
-    background: #172033;
-    color: white;
-}
-/* GAME */
-.gamePrompt {
-    display: none;
-    margin-top: 35px;
-    background: white;
-    border: 1px solid #dfe4ed;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-}
-.gamePrompt h2 {
-    margin: 0 0 8px;
-}
-.gamePrompt p {
-    color: #697386;
-}
-.gameButtons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-.playButton,
-.skipButton {
-    border: none;
-    border-radius: 12px;
-    padding: 12px 20px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.playButton {
-    background: #5269d8;
-    color: white;
-}
-.skipButton {
-    background: #eef0f5;
-    color: #39445a;
-}
-/* GAME SCREEN */
-.gameScreen {
-    display: none;
-    margin-top: 20px;
-    background: #172033;
-    color: white;
-    border-radius: 20px;
-    padding: 22px;
-    text-align: center;
-}
-.gameStats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
-    color: #dce1ee;
-}
-.gameArea {
-    height: 260px;
-    background: #252f48;
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-}
-.target {
-    position: absolute;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    border: none;
-    background: #7185e8;
-    cursor: pointer;
-    display: none;
-}
-.gameFinished {
-    display: none;
-    padding: 20px;
-}
-.playAgain {
-    border: none;
-    padding: 11px 17px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.note {
-    text-align: center;
-    color: #8a93a5;
-    font-size: 12px;
-    margin-top: 20px;
-}
-footer {
-    text-align: center;
-    color: #9098a8;
-    padding: 40px 20px;
-}
-@media(max-width:700px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mystarsnight Quick Search</title>
+  <meta name="description" content="Mystarsnight Quick Search compares useful websites and helps you find the best place to search.">
+  <meta name="google-adsense-account" content="ca-pub-6476815184336114">
+
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114"
+    crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #17202a;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 22px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: #dbeafe;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      background: #263244;
+      color: white;
+    }
+
+    .hero {
+      background: white;
+      text-align: center;
+      padding: 70px 20px 55px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 8vw, 62px);
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #667085;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .search-area {
+      max-width: 850px;
+      margin: 28px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-area input {
+      flex: 1;
+      min-width: 0;
+      padding: 17px;
+      border: 2px solid #d0d5dd;
+      border-radius: 12px;
+      font-size: 17px;
+      outline: none;
+    }
+
+    .search-area input:focus {
+      border-color: #2563eb;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .search-btn {
+      padding: 0 25px;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+    }
+
+    .search-btn:hover {
+      background: #1d4ed8;
+    }
+
     main {
-        padding-top: 30px;
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 18px;
     }
-    .searchBox {
+
+    .section {
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.06);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .section p {
+      line-height: 1.7;
+      color: #475467;
+    }
+
+    #results {
+      display: none;
+    }
+
+    .result-card {
+      border: 1px solid #e4e7ec;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .result-card h3 {
+      margin: 0 0 6px;
+    }
+
+    .result-card p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .go-btn {
+      background: #111827;
+      color: white;
+      padding: 11px 17px;
+      border-radius: 9px;
+      white-space: nowrap;
+    }
+
+    .redirect-box {
+      display: none;
+      background: #eef4ff;
+      border: 1px solid #b7ccff;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .redirect-box strong {
+      color: #1d4ed8;
+    }
+
+    .cancel-btn {
+      margin-top: 12px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      padding: 10px 16px;
+      border-radius: 9px;
+    }
+
+    .game-prompt {
+      display: none;
+      background: #111827;
+      color: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .game-prompt h2 {
+      margin-top: 0;
+    }
+
+    .game-btn {
+      background: white;
+      color: #111827;
+      padding: 13px 20px;
+      border-radius: 10px;
+      margin: 5px;
+      font-weight: 800;
+    }
+
+    .skip-btn {
+      background: #374151;
+      color: white;
+    }
+
+    #game {
+      display: none;
+      text-align: center;
+    }
+
+    .game-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .game-area {
+      height: 330px;
+      background: #f8fafc;
+      border: 2px solid #e5e7eb;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #target {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      font-weight: 900;
+    }
+
+    .game-result {
+      display: none;
+      padding: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .article {
+      border: 1px solid #e4e7ec;
+      border-radius: 14px;
+      padding: 20px;
+      background: #fff;
+    }
+
+    .article h3 {
+      margin-top: 0;
+    }
+
+    .article p {
+      font-size: 14px;
+    }
+
+    .article button {
+      background: #eef2ff;
+      color: #1d4ed8;
+      padding: 9px 13px;
+      border-radius: 8px;
+    }
+
+    .article-content {
+      display: none;
+      margin-top: 25px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 20px;
+    }
+
+    .article-content h3 {
+      font-size: 25px;
+    }
+
+    footer {
+      background: #111827;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 35px 20px;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: #dbeafe;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 650px) {
+      .header-inner {
         flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .search-area {
+        flex-direction: column;
+      }
+
+      .search-btn {
+        padding: 15px;
+      }
+
+      .result-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .go-btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 22px;
+      }
     }
-    .searchBox button {
-        height: 52px;
-    }
-    .cards {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  </style>
 </head>
+
 <body>
+
 <header>
-    <div class="logo">
-        Mystarsnight <span>Quick Search</span>
-    </div>
+  <div class="header-inner">
+    <div class="logo">Mystarsnight</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#articles">Articles</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+  </div>
 </header>
+
+<section class="hero" id="home">
+  <h1>Mystarsnight Quick Search</h1>
+
+  <p>
+    Type what you're looking for and Mystarsnight compares different
+    search destinations to help you choose where to go.
+  </p>
+
+  <div class="search-area">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="What are you looking for?"
+      autocomplete="off"
+    >
+
+    <button class="search-btn" onclick="performSearch()">
+      Search
+    </button>
+  </div>
+</section>
+
 <main>
-<section class="hero">
-    <h1>Find the right place.</h1>
-    <p>
-        Enter what you're looking for and Quick Search compares useful
-        destinations and recommends where to go.
-    </p>
-    <form class="searchBox" id="searchForm">
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Try “learn coding” or “watch videos”"
-            autocomplete="off"
-        >
-        <button type="submit">
-            Quick Search
-        </button>
-    </form>
-    <div class="examples">
-        <button class="example" data-search="watch videos">
-            Watch videos
-        </button>
-        <button class="example" data-search="learn coding">
-            Learn coding
-        </button>
-        <button class="example" data-search="buy books">
-            Buy books
-        </button>
-        <button class="example" data-search="search the web">
-            Search the web
-        </button>
-    </div>
-</section>
-<section id="results">
-    <div class="resultTitle">
-        Results for "<span id="searchText"></span>"
-    </div>
-    <div class="redirectBox" id="redirectBox">
-        <strong>
-            Best match:
-            <span id="bestSite"></span>
-        </strong>
-        <br>
+
+  <!-- SEARCH RESULTS -->
+  <section class="section" id="results">
+    <h2>Best places for your search</h2>
+
+    <div id="resultList"></div>
+
+    <div class="redirect-box" id="redirectBox">
+      <div>
+        Best match:
+        <strong id="bestSite"></strong>
+      </div>
+
+      <div>
         Opening in
-        <span class="count" id="count">5</span>
+        <strong id="countdown">5</strong>
         seconds...
-        <br>
-        <button class="cancel" id="cancelButton">
-            Cancel redirect
-        </button>
+      </div>
+
+      <button class="cancel-btn" onclick="cancelRedirect()">
+        Cancel
+      </button>
     </div>
-    <!-- GAME INVITATION -->
-    <div class="gamePrompt" id="gamePrompt">
-        <h2>
-            Wait… you want to play a game first?
-        </h2>
+
+    <div class="game-prompt" id="gamePrompt">
+      <h2>Wait... want to play a game first?</h2>
+
+      <p>
+        You can play a quick optional game before continuing.
+      </p>
+
+      <button class="game-btn" onclick="startGame()">
+        Play Quick Tap
+      </button>
+
+      <button class="game-btn skip-btn" onclick="skipGame()">
+        Skip
+      </button>
+    </div>
+  </section>
+
+
+  <!-- GAME -->
+  <section class="section" id="game">
+
+    <div class="game-info">
+      <span>Score: <span id="score">0</span></span>
+      <span>Time: <span id="gameTime">10</span>s</span>
+    </div>
+
+    <div class="game-area" id="gameArea">
+      <button id="target" onclick="hitTarget()">TAP</button>
+    </div>
+
+    <div class="game-result" id="gameResult"></div>
+
+    <button
+      class="game-btn"
+      onclick="endGame()"
+      style="margin-top:15px;"
+    >
+      Finish Game
+    </button>
+  </section>
+
+
+  <!-- ARTICLES -->
+  <section class="section" id="articles">
+    <h2>Mystarsnight Articles</h2>
+
+    <p>
+      Explore original articles about the web, coding, games, and useful
+      technology ideas.
+    </p>
+
+    <div class="article-grid">
+
+      <article class="article">
+        <h3>What Is HTML?</h3>
         <p>
-            Try a super quick game while you decide where you want to go.
+          Learn what HTML does and how webpages are structured.
         </p>
-        <div class="gameButtons">
-            <button class="playButton" id="playButton">
-                Play Quick Tap
-            </button>
-            <button class="skipButton" id="skipGame">
-                Skip game
-            </button>
-        </div>
+        <button onclick="openArticle('htmlArticle')">
+          Read Article
+        </button>
+      </article>
+
+      <article class="article">
+        <h3>How Websites Work</h3>
+        <p>
+          A beginner-friendly look at what happens when you visit a website.
+        </p>
+        <button onclick="openArticle('webArticle')">
+          Read Article
+        </button>
+      </article>
+
+      <article class="article">
+        <h3>Getting Started With JavaScript</h3>
+        <p>
+          Discover how JavaScript can make webpages interactive.
+        </p>
+        <button onclick="openArticle('jsArticle')">
+          Read Article
+        </button>
+      </article>
+
+      <article class="article">
+        <h3>How Browser Search Works</h3>
+        <p>
+          Learn the basics behind searching the web.
+        </p>
+        <button onclick="openArticle('searchArticle')">
+          Read Article
+        </button>
+      </article>
+
+      <article class="article">
+        <h3>Making Your First Browser Game</h3>
+        <p>
+          Learn the basic parts of a simple browser game.
+        </p>
+        <button onclick="openArticle('gameArticle')">
+          Read Article
+        </button>
+      </article>
+
+      <article class="article">
+        <h3>Why Responsive Design Matters</h3>
+        <p>
+          Find out why websites need to work on phones, tablets, and computers.
+        </p>
+        <button onclick="openArticle('responsiveArticle')">
+          Read Article
+        </button>
+      </article>
+
     </div>
-    <!-- GAME -->
-    <div class="gameScreen" id="gameScreen">
-        <h2>Quick Tap</h2>
-        <div class="gameStats">
-            <div>
-                Score:
-                <strong id="score">0</strong>
-            </div>
-            <div>
-                Time:
-                <strong id="gameTime">10</strong>
-            </div>
-        </div>
-        <div class="gameArea" id="gameArea">
-            <button class="target" id="target"></button>
-        </div>
-        <div class="gameFinished" id="gameFinished">
-            <h2>
-                Nice! Score:
-                <span id="finalScore">0</span>
-            </h2>
-            <button class="playAgain" id="playAgain">
-                Play Again
-            </button>
-        </div>
+
+
+    <div class="article-content" id="htmlArticle">
+      <h3>What Is HTML?</h3>
+      <p>
+        HTML stands for HyperText Markup Language. It is one of the main
+        technologies used to build webpages.
+      </p>
+      <p>
+        HTML describes the structure of a page. Headings, paragraphs,
+        buttons, images, links, forms, and many other elements can be
+        represented using HTML elements.
+      </p>
+      <p>
+        HTML normally works together with CSS and JavaScript. CSS controls
+        appearance while JavaScript can control behavior and interactions.
+      </p>
     </div>
-    <div class="cards" id="cards"></div>
-    <div class="note">
-        Recommendations are based on your search terms.
+
+
+    <div class="article-content" id="webArticle">
+      <h3>How Websites Work</h3>
+      <p>
+        When you enter a website address, your browser requests information
+        from a web server or another web-hosting system.
+      </p>
+      <p>
+        The browser receives resources such as HTML, CSS, JavaScript,
+        images, and other files. It then processes those resources and
+        displays the webpage.
+      </p>
+      <p>
+        Modern websites can also communicate with databases and APIs,
+        allowing pages to provide changing information and interactive
+        features.
+      </p>
     </div>
-</section>
+
+
+    <div class="article-content" id="jsArticle">
+      <h3>Getting Started With JavaScript</h3>
+      <p>
+        JavaScript is a programming language commonly used to add
+        interactivity to webpages.
+      </p>
+      <p>
+        It can respond to button clicks, update text, change elements,
+        create animations, process information, and build games.
+      </p>
+      <p>
+        A simple JavaScript project can start with a webpage containing
+        HTML elements and a script that responds when the user interacts
+        with them.
+      </p>
+    </div>
+
+
+    <div class="article-content" id="searchArticle">
+      <h3>How Browser Search Works</h3>
+      <p>
+        Search engines organize information from websites into large
+        indexes. When someone searches, the search engine compares the
+        query with information in its index.
+      </p>
+      <p>
+        Ranking systems then determine which results are most useful or
+        relevant to the query.
+      </p>
+      <p>
+        Different websites specialize in different types of information,
+        which is why a search about programming may be better suited to a
+        developer-focused website than a shopping website.
+      </p>
+    </div>
+
+
+    <div class="article-content" id="gameArticle">
+      <h3>Making Your First Browser Game</h3>
+      <p>
+        Browser games can be built with technologies that already work
+        inside modern web browsers.
+      </p>
+      <p>
+        HTML can create the game's interface, CSS can control its appearance,
+        and JavaScript can handle game logic.
+      </p>
+      <p>
+        Even a simple game can have a score, timer, player input, levels,
+        enemies, achievements, and saved progress.
+      </p>
+    </div>
+
+
+    <div class="article-content" id="responsiveArticle">
+      <h3>Why Responsive Design Matters</h3>
+      <p>
+        People use websites on many different screen sizes. A page that
+        looks great on a desktop can be difficult to use on a phone if it
+        isn't designed responsively.
+      </p>
+      <p>
+        Responsive design allows layouts to adapt to different screen
+        widths. Flexible containers, readable text, and mobile-friendly
+        controls are important parts of the approach.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <h2>About Mystarsnight</h2>
+
+    <p>
+      Mystarsnight is a web project focused on creating useful,
+      entertaining, and easy-to-use online tools.
+    </p>
+
+    <p>
+      Mystarsnight Quick Search was designed to make it easier to decide
+      where to search for different types of information.
+    </p>
+
+    <p>
+      The project may continue to grow with additional tools, games,
+      articles, and experiments.
+    </p>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+
+    <p>
+      Have a question, suggestion, or found something that doesn't work?
+      You can contact Mystarsnight using the contact method provided by
+      the site owner.
+    </p>
+
+    <p>
+      When contacting the site, please avoid sending passwords,
+      payment information, or other sensitive information.
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <span id="emailAddress">starsnighthelp@gmail.com</span>
+    </p>
+  </section>
+
+
+  <!-- PRIVACY -->
+  <section class="section" id="privacy">
+    <h2>Privacy Policy</h2>
+
+    <p>
+      Mystarsnight respects your privacy. This website is designed to
+      provide useful tools without requiring you to create an account
+      for basic use.
+    </p>
+
+    <h3>Information You Enter</h3>
+
+    <p>
+      Search terms entered into Quick Search are used by the webpage
+      to determine which destinations may be relevant. The selected
+      destination may receive your search query when you choose to
+      visit it.
+    </p>
+
+    <h3>Local Storage</h3>
+
+    <p>
+      If future features use browser storage, information stored there
+      remains on your device unless you clear your browser data.
+    </p>
+
+    <h3>Advertising</h3>
+
+    <p>
+      This website may display advertisements provided by third-party
+      advertising services. Those services may use technologies such as
+      cookies or similar identifiers according to their own policies.
+    </p>
+
+    <h3>Third-Party Websites</h3>
+
+    <p>
+      Quick Search can send you to third-party websites. Mystarsnight
+      does not control the privacy practices or content of those
+      external websites.
+    </p>
+
+    <h3>Changes</h3>
+
+    <p>
+      This Privacy Policy may be updated when the website's features
+      or practices change.
+    </p>
+  </section>
+
 </main>
+
+
 <footer>
-    © Mystarsnight • Quick Search
+  <div>
+    © <span id="year"></span> Mystarsnight
+  </div>
+
+  <p>
+    <a href="#home">Home</a>
+    <a href="#articles">Articles</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#privacy">Privacy</a>
+  </p>
 </footer>
+
+
 <script>
-const sites = [
+  const sites = [
     {
-        name: "Google",
-        url: "https://www.google.com/search?q=",
-        tags: [
-            "search",
-            "web",
-            "internet",
-            "find",
-            "information",
-            "research"
-        ],
-        description:
-            "A broad web search for finding websites and information."
+      name: "Google",
+      description: "General web search",
+      url: q => "https://www.google.com/search?q=" + encodeURIComponent(q),
+      tags: [
+        "search", "general", "website", "information", "question",
+        "news", "facts", "places", "people"
+      ]
     },
+
     {
-        name: "YouTube",
-        url: "https://www.youtube.com/results?search_query=",
-        tags: [
-            "video",
-            "videos",
-            "watch",
-            "music",
-            "tutorial",
-            "game",
-            "gaming"
-        ],
-        description:
-            "Find videos, tutorials, music, gaming and more."
+      name: "YouTube",
+      description: "Videos, tutorials and entertainment",
+      url: q => "https://www.youtube.com/results?search_query=" + encodeURIComponent(q),
+      tags: [
+        "video", "videos", "tutorial", "tutorials", "music",
+        "song", "gameplay", "gaming", "watch", "movie"
+      ]
     },
+
     {
-        name: "Wikipedia",
-        url: "https://en.wikipedia.org/wiki/Special:Search?search=",
-        tags: [
-            "learn",
-            "learning",
-            "facts",
-            "history",
-            "information",
-            "school"
-        ],
-        description:
-            "A useful place to start for facts and explanations."
+      name: "Wikipedia",
+      description: "Encyclopedia and general knowledge",
+      url: q => "https://en.wikipedia.org/wiki/Special:Search?search=" + encodeURIComponent(q),
+      tags: [
+        "history", "science", "person", "people", "country",
+        "facts", "definition", "what is", "information"
+      ]
     },
+
     {
-        name: "GitHub",
-        url: "https://github.com/search?q=",
-        tags: [
-            "coding",
-            "code",
-            "programming",
-            "developer",
-            "software",
-            "projects",
-            "html",
-            "javascript"
-        ],
-        description:
-            "Explore code, projects and developer tools."
+      name: "GitHub",
+      description: "Code, projects and open-source software",
+      url: q => "https://github.com/search?q=" + encodeURIComponent(q),
+      tags: [
+        "code", "coding", "programming", "html", "css",
+        "javascript", "github", "software", "developer",
+        "python", "repository", "repo"
+      ]
     },
+
     {
-        name: "MDN Web Docs",
-        url: "https://developer.mozilla.org/en-US/search?q=",
-        tags: [
-            "html",
-            "css",
-            "javascript",
-            "coding",
-            "programming",
-            "web",
-            "developer"
-        ],
-        description:
-            "Detailed documentation for HTML, CSS and JavaScript."
+      name: "MDN Web Docs",
+      description: "Web development documentation",
+      url: q => "https://developer.mozilla.org/en-US/search?q=" + encodeURIComponent(q),
+      tags: [
+        "html", "css", "javascript", "web", "developer",
+        "api", "dom", "programming", "code"
+      ]
     },
+
     {
-        name: "Amazon",
-        url: "https://www.amazon.com/s?k=",
-        tags: [
-            "buy",
-            "shop",
-            "shopping",
-            "books",
-            "book",
-            "electronics",
-            "product",
-            "products"
-        ],
-        description:
-            "Search for products, electronics, books and more."
+      name: "Amazon",
+      description: "Products and shopping",
+      url: q => "https://www.amazon.com/s?k=" + encodeURIComponent(q),
+      tags: [
+        "buy", "buying", "product", "products", "price",
+        "shopping", "shop", "keyboard", "computer", "phone"
+      ]
     },
+
     {
-        name: "Google Books",
-        url: "https://www.google.com/search?tbm=bks&q=",
-        tags: [
-            "book",
-            "books",
-            "reading",
-            "read"
-        ],
-        description:
-            "Search for books and book information."
+      name: "Google Books",
+      description: "Books and publications",
+      url: q => "https://www.google.com/search?tbm=bks&q=" + encodeURIComponent(q),
+      tags: [
+        "book", "books", "novel", "author", "reading",
+        "chapter", "publication"
+      ]
     },
+
     {
-        name: "Reddit",
-        url: "https://www.reddit.com/search/?q=",
-        tags: [
-            "community",
-            "discussion",
-            "reviews",
-            "opinions",
-            "help"
-        ],
-        description:
-            "Find community discussions and opinions."
+      name: "Reddit",
+      description: "Community discussions and experiences",
+      url: q => "https://www.reddit.com/search/?q=" + encodeURIComponent(q),
+      tags: [
+        "reddit", "community", "discussion", "opinion",
+        "experience", "help", "recommendation", "recommendations"
+      ]
     }
-];
-let redirectTimer = null;
-let bestDestination = "";
-let currentQuery = "";
-/* SEARCH */
-document
-    .getElementById("searchForm")
-    .addEventListener("submit", function(event) {
-        event.preventDefault();
-        const query =
-            document
-                .getElementById("searchInput")
-                .value
-                .trim();
-        if (!query) return;
-        performSearch(query);
-    });
-/* EXAMPLES */
-document
-    .querySelectorAll(".example")
-    .forEach(function(button) {
-        button.addEventListener("click", function() {
-            const query =
-                button.dataset.search;
-            document
-                .getElementById("searchInput")
-                .value = query;
-            performSearch(query);
-        });
-    });
-/* SCORE */
-function calculateScore(site, query) {
-    const words =
-        query
-            .toLowerCase()
-            .replace(/[^a-z0-9 ]/g, " ")
-            .split(/\s+/)
-            .filter(Boolean);
-    let score = 0;
-    words.forEach(function(word) {
-        site.tags.forEach(function(tag) {
-            if (word === tag) {
-                score += 10;
-            }
-            else if (
-                word.includes(tag) ||
-                tag.includes(word)
-            ) {
-                score += 4;
-            }
-        });
-    });
-    return score;
-}
-/* SEARCH */
-function performSearch(query) {
-    clearInterval(redirectTimer);
-    currentQuery = query;
-    document
-        .getElementById("results")
-        .style.display = "block";
-    document
-        .getElementById("searchText")
-        .textContent = query;
-    let ranked =
-        sites
-            .map(function(site) {
-                return {
-                    ...site,
-                    score: calculateScore(site, query)
-                };
-            })
-            .sort(function(a, b) {
-                return b.score - a.score;
-            });
-    if (ranked[0].score === 0) {
-        ranked.sort(function(a, b) {
-            if (a.name === "Google") return -1;
-            if (b.name === "Google") return 1;
-            return 0;
-        });
+  ];
+
+  let bestDestination = "";
+  let redirectTimer = null;
+  let countdown = 5;
+
+  function performSearch() {
+    const input = document.getElementById("searchInput");
+    const query = input.value.trim();
+
+    if (!query) {
+      input.focus();
+      return;
     }
+
+    const lower = query.toLowerCase();
+
+    const ranked = sites.map(site => {
+      let score = 0;
+
+      site.tags.forEach(tag => {
+        if (lower.includes(tag)) {
+          score += 10;
+        }
+      });
+
+      if (
+        site.name.toLowerCase().includes(lower) ||
+        lower.includes(site.name.toLowerCase())
+      ) {
+        score += 30;
+      }
+
+      return {
+        ...site,
+        score
+      };
+    });
+
+    ranked.sort((a, b) => b.score - a.score);
+
     const best = ranked[0];
-    bestDestination =
-        best.url +
-        encodeURIComponent(query);
-    document
-        .getElementById("bestSite")
-        .textContent = best.name;
-    const cards =
-        document.getElementById("cards");
-    cards.innerHTML =
-        ranked
-            .slice(0, 3)
-            .map(function(site, index) {
-                return `
-                <article class="card ${index === 0 ? "best" : ""}">
-                    ${
-                        index === 0
-                        ?
-                        '<div class="badge">BEST MATCH</div>'
-                        :
-                        ''
-                    }
-                    <h3>
-                        ${escapeHTML(site.name)}
-                    </h3>
-                    <p>
-                        ${escapeHTML(site.description)}
-                    </p>
-                    <button
-                        class="goButton"
-                        data-url="${escapeHTML(site.url)}"
-                    >
-                        Go here
-                    </button>
-                </article>
-                `;
-            })
-            .join("");
-    cards
-        .querySelectorAll(".goButton")
-        .forEach(function(button) {
-            button.addEventListener("click", function() {
-                clearInterval(redirectTimer);
-                window.location.href =
-                    button.dataset.url +
-                    encodeURIComponent(query);
-            });
-        });
-    /*
-       Start normal 5-second redirect.
-    */
+
+    bestDestination = best.url(query);
+
+    document.getElementById("results").style.display = "block";
+
+    const resultList = document.getElementById("resultList");
+    resultList.innerHTML = "";
+
+    ranked.slice(0, 3).forEach((site, index) => {
+      const card = document.createElement("div");
+      card.className = "result-card";
+
+      const left = document.createElement("div");
+
+      const title = document.createElement("h3");
+      title.textContent =
+        (index === 0 ? "★ " : "") + site.name;
+
+      const desc = document.createElement("p");
+      desc.textContent = site.description;
+
+      left.appendChild(title);
+      left.appendChild(desc);
+
+      const button = document.createElement("button");
+      button.className = "go-btn";
+      button.textContent = "Go Here";
+
+      button.onclick = () => {
+        window.location.href = site.url(query);
+      };
+
+      card.appendChild(left);
+      card.appendChild(button);
+
+      resultList.appendChild(card);
+    });
+
+    document.getElementById("bestSite").textContent = best.name;
+
     startRedirect();
-    /*
-       Show game invitation.
-    */
-    document
-        .getElementById("gamePrompt")
-        .style.display = "block";
-    window.scrollTo({
-        top:
-            document.getElementById("results").offsetTop - 20,
-        behavior: "smooth"
+
+    document.getElementById("gamePrompt").style.display = "block";
+
+    document.getElementById("results").scrollIntoView({
+      behavior: "smooth"
     });
-}
-/* REDIRECT */
-function startRedirect() {
+  }
+
+
+  function startRedirect() {
     clearInterval(redirectTimer);
-    let seconds = 5;
-    document
-        .getElementById("count")
-        .textContent = seconds;
-    redirectTimer =
-        setInterval(function() {
-            seconds--;
-            document
-                .getElementById("count")
-                .textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(redirectTimer);
-                window.location.href =
-                    bestDestination;
-            }
-        }, 1000);
-}
-/* CANCEL */
-document
-    .getElementById("cancelButton")
-    .addEventListener("click", function() {
+
+    countdown = 5;
+
+    document.getElementById("redirectBox").style.display = "block";
+    document.getElementById("countdown").textContent = countdown;
+
+    redirectTimer = setInterval(() => {
+      countdown--;
+
+      document.getElementById("countdown").textContent = countdown;
+
+      if (countdown <= 0) {
         clearInterval(redirectTimer);
-        document
-            .getElementById("redirectBox")
-            .style.display = "none";
-    });
-/* GAME */
-let score = 0;
-let gameSeconds = 10;
-let gameTimer = null;
-const target =
-    document.getElementById("target");
-const gameArea =
-    document.getElementById("gameArea");
-document
-    .getElementById("playButton")
-    .addEventListener("click", startGame);
-document
-    .getElementById("playAgain")
-    .addEventListener("click", startGame);
-function startGame() {
-    /*
-       Stop the automatic redirect while
-       the user is actively playing.
-    */
+
+        if (bestDestination) {
+          window.location.href = bestDestination;
+        }
+      }
+    }, 1000);
+  }
+
+
+  function cancelRedirect() {
     clearInterval(redirectTimer);
+
+    document.getElementById("redirectBox").style.display = "none";
+  }
+
+
+  /* GAME */
+
+  let score = 0;
+  let gameSeconds = 10;
+  let gameTimer = null;
+  let gameRunning = false;
+
+  function startGame() {
+    clearInterval(redirectTimer);
+
+    document.getElementById("redirectBox").style.display = "none";
+    document.getElementById("gamePrompt").style.display = "none";
+    document.getElementById("game").style.display = "block";
+
     score = 0;
     gameSeconds = 10;
-    document
-        .getElementById("score")
-        .textContent = score;
-    document
-        .getElementById("gameTime")
-        .textContent = gameSeconds;
-    document
-        .getElementById("gamePrompt")
-        .style.display = "none";
-    document
-        .getElementById("gameScreen")
-        .style.display = "block";
-    document
-        .getElementById("gameFinished")
-        .style.display = "none";
-    target.style.display = "block";
+    gameRunning = true;
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("gameTime").textContent = gameSeconds;
+    document.getElementById("gameResult").style.display = "none";
+
+    const target = document.getElementById("target");
+    target.style.display = "flex";
+
     moveTarget();
+
     clearInterval(gameTimer);
-    gameTimer =
-        setInterval(function() {
-            gameSeconds--;
-            document
-                .getElementById("gameTime")
-                .textContent = gameSeconds;
-            if (gameSeconds <= 0) {
-                endGame();
-            }
-        }, 1000);
-}
-/* TARGET CLICK */
-target.addEventListener("click", function() {
+
+    gameTimer = setInterval(() => {
+      gameSeconds--;
+
+      document.getElementById("gameTime").textContent = gameSeconds;
+
+      if (gameSeconds <= 0) {
+        endGame();
+      }
+    }, 1000);
+
+    document.getElementById("game").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function hitTarget() {
+    if (!gameRunning) return;
+
     score++;
-    document
-        .getElementById("score")
-        .textContent = score;
+
+    document.getElementById("score").textContent = score;
+
     moveTarget();
-});
-/* MOVE TARGET */
-function moveTarget() {
-    const maxX =
-        gameArea.clientWidth - 55;
-    const maxY =
-        gameArea.clientHeight - 55;
-    const x =
-        Math.random() * Math.max(0, maxX);
-    const y =
-        Math.random() * Math.max(0, maxY);
+  }
+
+
+  function moveTarget() {
+    const area = document.getElementById("gameArea");
+    const target = document.getElementById("target");
+
+    const maxX = area.clientWidth - target.offsetWidth;
+    const maxY = area.clientHeight - target.offsetHeight;
+
+    const x = Math.random() * Math.max(0, maxX);
+    const y = Math.random() * Math.max(0, maxY);
+
     target.style.left = x + "px";
     target.style.top = y + "px";
-}
-/* END GAME */
-function endGame() {
+  }
+
+
+  function endGame() {
+    if (!gameRunning) return;
+
+    gameRunning = false;
+
     clearInterval(gameTimer);
-    target.style.display = "none";
-    document
-        .getElementById("finalScore")
-        .textContent = score;
-    document
-        .getElementById("gameFinished")
-        .style.display = "block";
-    /*
-       After the game, the user can continue
-       normally rather than being trapped.
-    */
-}
-/* SKIP */
-document
-    .getElementById("skipGame")
-    .addEventListener("click", function() {
-        document
-            .getElementById("gamePrompt")
-            .style.display = "none";
-        window.location.href =
-            bestDestination;
-    });
-/* ESCAPE HTML */
-function escapeHTML(text) {
-    return text.replace(
-        /[&<>"']/g,
-        function(character) {
-            return {
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#039;"
-            }[character];
+
+    document.getElementById("target").style.display = "none";
+
+    const result = document.getElementById("gameResult");
+
+    result.textContent =
+      "Game over! You scored " + score + " points.";
+
+    result.style.display = "block";
+
+    if (bestDestination) {
+      document.getElementById("redirectBox").style.display = "block";
+
+      countdown = 3;
+
+      document.getElementById("countdown").textContent = countdown;
+
+      clearInterval(redirectTimer);
+
+      redirectTimer = setInterval(() => {
+        countdown--;
+
+        document.getElementById("countdown").textContent = countdown;
+
+        if (countdown <= 0) {
+          clearInterval(redirectTimer);
+
+          window.location.href = bestDestination;
         }
-    );
-}
+      }, 1000);
+    }
+  }
+
+
+  function skipGame() {
+    clearInterval(redirectTimer);
+
+    document.getElementById("gamePrompt").style.display = "none";
+
+    if (bestDestination) {
+      window.location.href = bestDestination;
+    }
+  }
+
+
+  /* ARTICLES */
+
+  function openArticle(id) {
+    document.querySelectorAll(".article-content").forEach(article => {
+      article.style.display = "none";
+    });
+
+    const article = document.getElementById(id);
+
+    if (article) {
+      article.style.display = "block";
+
+      article.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+
+  /* ENTER KEY SEARCH */
+
+  document.getElementById("searchInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      performSearch();
+    }
+  });
+
+
+  /* YEAR */
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 </script>
+
 </body>
 </html>
