@@ -6,7 +6,7 @@
 
 <title>Mystarsnight Quick Search</title>
 
-<meta name="description" content="Mystarsnight Quick Search helps you decide which type of website is the best place to continue your search.">
+<meta name="description" content="Mystarsnight Quick Search helps you find useful websites, tools, news, learning resources, coding documentation, videos, products and more.">
 
 <meta name="google-adsense-account" content="ca-pub-6476815184336114">
 
@@ -15,6 +15,10 @@ src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pu
 crossorigin="anonymous"></script>
 
 <style>
+
+/* =========================
+   GLOBAL
+========================= */
 
 * {
     box-sizing: border-box;
@@ -27,94 +31,111 @@ html {
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
+    background: #f4f6f8;
     color: #172033;
 }
 
-/* HEADER */
+button,
+input {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header {
-    background: white;
-    border-bottom: 1px solid #e2e7ef;
     position: sticky;
     top: 0;
     z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid #dfe4ea;
 }
 
 .header-inner {
-    max-width: 1100px;
+    max-width: 1180px;
     margin: auto;
-    padding: 16px 22px;
+    padding: 15px 22px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
 }
 
 .logo {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 850;
+    letter-spacing: -0.5px;
     white-space: nowrap;
 }
 
 .logo span {
-    color: #5269d8;
+    color: #4963b5;
 }
-
-/* NAVIGATION */
 
 nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 5px;
+    gap: 3px;
     flex-wrap: wrap;
 }
 
 nav a {
-    color: #4d5a70;
+    color: #4d596c;
     text-decoration: none;
-    padding: 9px 11px;
-    border-radius: 9px;
     font-size: 14px;
-    font-weight: 650;
+    font-weight: 700;
+    padding: 9px 11px;
+    border-radius: 8px;
 }
 
 nav a:hover {
-    background: #eef1f7;
     color: #172033;
+    background: #eef1f5;
 }
 
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    background: white;
-    border-bottom: 1px solid #e5e9f0;
+    background: #ffffff;
+    border-bottom: 1px solid #e1e5eb;
     text-align: center;
-    padding: 70px 20px 60px;
+    padding: 72px 20px 60px;
 }
 
 .hero h1 {
-    margin: 0;
-    font-size: clamp(40px, 8vw, 66px);
+    max-width: 900px;
+    margin: auto;
+    font-size: clamp(42px, 7vw, 68px);
+    line-height: 1.05;
     letter-spacing: -3px;
 }
 
 .hero p {
-    max-width: 690px;
-    margin: 18px auto 0;
-    color: #667085;
+    max-width: 760px;
+    margin: 20px auto 0;
+    color: #5d6879;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 .search-box {
     display: flex;
-    max-width: 820px;
+    max-width: 850px;
     margin: 30px auto 0;
     gap: 10px;
 }
@@ -122,75 +143,79 @@ nav a:hover {
 .search-box input {
     flex: 1;
     min-width: 0;
-    padding: 18px;
+    padding: 19px;
+    border: 2px solid #d8dee7;
     border-radius: 14px;
-    border: 2px solid #d7deea;
-    font-size: 17px;
-    outline: none;
+    background: #ffffff;
     color: #172033;
+    outline: none;
+    font-size: 17px;
 }
 
 .search-box input:focus {
-    border-color: #6076df;
+    border-color: #5d73bb;
 }
 
 .search-box button {
     border: 0;
     border-radius: 14px;
-    padding: 0 24px;
+    padding: 0 25px;
     background: #172033;
     color: white;
-    font-size: 16px;
-    font-weight: 750;
     cursor: pointer;
+    font-weight: 800;
 }
 
 .search-box button:hover {
-    background: #2b3855;
+    background: #2b3850;
 }
 
-
-/* EXAMPLES */
-
 .examples {
+    max-width: 900px;
+    margin: 16px auto 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 15px;
 }
 
 .example {
-    background: white;
-    border: 1px solid #dce2ec;
-    color: #536077;
+    background: #ffffff;
+    border: 1px solid #dce2e9;
     border-radius: 20px;
     padding: 8px 13px;
+    color: #536076;
     cursor: pointer;
 }
 
+.example:hover {
+    background: #f0f2f5;
+}
 
-/* MAIN */
+
+/* =========================
+   MAIN
+========================= */
 
 main {
-    max-width: 1050px;
+    max-width: 1120px;
     margin: auto;
     padding: 35px 18px;
 }
 
 .section {
-    background: white;
-    border: 1px solid #e4e8ef;
+    background: #ffffff;
+    border: 1px solid #e1e5eb;
     border-radius: 20px;
     padding: 30px;
     margin-bottom: 22px;
-    box-shadow: 0 5px 20px rgba(20, 30, 55, .04);
+    box-shadow: 0 6px 25px rgba(20, 30, 50, 0.04);
 }
 
 .section h2 {
-    margin-top: 0;
-    font-size: 29px;
-    letter-spacing: -.5px;
+    margin: 0 0 14px;
+    font-size: 30px;
+    letter-spacing: -0.7px;
 }
 
 .section h3 {
@@ -199,73 +224,41 @@ main {
 
 .section p {
     color: #566176;
-    line-height: 1.7;
+    line-height: 1.75;
 }
 
 
-/* HOW IT WORKS */
-
-.steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 22px;
-}
-
-.step {
-    background: #f7f8fb;
-    border: 1px solid #e4e8ef;
-    border-radius: 15px;
-    padding: 20px;
-}
-
-.step-number {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #172033;
-    color: white;
-    border-radius: 50%;
-    font-weight: 800;
-    margin-bottom: 12px;
-}
-
-.step h3 {
-    margin: 0 0 8px;
-}
-
-.step p {
-    margin: 0;
-    font-size: 14px;
-}
-
-
-/* RESULTS */
+/* =========================
+   SEARCH RESULTS
+========================= */
 
 #results {
     display: none;
 }
 
-.result-intro {
-    color: #667085;
-    margin-bottom: 20px;
+.search-summary {
+    color: #657187;
+    margin-bottom: 22px;
 }
 
 .result-card {
-    border: 1px solid #e1e6ef;
-    border-radius: 15px;
-    padding: 19px;
+    border: 1px solid #e0e5ec;
+    border-radius: 16px;
+    padding: 20px;
     margin-bottom: 12px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    transition: transform 0.15s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
 }
 
 .result-card.best {
-    border: 2px solid #667be0;
+    border: 2px solid #6074b8;
 }
 
 .result-card h3 {
@@ -279,33 +272,39 @@ main {
 
 .best-label {
     display: inline-block;
-    margin-bottom: 8px;
     padding: 5px 8px;
-    border-radius: 7px;
-    background: #eef1ff;
-    color: #5269d8;
+    margin-bottom: 9px;
+    border-radius: 6px;
+    background: #edf0fa;
+    color: #4c61a6;
     font-size: 11px;
-    font-weight: 800;
+    font-weight: 850;
 }
 
 .go-button {
-    padding: 11px 16px;
     border: 0;
     border-radius: 10px;
+    padding: 12px 17px;
     background: #172033;
-    color: white;
+    color: #ffffff;
+    font-weight: 800;
     cursor: pointer;
-    font-weight: 750;
     white-space: nowrap;
 }
 
+.go-button:hover {
+    background: #2b3850;
+}
 
-/* REDIRECT */
+
+/* =========================
+   REDIRECT
+========================= */
 
 .redirect-box {
     display: none;
-    margin: 20px 0;
-    padding: 20px;
+    margin-top: 20px;
+    padding: 23px;
     text-align: center;
     border-radius: 16px;
     background: #172033;
@@ -313,112 +312,241 @@ main {
 }
 
 .redirect-box strong {
-    font-size: 19px;
+    font-size: 18px;
 }
 
 .countdown {
-    font-size: 28px;
-    font-weight: 850;
+    display: inline-block;
+    margin: 7px 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.redirect-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.cancel-button,
+.redirect-now {
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 800;
 }
 
 .cancel-button {
-    margin-top: 12px;
-    padding: 9px 16px;
-    border-radius: 9px;
-    border: 1px solid #71809b;
     background: transparent;
     color: white;
-    cursor: pointer;
+    border: 1px solid #77849b;
+}
+
+.redirect-now {
+    border: 0;
+    background: white;
+    color: #172033;
 }
 
 
-/* GAME */
+/* =========================
+   GAME PROMPT
+========================= */
 
 .game-prompt {
     display: none;
     margin-top: 20px;
-    padding: 26px;
+    padding: 28px;
     text-align: center;
-    border-radius: 18px;
-    background: #f2f4f8;
+    border-radius: 17px;
+    background: #f1f3f6;
+    border: 1px solid #e1e5eb;
 }
 
 .game-prompt h2 {
-    font-size: 25px;
     margin-bottom: 10px;
 }
 
 .game-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .play-button {
-    padding: 12px 18px;
-    border-radius: 10px;
+    padding: 12px 19px;
     border: 0;
-    background: #5269d8;
+    border-radius: 10px;
+    background: #4d64a9;
     color: white;
     cursor: pointer;
-    font-weight: 750;
+    font-weight: 800;
 }
 
 .skip-button {
-    padding: 12px 18px;
+    padding: 12px 19px;
     border-radius: 10px;
-    border: 1px solid #d6dce6;
+    border: 1px solid #d6dce5;
     background: white;
-    color: #39465d;
+    color: #3e4b60;
     cursor: pointer;
-    font-weight: 750;
+    font-weight: 800;
 }
+
+
+/* =========================
+   GAME
+========================= */
 
 #game {
     display: none;
 }
 
-.game-stats {
+.game-top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 14px;
-    font-weight: 750;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.game-stat {
+    padding: 11px 15px;
+    background: #f3f5f7;
+    border: 1px solid #e1e5eb;
+    border-radius: 10px;
+    font-weight: 800;
 }
 
 .game-area {
-    height: 300px;
-    border-radius: 16px;
-    border: 2px solid #e1e6ef;
-    background: #f7f8fb;
     position: relative;
+    height: 360px;
     overflow: hidden;
+    background: #f7f8fa;
+    border: 2px solid #dfe4ea;
+    border-radius: 18px;
 }
 
-.target {
-    display: none;
+.game-item {
     position: absolute;
     width: 62px;
     height: 62px;
-    border: 0;
     border-radius: 50%;
-    background: #5269d8;
+    border: 0;
+    background: #6074b8;
     color: white;
-    cursor: pointer;
     font-weight: 850;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(30, 45, 80, 0.18);
+}
+
+.game-item:hover {
+    transform: scale(1.05);
 }
 
 .game-result {
     display: none;
-    text-align: center;
-    margin-top: 18px;
-    padding: 20px;
+    margin-top: 17px;
+    padding: 22px;
     border-radius: 14px;
-    background: #f2f4f8;
+    text-align: center;
+    background: #f1f3f6;
+}
+
+.game-result h3 {
+    margin-top: 0;
 }
 
 
-/* SPECIAL */
+/* =========================
+   TOOL GRID
+========================= */
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.tool {
+    border: 1px solid #e1e5eb;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.tool h3 {
+    margin: 0 0 9px;
+}
+
+.tool p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.tool button {
+    margin-top: 15px;
+    padding: 9px 13px;
+    border: 1px solid #d7dde6;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #344158;
+    cursor: pointer;
+    font-weight: 750;
+}
+
+.tool button:hover {
+    background: #f2f4f6;
+}
+
+
+/* =========================
+   STEPS
+========================= */
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.step {
+    padding: 21px;
+    border-radius: 15px;
+    background: #f7f8fa;
+    border: 1px solid #e3e7ec;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #172033;
+    color: white;
+    font-weight: 850;
+    margin-bottom: 12px;
+}
+
+.step h3 {
+    margin: 0 0 8px;
+}
+
+.step p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FEATURE GRID
+========================= */
 
 .special-grid {
     display: grid;
@@ -428,13 +556,13 @@ main {
 }
 
 .special {
-    border: 1px solid #e3e7ef;
-    border-radius: 15px;
     padding: 20px;
+    border: 1px solid #e1e5eb;
+    border-radius: 15px;
 }
 
 .special h3 {
-    margin: 0 0 10px;
+    margin: 0 0 9px;
 }
 
 .special p {
@@ -443,45 +571,69 @@ main {
 }
 
 
-/* CONTACT */
+/* =========================
+   CONTACT
+========================= */
 
 .contact-box {
-    padding: 18px;
-    border-radius: 13px;
-    background: #f7f8fb;
-    border: 1px solid #e5e9ef;
+    padding: 20px;
+    border-radius: 14px;
+    background: #f5f6f8;
+    border: 1px solid #e1e5eb;
 }
 
 .contact-box p {
     margin: 0;
 }
 
+.contact-box a {
+    color: #4059a5;
+    font-weight: 800;
+}
 
-/* FOOTER */
+
+/* =========================
+   ARTICLE
+========================= */
+
+.article {
+    max-width: 900px;
+}
+
+.article h3 {
+    font-size: 22px;
+    color: #202b3d;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-    text-align: center;
     background: #172033;
-    color: #c4ccda;
-    padding: 35px 20px;
-    margin-top: 20px;
+    color: #c7cfdd;
+    text-align: center;
+    padding: 38px 20px;
 }
 
 .footer-links {
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 .footer-links a {
-    color: #dce4f2;
-    text-decoration: none;
     margin: 0 8px;
+    color: #dfe6f1;
+    text-decoration: none;
     font-size: 14px;
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 720px) {
+@media (max-width: 800px) {
 
     .header-inner {
         flex-direction: column;
@@ -496,11 +648,12 @@ footer {
     }
 
     .search-box button {
-        height: 55px;
+        height: 56px;
     }
 
     .steps,
-    .special-grid {
+    .special-grid,
+    .tool-grid {
         grid-template-columns: 1fr;
     }
 
@@ -520,6 +673,7 @@ footer {
 
 <body>
 
+
 <header>
 
 <div class="header-inner">
@@ -530,6 +684,8 @@ Mystarsnight <span>Quick Search</span>
 
 <nav>
 <a href="#home">Home</a>
+<a href="#tools">Tools</a>
+<a href="#news">Daily News</a>
 <a href="#how">How It Works</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
@@ -541,15 +697,18 @@ Mystarsnight <span>Quick Search</span>
 </header>
 
 
+
 <section class="hero" id="home">
 
-<h1>Find the right place to search.</h1>
+<h1>Find a better place to search.</h1>
 
 <p>
-Mystarsnight Quick Search helps you decide where to continue your search.
-Different websites are useful for different things, and Quick Search compares
-your request with categories to recommend a starting point.
+Mystarsnight Quick Search compares what you are looking for with different
+types of websites and tools to help you choose a useful place to continue.
+Search for coding, videos, products, news, learning, maps, images, games,
+books, music and much more.
 </p>
+
 
 <div class="search-box">
 
@@ -566,21 +725,30 @@ Quick Search
 
 </div>
 
+
 <div class="examples">
 
-<button class="example" onclick="exampleSearch('learn coding')">
+<button class="example" onclick="exampleSearch('learn javascript coding')">
 Learn coding
+</button>
+
+<button class="example" onclick="exampleSearch('daily technology news')">
+Daily news
+</button>
+
+<button class="example" onclick="exampleSearch('buy a mechanical keyboard')">
+Find products
 </button>
 
 <button class="example" onclick="exampleSearch('watch space videos')">
 Watch videos
 </button>
 
-<button class="example" onclick="exampleSearch('buy a keyboard')">
-Find products
+<button class="example" onclick="exampleSearch('find images of planets')">
+Find images
 </button>
 
-<button class="example" onclick="exampleSearch('learn about history')">
+<button class="example" onclick="exampleSearch('learn about ancient history')">
 Learn something
 </button>
 
@@ -589,75 +757,17 @@ Learn something
 </section>
 
 
+
 <main>
 
 
-<section class="section" id="how">
-
-<h2>How Mystarsnight Quick Search Works</h2>
-
-<p>
-Quick Search is designed as a simple starting tool. Instead of assuming that
-one website is always best, it looks at the words in your request and compares
-them with different types of destinations.
-</p>
-
-<div class="steps">
-
-<div class="step">
-
-<div class="step-number">1</div>
-
-<h3>Describe what you want</h3>
-
-<p>
-Enter a short search such as learning a skill, finding a product, researching
-a topic, watching a video, or finding programming resources.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">2</div>
-
-<h3>Compare destinations</h3>
-
-<p>
-Quick Search checks the type of words in your request and ranks destinations
-that may be useful for that type of search.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">3</div>
-
-<h3>Choose where to go</h3>
-
-<p>
-You can visit any suggested destination yourself. The recommended destination
-can also open automatically unless you cancel the redirect.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
+<!-- RESULTS -->
 
 <section class="section" id="results">
 
-<h2>Search Results</h2>
+<h2>Quick Search Results</h2>
 
-<p class="result-intro">
-Here are destinations that may fit what you are looking for.
-</p>
+<p class="search-summary" id="searchSummary"></p>
 
 <div id="resultList"></div>
 
@@ -665,20 +775,28 @@ Here are destinations that may fit what you are looking for.
 <div class="redirect-box" id="redirectBox">
 
 <strong>
-Recommended: <span id="bestSite"></span>
+Recommended destination: <span id="bestSite"></span>
 </strong>
 
 <br>
 
 Opening in
-<span class="countdown" id="countdown">5</span>
-seconds...
 
-<br>
+<div class="countdown" id="countdown">5</div>
+
+seconds.
+
+<div class="redirect-actions">
 
 <button class="cancel-button" onclick="cancelRedirect()">
 Cancel redirect
 </button>
+
+<button class="redirect-now" onclick="goToBest()">
+Go now
+</button>
+
+</div>
 
 </div>
 
@@ -688,16 +806,17 @@ Cancel redirect
 <h2>Wait... want to play a game first?</h2>
 
 <p>
-Try a quick optional game before continuing.
+Try Quick Catch before you continue. The game pauses the automatic redirect,
+so you stay in control.
 </p>
 
 <div class="game-buttons">
 
 <button class="play-button" onclick="startGame()">
-Play Quick Tap
+Play Quick Catch
 </button>
 
-<button class="skip-button" onclick="skipGame()">
+<button class="skip-button" onclick="goToBest()">
 Continue to result
 </button>
 
@@ -709,18 +828,30 @@ Continue to result
 
 
 
+<!-- GAME -->
+
 <section class="section" id="game">
 
-<h2>Quick Tap</h2>
+<h2>Quick Catch</h2>
 
-<div class="game-stats">
+<p>
+Click the moving targets before time runs out. Each successful catch earns
+one point. Try to beat your saved best score.
+</p>
 
-<div>
+
+<div class="game-top">
+
+<div class="game-stat">
 Score: <span id="score">0</span>
 </div>
 
-<div>
-Time: <span id="gameTime">10</span>s
+<div class="game-stat">
+Time: <span id="gameTime">15</span>s
+</div>
+
+<div class="game-stat">
+Best: <span id="bestScore">0</span>
 </div>
 
 </div>
@@ -728,8 +859,8 @@ Time: <span id="gameTime">10</span>s
 
 <div class="game-area" id="gameArea">
 
-<button class="target" id="target">
-TAP
+<button class="game-item" id="gameItem">
+CATCH
 </button>
 
 </div>
@@ -741,24 +872,293 @@ TAP
 
 
 
+<!-- TOOLS -->
+
+<section class="section" id="tools">
+
+<h2>More Mystarsnight Tools</h2>
+
+<p>
+Quick Search is designed to be a starting point. These shortcuts let you
+quickly begin common types of searches.
+</p>
+
+
+<div class="tool-grid">
+
+
+<div class="tool">
+
+<h3>Daily News Search</h3>
+
+<p>
+Search current news topics using a news-focused search.
+</p>
+
+<button onclick="toolSearch('latest daily news')">
+Open News Search
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Code Finder</h3>
+
+<p>
+Search programming resources, source code, repositories and documentation.
+</p>
+
+<button onclick="toolSearch('programming code examples')">
+Find Code
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Learning Search</h3>
+
+<p>
+Find explanations, educational resources and topics to study.
+</p>
+
+<button onclick="toolSearch('learn something new')">
+Start Learning
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Video Search</h3>
+
+<p>
+Find tutorials, entertainment and visual explanations.
+</p>
+
+<button onclick="toolSearch('video tutorial')">
+Find Videos
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Product Finder</h3>
+
+<p>
+Start a search for products, technology, accessories and other items.
+</p>
+
+<button onclick="toolSearch('find products')">
+Find Products
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Image Search</h3>
+
+<p>
+Search for pictures, artwork, photography and visual references.
+</p>
+
+<button onclick="toolSearch('find images')">
+Find Images
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Map Search</h3>
+
+<p>
+Search for places, locations, routes and businesses.
+</p>
+
+<button onclick="toolSearch('find a place on a map')">
+Open Map Search
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Book Search</h3>
+
+<p>
+Look for books, authors, stories and reading material.
+</p>
+
+<button onclick="toolSearch('find books')">
+Find Books
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<h3>Game Search</h3>
+
+<p>
+Search for games, game information, walkthroughs and communities.
+</p>
+
+<button onclick="toolSearch('find games')">
+Find Games
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- DAILY NEWS -->
+
+<section class="section article" id="news">
+
+<h2>Daily News and Current Topics</h2>
+
+<p>
+News changes throughout the day, which means a useful news tool should help
+you reach current information instead of pretending that a static page always
+contains today's latest events. Mystarsnight Quick Search includes news-related
+keywords so searches about current events can be directed toward a news search.
+</p>
+
+<p>
+You can search for broad topics such as technology news, science news, space
+news, gaming news, sports news, business news, entertainment news, world news,
+or local news. You can also type the name of a specific topic directly into the
+main search bar.
+</p>
+
+<h3>Why Current News Searches Matter</h3>
+
+<p>
+A topic that was accurate yesterday may have changed today. For current events,
+the date of a source and the time it was published can matter just as much as
+the headline. Searching for current information gives visitors an opportunity
+to compare recent sources and learn more about developing stories.
+</p>
+
+<h3>Using Quick Search for News</h3>
+
+<p>
+Try searching for a specific subject instead of only typing "news." For
+example, a search for "latest space news" or "today's technology news" gives
+the search tool more information about what you are interested in.
+</p>
+
+<p>
+Mystarsnight Quick Search is intended to help visitors find a starting point.
+When researching important or fast-changing subjects, it is useful to compare
+multiple sources and check publication dates.
+</p>
+
+<button class="go-button" onclick="toolSearch('latest news today')">
+Search Daily News
+</button>
+
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+<h2>How Mystarsnight Quick Search Works</h2>
+
+<p>
+Different searches have different purposes. Someone looking for programming
+documentation may benefit from a developer resource, while someone looking
+for a video tutorial may prefer a video platform. Quick Search compares the
+words you enter with categories connected to different types of destinations.
+</p>
+
+
+<div class="steps">
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<h3>Describe your goal</h3>
+
+<p>
+Type what you are trying to find using normal words. You can search for a
+topic, a product, a tutorial, news, code, a location, an image or many other
+subjects.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<h3>Compare categories</h3>
+
+<p>
+Quick Search checks words and phrases against categories such as news,
+learning, programming, videos, shopping, maps and community discussions.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<h3>Choose where to continue</h3>
+
+<p>
+The tool displays several possible destinations. You can select one yourself,
+cancel the countdown, or allow the recommended destination to open.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- WHAT MAKES IT DIFFERENT -->
+
 <section class="section">
 
 <h2>What Makes Quick Search Different?</h2>
 
-<p>
-Mystarsnight Quick Search is built around a simple idea: the best place to
-continue searching depends on what you are trying to do.
-</p>
-
 <div class="special-grid">
+
 
 <div class="special">
 
-<h3>Purpose-Based</h3>
+<h3>Purpose-Based Suggestions</h3>
 
 <p>
-The recommendations are based on the purpose of your search rather than
-showing the same destination for every request.
+Recommendations change depending on what you search for instead of always
+showing the same destination.
 </p>
 
 </div>
@@ -766,11 +1166,11 @@ showing the same destination for every request.
 
 <div class="special">
 
-<h3>Simple to Use</h3>
+<h3>Multiple Starting Points</h3>
 
 <p>
-There are no accounts required for basic searching. Enter what you want and
-Quick Search gives you a clear set of possible next steps.
+Search results show several possible places to continue, making it easier to
+compare different kinds of resources.
 </p>
 
 </div>
@@ -781,69 +1181,141 @@ Quick Search gives you a clear set of possible next steps.
 <h3>You Stay in Control</h3>
 
 <p>
-You can manually choose a destination or cancel an automatic redirect.
-The optional game can also be skipped.
+You can cancel redirects, choose another result or play the optional mini-game
+before continuing.
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
 
+
+<!-- LONG ARTICLE -->
+
+<section class="section article">
+
+<h2>Finding Better Information Online</h2>
+
+<p>
+The internet contains an enormous amount of information, but finding the right
+starting point can sometimes be more difficult than finding the answer itself.
+A search for a programming problem, a product, a video tutorial or a current
+event can each benefit from different types of websites.
+</p>
+
+<h3>Choose Resources Based on Your Goal</h3>
+
+<p>
+When you want to learn a technical skill, official documentation and educational
+resources can be useful. When you want to see how something works, a video may
+provide a clearer explanation. When you want to purchase something, product
+searches and reviews may be more relevant than general information pages.
+</p>
+
+<h3>Use Specific Search Terms</h3>
+
+<p>
+Specific searches usually communicate your goal more clearly. Instead of
+searching for "coding," you could search for "learn HTML for beginners" or
+"JavaScript array examples." Instead of searching for "space," you could search
+for "latest space exploration news" or "how planets form."
+</p>
+
+<h3>Compare Information When Necessary</h3>
+
+<p>
+Not every website has the same purpose. Some websites specialize in official
+documentation, while others focus on videos, products, discussions or general
+background information. Comparing multiple sources can help you understand a
+topic more completely.
+</p>
+
+<h3>Remember That Current Information Changes</h3>
+
+<p>
+News, prices, product availability, schedules and other time-sensitive topics
+can change. When searching for something current, checking dates and recent
+updates can be important.
+</p>
+
+<p>
+Mystarsnight Quick Search is built around the idea that finding a useful
+starting point should be quick and understandable. Enter what you are looking
+for, review the suggestions and choose where you want to continue.
+</p>
+
+</section>
+
+
+
+<!-- ABOUT -->
 
 <section class="section" id="about">
 
 <h2>About Mystarsnight</h2>
 
 <p>
-Mystarsnight is an independent web project focused on experimenting with
-useful browser tools, games, and interactive experiences.
+Mystarsnight is an independent web project focused on creating browser-based
+tools, games and interactive experiences.
 </p>
 
 <p>
-Mystarsnight Quick Search was created to provide a simple tool for deciding
-where a search may be most useful. A programming question, a product search,
-a video search, and a general research question may each benefit from a
-different starting destination.
+Mystarsnight Quick Search was created as a simple tool for helping visitors
+choose where to continue searching. A coding question, a product search, a
+video search and a current news topic may all benefit from different kinds of
+online resources.
 </p>
 
 <p>
-The goal is to keep the experience straightforward, understandable, and
-useful for visitors.
+The goal is to create useful interactive experiences that are straightforward,
+mobile-friendly and easy to understand.
 </p>
 
 </section>
 
 
+
+<!-- CONTACT -->
 
 <section class="section" id="contact">
 
 <h2>Contact</h2>
 
 <p>
-Questions, feedback, and suggestions can help improve Mystarsnight Quick
-Search over time.
+Questions, suggestions and feedback can help improve Mystarsnight Quick Search
+over time.
 </p>
+
 
 <div class="contact-box">
 
 <p>
-<strong>Contact information:</strong>
-Email: starsnighthelp@gmail.com
+
+<strong>Email:</strong>
+
+<a href="mailto:starsnighthelp@gmail.com">
+starsnighthelp@gmail.com
+</a>
+
 </p>
 
 </div>
 
+
 <p>
-Please do not send passwords, financial information, or other sensitive
-personal information through public contact methods.
+Please do not send passwords, payment information or other sensitive personal
+information by email.
 </p>
 
 </section>
 
 
+
+<!-- PRIVACY -->
 
 <section class="section" id="privacy">
 
@@ -854,41 +1326,54 @@ This Privacy Policy explains how Mystarsnight Quick Search handles information
 while you use the website.
 </p>
 
+
 <h3>Search Requests</h3>
 
 <p>
-The words you enter into Quick Search are used by the webpage to generate
-recommendations. When you choose or are redirected to another website, that
-website may receive the search terms as part of the destination URL.
+The words entered into Quick Search are processed by the webpage to generate
+destination suggestions. When you choose to visit an external website, your
+search terms may be included in that website's search URL.
 </p>
+
+
+<h3>Local Game Scores</h3>
+
+<p>
+Quick Catch may save your best score using your browser's local storage. This
+allows the score to remain available when you revisit the website using the
+same browser. This information is stored locally in your browser.
+</p>
+
 
 <h3>Advertising</h3>
 
 <p>
 This website may use third-party advertising services. Advertising providers
-may use cookies or similar technologies according to their own privacy
-policies and applicable settings.
+may use cookies or similar technologies according to their own policies and
+applicable user settings.
 </p>
+
 
 <h3>Third-Party Websites</h3>
 
 <p>
-Quick Search may direct visitors to third-party websites. Mystarsnight does
-not control the content, privacy practices, or policies of external websites.
-Visitors should review the policies of websites they visit.
+Quick Search can direct visitors to third-party websites. Mystarsnight does not
+control the content or privacy practices of external websites. Visitors should
+review the policies of websites they choose to visit.
 </p>
 
-<h3>Changes to This Policy</h3>
+
+<h3>Changes</h3>
 
 <p>
-This Privacy Policy may be updated if the website's features or practices
-change.
+This Privacy Policy may be updated when the website or its features change.
 </p>
 
 </section>
 
 
 </main>
+
 
 
 <footer>
@@ -900,7 +1385,8 @@ change.
 <div class="footer-links">
 
 <a href="#home">Home</a>
-<a href="#how">How It Works</a>
+<a href="#tools">Tools</a>
+<a href="#news">Daily News</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
 <a href="#privacy">Privacy</a>
@@ -914,36 +1400,41 @@ change.
 <script>
 
 
+/* =========================
+   SEARCH DESTINATIONS
+========================= */
+
 const sites = [
 
 {
-name: "Google",
-description: "General information and broad web searches.",
+name: "Google Search",
+description: "General web searches, questions, information and broad research.",
 tags: [
-"search",
-"information",
-"question",
-"facts",
-"research",
-"website",
-"web",
-"find"
+"search","find","information","question","questions","answer","answers",
+"facts","fact","research","website","web","internet","topic","topics",
+"explain","explained","definition","meaning","help","guide","guides"
 ],
 url: "https://www.google.com/search?q="
 },
 
 {
-name: "YouTube",
-description: "Videos, tutorials, entertainment, and visual explanations.",
+name: "Google News",
+description: "Current events, daily news and recent news searches.",
 tags: [
-"video",
-"videos",
-"watch",
-"tutorial",
-"tutorials",
-"music",
-"gaming",
-"gameplay"
+"news","daily","today","latest","current","breaking","headlines",
+"event","events","politics","business","world","recent","update",
+"updates","technology news","science news","gaming news"
+],
+url: "https://news.google.com/search?q="
+},
+
+{
+name: "YouTube",
+description: "Videos, tutorials, entertainment and visual explanations.",
+tags: [
+"video","videos","watch","tutorial","tutorials","music","song",
+"gaming","gameplay","review","reviews","how to","movie","movies",
+"show","shows","demonstration","explainer","stream"
 ],
 url: "https://www.youtube.com/results?search_query="
 },
@@ -952,101 +1443,156 @@ url: "https://www.youtube.com/results?search_query="
 name: "Wikipedia",
 description: "General background information and encyclopedia topics.",
 tags: [
-"history",
-"science",
-"facts",
-"learn",
-"learning",
-"definition",
-"country",
-"person"
+"history","science","facts","learn","learning","definition","country",
+"person","people","animal","animals","planet","space","ancient",
+"civilization","biography","background"
 ],
 url: "https://en.wikipedia.org/wiki/Special:Search?search="
 },
 
 {
 name: "GitHub",
-description: "Programming projects, source code, and developer resources.",
+description: "Programming projects, open source code and developer resources.",
 tags: [
-"coding",
-"code",
-"programming",
-"developer",
-"software",
-"repository",
-"html",
-"javascript",
-"python"
+"coding","code","programming","developer","software","repository",
+"repositories","github","open source","project","projects","script",
+"source code","javascript","python","html","css","api"
 ],
 url: "https://github.com/search?q="
 },
 
 {
 name: "MDN Web Docs",
-description: "Web development documentation and technical references.",
+description: "Official-style web development documentation and technical references.",
 tags: [
-"html",
-"css",
-"javascript",
-"web",
-"coding",
-"programming",
-"developer"
+"html","css","javascript","web development","frontend","front end",
+"browser","dom","web api","web api","web coding","developer docs",
+"documentation","syntax","function"
 ],
 url: "https://developer.mozilla.org/en-US/search?q="
 },
 
 {
-name: "Amazon",
-description: "Product searches and shopping.",
+name: "Stack Overflow",
+description: "Programming questions, debugging and developer discussions.",
 tags: [
-"buy",
-"shopping",
-"shop",
-"product",
-"products",
-"keyboard",
-"electronics",
-"price"
+"error","bug","debug","debugging","problem","coding problem",
+"javascript error","python error","html problem","css problem",
+"stackoverflow","stack overflow","fix code"
+],
+url: "https://stackoverflow.com/search?q="
+},
+
+{
+name: "Google Images",
+description: "Pictures, photographs, artwork and visual references.",
+tags: [
+"image","images","picture","pictures","photo","photos","photograph",
+"art","artwork","drawing","wallpaper","visual","reference"
+],
+url: "https://www.google.com/search?tbm=isch&q="
+},
+
+{
+name: "Google Maps",
+description: "Places, directions, businesses, locations and routes.",
+tags: [
+"map","maps","location","directions","route","place","places",
+"restaurant","store","shop","near me","nearby","address","city",
+"business","businesses","travel"
+],
+url: "https://www.google.com/maps/search/"
+},
+
+{
+name: "Amazon",
+description: "Product searches, shopping and technology.",
+tags: [
+"buy","shopping","shop","product","products","keyboard","electronics",
+"computer","accessory","accessories","price","cheap","best product",
+"purchase","hardware","headphones","monitor"
 ],
 url: "https://www.amazon.com/s?k="
 },
 
 {
 name: "Google Books",
-description: "Books and published works.",
+description: "Books, authors, stories and published works.",
 tags: [
-"book",
-"books",
-"reading",
-"read",
-"author",
-"novel"
+"book","books","reading","read","author","authors","novel","novels",
+"story","stories","literature","library","textbook"
 ],
 url: "https://www.google.com/search?tbm=bks&q="
 },
 
 {
 name: "Reddit",
-description: "Community discussions and personal experiences.",
+description: "Community discussions, opinions and personal experiences.",
 tags: [
-"community",
-"discussion",
-"opinion",
-"opinions",
-"recommendation",
-"recommendations",
-"experience"
+"community","discussion","opinion","opinions","recommendation",
+"recommendations","experience","experiences","reddit","people think",
+"discussion forum","community advice"
 ],
 url: "https://www.reddit.com/search/?q="
+},
+
+{
+name: "Google Scholar",
+description: "Academic papers, studies and scholarly research.",
+tags: [
+"study","studies","academic","paper","papers","research paper",
+"scientific","journal","university","scholar","scholarly"
+],
+url: "https://scholar.google.com/scholar?q="
+},
+
+{
+name: "Google Search for Games",
+description: "Game information, walkthroughs, game news and communities.",
+tags: [
+"game","games","gaming","walkthrough","walkthroughs","level",
+"levels","game guide","game news","multiplayer","singleplayer",
+"play game"
+],
+url: "https://www.google.com/search?q="
+},
+
+{
+name: "Google Search for AI",
+description: "Artificial intelligence tools, information and learning resources.",
+tags: [
+"ai","artificial intelligence","chatbot","machine learning",
+"generate","generator","ai tool","ai tools","neural network",
+"language model"
+],
+url: "https://www.google.com/search?q="
+},
+
+{
+name: "Google Search for Weather",
+description: "Weather conditions and forecasts.",
+tags: [
+"weather","forecast","temperature","rain","snow","storm","sunny",
+"wind","climate"
+],
+url: "https://www.google.com/search?q="
 }
 
 ];
 
 
+/* =========================
+   SEARCH STATE
+========================= */
+
 let bestDestination = "";
 let redirectTimer = null;
+let currentQuery = "";
 
+
+/* =========================
+   EXAMPLE SEARCH
+========================= */
 
 function exampleSearch(query) {
 
@@ -1056,6 +1602,29 @@ performSearch();
 
 }
 
+
+/* =========================
+   TOOL SEARCH
+========================= */
+
+function toolSearch(query) {
+
+document.getElementById("searchInput").value = query;
+
+document.getElementById("home").scrollIntoView({
+behavior: "smooth"
+});
+
+setTimeout(() => {
+performSearch();
+}, 350);
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
 
 function performSearch() {
 
@@ -1074,6 +1643,14 @@ return;
 }
 
 
+currentQuery = query;
+
+
+clearInterval(redirectTimer);
+
+
+/* Split words */
+
 const words =
 query
 .toLowerCase()
@@ -1081,32 +1658,60 @@ query
 .filter(Boolean);
 
 
+/* Score destinations */
+
 const ranked =
 sites.map(site => {
 
 let score = 0;
 
 
+/* Individual word matching */
+
 words.forEach(word => {
 
 site.tags.forEach(tag => {
 
-if (word === tag) {
+const normalizedTag =
+tag.toLowerCase();
 
-score += 10;
+
+if (word === normalizedTag) {
+
+score += 12;
 
 }
 
 else if (
-word.includes(tag) ||
-tag.includes(word)
+word.length > 3 &&
+(
+word.includes(normalizedTag) ||
+normalizedTag.includes(word)
+)
 ) {
 
-score += 3;
+score += 4;
 
 }
 
 });
+
+});
+
+
+/* Full phrase matching */
+
+site.tags.forEach(tag => {
+
+if (
+query.toLowerCase().includes(
+tag.toLowerCase()
+)
+) {
+
+score += 15;
+
+}
 
 });
 
@@ -1117,15 +1722,41 @@ score: score
 };
 
 })
+
+
 .sort((a,b) => b.score - a.score);
 
 
-const best = ranked[0];
+/* If nothing strongly matches, Google stays useful */
+
+if (
+ranked[0].score === 0
+) {
+
+const google =
+ranked.find(
+site => site.name === "Google Search"
+);
+
+google.score = 1;
+
+ranked.sort(
+(a,b) => b.score - a.score
+);
+
+}
+
+
+const best =
+ranked[0];
 
 
 bestDestination =
-best.url + encodeURIComponent(query);
+best.url +
+encodeURIComponent(query);
 
+
+/* Show results */
 
 document
 .getElementById("results")
@@ -1133,8 +1764,17 @@ document
 
 
 document
+.getElementById("searchSummary")
+.textContent =
+'Results for "' +
+query +
+'". These destinations are ranked based on the type of search you entered.';
+
+
+document
 .getElementById("bestSite")
-.textContent = best.name;
+.textContent =
+best.name;
 
 
 const list =
@@ -1144,8 +1784,10 @@ document.getElementById("resultList");
 list.innerHTML = "";
 
 
+/* Show top five */
+
 ranked
-.slice(0,3)
+.slice(0,5)
 .forEach((site,index) => {
 
 const card =
@@ -1166,7 +1808,8 @@ if (index === 0) {
 const label =
 document.createElement("div");
 
-label.className = "best-label";
+label.className =
+"best-label";
 
 label.textContent =
 "RECOMMENDED STARTING POINT";
@@ -1179,7 +1822,8 @@ info.appendChild(label);
 const title =
 document.createElement("h3");
 
-title.textContent = site.name;
+title.textContent =
+site.name;
 
 
 const description =
@@ -1204,13 +1848,14 @@ button.textContent =
 "Visit";
 
 
-button.onclick = () => {
+button.onclick =
+function() {
 
 clearInterval(redirectTimer);
 
 window.location.href =
 site.url +
-encodeURIComponent(query);
+encodeURIComponent(currentQuery);
 
 };
 
@@ -1226,12 +1871,14 @@ list.appendChild(card);
 
 document
 .getElementById("gamePrompt")
-.style.display = "block";
+.style.display =
+"block";
 
 
 document
 .getElementById("game")
-.style.display = "none";
+.style.display =
+"none";
 
 
 startRedirect();
@@ -1247,6 +1894,10 @@ behavior: "smooth"
 
 
 
+/* =========================
+   REDIRECT
+========================= */
+
 function startRedirect() {
 
 clearInterval(redirectTimer);
@@ -1257,12 +1908,14 @@ let seconds = 5;
 
 document
 .getElementById("redirectBox")
-.style.display = "block";
+.style.display =
+"block";
 
 
 document
 .getElementById("countdown")
-.textContent = seconds;
+.textContent =
+seconds;
 
 
 redirectTimer =
@@ -1273,20 +1926,15 @@ seconds--;
 
 document
 .getElementById("countdown")
-.textContent = seconds;
+.textContent =
+seconds;
 
 
 if (seconds <= 0) {
 
 clearInterval(redirectTimer);
 
-
-if (bestDestination) {
-
-window.location.href =
-bestDestination;
-
-}
+goToBest();
 
 }
 
@@ -1303,26 +1951,58 @@ clearInterval(redirectTimer);
 
 document
 .getElementById("redirectBox")
-.style.display = "none";
+.style.display =
+"none";
 
 }
 
 
 
-/* GAME */
+function goToBest() {
 
+clearInterval(redirectTimer);
+
+
+if (bestDestination) {
+
+window.location.href =
+bestDestination;
+
+}
+
+}
+
+
+
+/* =========================
+   GAME
+========================= */
 
 let score = 0;
-let time = 10;
+let time = 15;
 let gameTimer = null;
 let gameRunning = false;
 
 
-const target =
-document.getElementById("target");
+const gameItem =
+document.getElementById("gameItem");
 
 
-target.addEventListener(
+let bestScore =
+Number(
+localStorage.getItem(
+"mystarsnightQuickSearchBestScore"
+)
+) || 0;
+
+
+document
+.getElementById("bestScore")
+.textContent =
+bestScore;
+
+
+gameItem.addEventListener(
 "click",
 hitTarget
 );
@@ -1331,47 +2011,57 @@ hitTarget
 
 function startGame() {
 
+
+/* Pause redirect */
+
 clearInterval(redirectTimer);
 
 
 document
 .getElementById("redirectBox")
-.style.display = "none";
+.style.display =
+"none";
 
 
 document
 .getElementById("gamePrompt")
-.style.display = "none";
+.style.display =
+"none";
 
 
 document
 .getElementById("game")
-.style.display = "block";
+.style.display =
+"block";
 
 
 document
 .getElementById("gameResult")
-.style.display = "none";
+.style.display =
+"none";
 
 
 score = 0;
 
-time = 10;
+time = 15;
 
 gameRunning = true;
 
 
 document
 .getElementById("score")
-.textContent = score;
+.textContent =
+score;
 
 
 document
 .getElementById("gameTime")
-.textContent = time;
+.textContent =
+time;
 
 
-target.style.display = "block";
+gameItem.style.display =
+"block";
 
 
 moveTarget();
@@ -1388,7 +2078,8 @@ time--;
 
 document
 .getElementById("gameTime")
-.textContent = time;
+.textContent =
+time;
 
 
 if (time <= 0) {
@@ -1420,7 +2111,8 @@ score++;
 
 document
 .getElementById("score")
-.textContent = score;
+.textContent =
+score;
 
 
 moveTarget();
@@ -1443,6 +2135,8 @@ const maxY =
 area.clientHeight - 62;
 
 
+/* Keep target inside area */
+
 const x =
 Math.random() *
 Math.max(0,maxX);
@@ -1453,11 +2147,11 @@ Math.random() *
 Math.max(0,maxY);
 
 
-target.style.left =
+gameItem.style.left =
 x + "px";
 
 
-target.style.top =
+gameItem.style.top =
 y + "px";
 
 }
@@ -1469,24 +2163,62 @@ function endGame() {
 if (!gameRunning) return;
 
 
-gameRunning = false;
+gameRunning =
+false;
 
 
 clearInterval(gameTimer);
 
 
-target.style.display =
+gameItem.style.display =
 "none";
+
+
+let newRecord =
+false;
+
+
+/* Save best score */
+
+if (score > bestScore) {
+
+bestScore = score;
+
+newRecord = true;
+
+
+localStorage.setItem(
+"mystarsnightQuickSearchBestScore",
+bestScore
+);
+
+
+document
+.getElementById("bestScore")
+.textContent =
+bestScore;
+
+}
 
 
 const result =
 document.getElementById("gameResult");
 
 
-result.textContent =
-"Game finished! Your score was " +
+result.innerHTML =
+"<h3>" +
+(newRecord
+? "New Best Score!"
+: "Game Finished") +
+"</h3>" +
+
+"<p>You scored <strong>" +
 score +
-".";
+"</strong> points.</p>" +
+
+"<button class='go-button' onclick='goToBest()'>" +
+"Continue to Search Result" +
+"</button>";
 
 
 result.style.display =
@@ -1495,35 +2227,16 @@ result.style.display =
 
 document
 .getElementById("gamePrompt")
-.style.display = "block";
+.style.display =
+"block";
 
 }
 
 
 
-function skipGame() {
-
-clearInterval(redirectTimer);
-
-
-document
-.getElementById("gamePrompt")
-.style.display = "none";
-
-
-if (bestDestination) {
-
-window.location.href =
-bestDestination;
-
-}
-
-}
-
-
-
-/* ENTER SEARCH */
-
+/* =========================
+   ENTER KEY
+========================= */
 
 document
 .getElementById("searchInput")
@@ -1531,7 +2244,9 @@ document
 "keydown",
 event => {
 
-if (event.key === "Enter") {
+if (
+event.key === "Enter"
+) {
 
 performSearch();
 
@@ -1541,6 +2256,10 @@ performSearch();
 );
 
 
+
+/* =========================
+   YEAR
+========================= */
 
 document
 .getElementById("year")
