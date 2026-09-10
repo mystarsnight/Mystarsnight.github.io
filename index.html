@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Mystarsnight Quick Search</title>
 
-<meta name="description" content="Mystarsnight Quick Search helps you find useful websites, tools, news, learning resources, coding documentation, videos, products and more.">
+<meta name="description" content="Search topics and explore live information, related topics, key ideas and useful resources with Mystarsnight Quick Search.">
 
 <meta name="google-adsense-account" content="ca-pub-6476815184336114">
 
@@ -16,654 +16,624 @@ crossorigin="anonymous"></script>
 
 <style>
 
-/* =========================
+/* ================================
    GLOBAL
-========================= */
+================================ */
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f8;
-    color: #172033;
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f8;
+    color:#172033;
 }
 
 button,
-input {
-    font: inherit;
+input{
+    font:inherit;
 }
 
-button {
-    -webkit-tap-highlight-color: transparent;
+button{
+    cursor:pointer;
+}
+
+a{
+    color:#41599f;
 }
 
 
-/* =========================
+/* ================================
    HEADER
-========================= */
+================================ */
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #ffffff;
-    border-bottom: 1px solid #dfe4ea;
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#ffffff;
+    border-bottom:1px solid #dfe4ea;
 }
 
-.header-inner {
-    max-width: 1180px;
-    margin: auto;
-    padding: 15px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: 850;
-    letter-spacing: -0.5px;
-    white-space: nowrap;
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-.5px;
+    white-space:nowrap;
 }
 
-.logo span {
-    color: #4963b5;
+.logo span{
+    color:#5369ae;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 3px;
-    flex-wrap: wrap;
+nav{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
-nav a {
-    color: #4d596c;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 9px 11px;
-    border-radius: 8px;
+nav a{
+    text-decoration:none;
+    color:#526076;
+    font-size:14px;
+    font-weight:700;
+    padding:9px 11px;
+    border-radius:8px;
 }
 
-nav a:hover {
-    color: #172033;
-    background: #eef1f5;
+nav a:hover{
+    background:#f0f2f5;
+    color:#172033;
 }
 
 
-/* =========================
+/* ================================
    HERO
-========================= */
+================================ */
 
-.hero {
-    background: #ffffff;
-    border-bottom: 1px solid #e1e5eb;
-    text-align: center;
-    padding: 72px 20px 60px;
+.hero{
+    background:#ffffff;
+    border-bottom:1px solid #e1e5eb;
+    padding:72px 20px 62px;
+    text-align:center;
 }
 
-.hero h1 {
-    max-width: 900px;
-    margin: auto;
-    font-size: clamp(42px, 7vw, 68px);
-    line-height: 1.05;
-    letter-spacing: -3px;
+.hero h1{
+    max-width:900px;
+    margin:auto;
+    font-size:clamp(42px,7vw,70px);
+    letter-spacing:-3px;
+    line-height:1.03;
 }
 
-.hero p {
-    max-width: 760px;
-    margin: 20px auto 0;
-    color: #5d6879;
-    font-size: 18px;
-    line-height: 1.65;
+.hero p{
+    max-width:760px;
+    margin:20px auto 0;
+    color:#5c687a;
+    line-height:1.7;
+    font-size:18px;
 }
 
 
-/* =========================
+/* ================================
    SEARCH
-========================= */
+================================ */
 
-.search-box {
-    display: flex;
-    max-width: 850px;
-    margin: 30px auto 0;
-    gap: 10px;
+.search-wrap{
+    max-width:850px;
+    margin:32px auto 0;
 }
 
-.search-box input {
-    flex: 1;
-    min-width: 0;
-    padding: 19px;
-    border: 2px solid #d8dee7;
-    border-radius: 14px;
-    background: #ffffff;
-    color: #172033;
-    outline: none;
-    font-size: 17px;
+.search-box{
+    display:flex;
+    gap:10px;
 }
 
-.search-box input:focus {
-    border-color: #5d73bb;
+.search-box input{
+    flex:1;
+    min-width:0;
+    padding:19px;
+    border:2px solid #d8dee7;
+    border-radius:14px;
+    outline:none;
+    font-size:17px;
+    color:#172033;
 }
 
-.search-box button {
-    border: 0;
-    border-radius: 14px;
-    padding: 0 25px;
-    background: #172033;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
+.search-box input:focus{
+    border-color:#5d72b5;
 }
 
-.search-box button:hover {
-    background: #2b3850;
+.search-box button{
+    border:0;
+    padding:0 25px;
+    border-radius:14px;
+    background:#172033;
+    color:white;
+    font-weight:800;
 }
 
-.examples {
-    max-width: 900px;
-    margin: 16px auto 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
+.search-box button:hover{
+    background:#2b3850;
 }
 
-.example {
-    background: #ffffff;
-    border: 1px solid #dce2e9;
-    border-radius: 20px;
-    padding: 8px 13px;
-    color: #536076;
-    cursor: pointer;
+.examples{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
 }
 
-.example:hover {
-    background: #f0f2f5;
+.example{
+    background:white;
+    border:1px solid #dce2e9;
+    border-radius:20px;
+    padding:8px 13px;
+    color:#536076;
+}
+
+.example:hover{
+    background:#f0f2f5;
 }
 
 
-/* =========================
+/* ================================
    MAIN
-========================= */
+================================ */
 
-main {
-    max-width: 1120px;
-    margin: auto;
-    padding: 35px 18px;
+main{
+    max-width:1120px;
+    margin:auto;
+    padding:35px 18px;
 }
 
-.section {
-    background: #ffffff;
-    border: 1px solid #e1e5eb;
-    border-radius: 20px;
-    padding: 30px;
-    margin-bottom: 22px;
-    box-shadow: 0 6px 25px rgba(20, 30, 50, 0.04);
+.section{
+    background:white;
+    border:1px solid #e1e5eb;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:22px;
+    box-shadow:0 6px 25px rgba(20,30,50,.04);
 }
 
-.section h2 {
-    margin: 0 0 14px;
-    font-size: 30px;
-    letter-spacing: -0.7px;
+.section h2{
+    margin:0 0 14px;
+    font-size:30px;
+    letter-spacing:-.7px;
 }
 
-.section h3 {
-    margin-top: 25px;
+.section h3{
+    margin-top:24px;
 }
 
-.section p {
-    color: #566176;
-    line-height: 1.75;
-}
-
-
-/* =========================
-   SEARCH RESULTS
-========================= */
-
-#results {
-    display: none;
-}
-
-.search-summary {
-    color: #657187;
-    margin-bottom: 22px;
-}
-
-.result-card {
-    border: 1px solid #e0e5ec;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    transition: transform 0.15s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-2px);
-}
-
-.result-card.best {
-    border: 2px solid #6074b8;
-}
-
-.result-card h3 {
-    margin: 0 0 7px;
-}
-
-.result-card p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.best-label {
-    display: inline-block;
-    padding: 5px 8px;
-    margin-bottom: 9px;
-    border-radius: 6px;
-    background: #edf0fa;
-    color: #4c61a6;
-    font-size: 11px;
-    font-weight: 850;
-}
-
-.go-button {
-    border: 0;
-    border-radius: 10px;
-    padding: 12px 17px;
-    background: #172033;
-    color: #ffffff;
-    font-weight: 800;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.go-button:hover {
-    background: #2b3850;
+.section p{
+    color:#566176;
+    line-height:1.75;
 }
 
 
-/* =========================
-   REDIRECT
-========================= */
+/* ================================
+   LOADING
+================================ */
 
-.redirect-box {
-    display: none;
-    margin-top: 20px;
-    padding: 23px;
-    text-align: center;
-    border-radius: 16px;
-    background: #172033;
-    color: white;
+.loading{
+    display:none;
+    text-align:center;
+    padding:42px 20px;
 }
 
-.redirect-box strong {
-    font-size: 18px;
+.spinner{
+    width:42px;
+    height:42px;
+    margin:auto auto 18px;
+    border:4px solid #e1e5eb;
+    border-top-color:#5369ae;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
 }
 
-.countdown {
-    display: inline-block;
-    margin: 7px 0;
-    font-size: 30px;
-    font-weight: 900;
-}
+@keyframes spin{
 
-.redirect-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 14px;
-}
+    to{
+        transform:rotate(360deg);
+    }
 
-.cancel-button,
-.redirect-now {
-    padding: 10px 16px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: 800;
-}
-
-.cancel-button {
-    background: transparent;
-    color: white;
-    border: 1px solid #77849b;
-}
-
-.redirect-now {
-    border: 0;
-    background: white;
-    color: #172033;
 }
 
 
-/* =========================
-   GAME PROMPT
-========================= */
+/* ================================
+   RESULTS
+================================ */
 
-.game-prompt {
-    display: none;
-    margin-top: 20px;
-    padding: 28px;
-    text-align: center;
-    border-radius: 17px;
-    background: #f1f3f6;
-    border: 1px solid #e1e5eb;
+#results{
+    display:none;
 }
 
-.game-prompt h2 {
-    margin-bottom: 10px;
+.result-heading{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:flex-start;
+    flex-wrap:wrap;
 }
 
-.game-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+.topic-badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:8px;
+    background:#edf0f8;
+    color:#4b61a4;
+    font-size:12px;
+    font-weight:850;
+    margin-bottom:10px;
 }
 
-.play-button {
-    padding: 12px 19px;
-    border: 0;
-    border-radius: 10px;
-    background: #4d64a9;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
+.source-note{
+    font-size:13px;
+    color:#738096;
+    margin-top:4px;
 }
 
-.skip-button {
-    padding: 12px 19px;
-    border-radius: 10px;
-    border: 1px solid #d6dce5;
-    background: white;
-    color: #3e4b60;
-    cursor: pointer;
-    font-weight: 800;
+.overview-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 280px;
+    gap:25px;
+    margin-top:22px;
 }
 
-
-/* =========================
-   GAME
-========================= */
-
-#game {
-    display: none;
+.overview-card{
+    padding:24px;
+    border:1px solid #e1e5eb;
+    border-radius:17px;
+    background:#fafbfc;
 }
 
-.game-top {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 15px;
+.overview-card h3{
+    margin-top:0;
 }
 
-.game-stat {
-    padding: 11px 15px;
-    background: #f3f5f7;
-    border: 1px solid #e1e5eb;
-    border-radius: 10px;
-    font-weight: 800;
+.overview-text{
+    white-space:pre-line;
+    color:#3f4c60;
+    line-height:1.8;
 }
 
-.game-area {
-    position: relative;
-    height: 360px;
-    overflow: hidden;
-    background: #f7f8fa;
-    border: 2px solid #dfe4ea;
-    border-radius: 18px;
+.topic-image{
+    width:100%;
+    border-radius:16px;
+    object-fit:cover;
+    max-height:300px;
+    background:#eef1f4;
 }
 
-.game-item {
-    position: absolute;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    border: 0;
-    background: #6074b8;
-    color: white;
-    font-weight: 850;
-    cursor: pointer;
-    box-shadow: 0 5px 12px rgba(30, 45, 80, 0.18);
-}
-
-.game-item:hover {
-    transform: scale(1.05);
-}
-
-.game-result {
-    display: none;
-    margin-top: 17px;
-    padding: 22px;
-    border-radius: 14px;
-    text-align: center;
-    background: #f1f3f6;
-}
-
-.game-result h3 {
-    margin-top: 0;
+.no-image{
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    border:1px solid #e1e5eb;
+    border-radius:16px;
+    color:#7a8595;
+    background:#f7f8fa;
 }
 
 
-/* =========================
-   TOOL GRID
-========================= */
+/* ================================
+   KEY IDEAS
+================================ */
 
-.tool-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 20px;
+.key-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+    margin-top:18px;
 }
 
-.tool {
-    border: 1px solid #e1e5eb;
-    border-radius: 15px;
-    padding: 20px;
+.key-card{
+    border:1px solid #e1e5eb;
+    border-radius:14px;
+    padding:18px;
 }
 
-.tool h3 {
-    margin: 0 0 9px;
+.key-card h4{
+    margin:0 0 8px;
+    color:#27334a;
 }
 
-.tool p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.tool button {
-    margin-top: 15px;
-    padding: 9px 13px;
-    border: 1px solid #d7dde6;
-    border-radius: 9px;
-    background: #ffffff;
-    color: #344158;
-    cursor: pointer;
-    font-weight: 750;
-}
-
-.tool button:hover {
-    background: #f2f4f6;
+.key-card p{
+    margin:0;
+    font-size:14px;
 }
 
 
-/* =========================
-   STEPS
-========================= */
+/* ================================
+   RELATED
+================================ */
 
-.steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 20px;
+.related-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
 }
 
-.step {
-    padding: 21px;
-    border-radius: 15px;
-    background: #f7f8fa;
-    border: 1px solid #e3e7ec;
+.related-card{
+    text-align:left;
+    padding:17px;
+    border:1px solid #e0e5ec;
+    border-radius:14px;
+    background:white;
 }
 
-.step-number {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #172033;
-    color: white;
-    font-weight: 850;
-    margin-bottom: 12px;
+.related-card:hover{
+    background:#f5f6f8;
 }
 
-.step h3 {
-    margin: 0 0 8px;
+.related-card strong{
+    display:block;
+    color:#263248;
+    margin-bottom:7px;
 }
 
-.step p {
-    margin: 0;
-    font-size: 14px;
+.related-card span{
+    display:block;
+    font-size:13px;
+    color:#69758a;
+    line-height:1.5;
 }
 
 
-/* =========================
-   FEATURE GRID
-========================= */
+/* ================================
+   EXPLORER
+================================ */
 
-.special-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 20px;
+.explorer-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:20px;
 }
 
-.special {
-    padding: 20px;
-    border: 1px solid #e1e5eb;
-    border-radius: 15px;
+.explorer-card{
+    border:1px solid #e1e5eb;
+    border-radius:15px;
+    padding:20px;
 }
 
-.special h3 {
-    margin: 0 0 9px;
+.explorer-card h3{
+    margin:0 0 9px;
 }
 
-.special p {
-    margin: 0;
-    font-size: 14px;
+.explorer-card p{
+    margin:0;
+    font-size:14px;
+}
+
+.explorer-card button{
+    margin-top:15px;
+    border:1px solid #d8dee7;
+    background:white;
+    padding:9px 13px;
+    border-radius:9px;
+    font-weight:750;
 }
 
 
-/* =========================
+/* ================================
+   LEARNING PATH
+================================ */
+
+.path{
+    margin-top:20px;
+}
+
+.path-step{
+    display:flex;
+    gap:15px;
+    align-items:flex-start;
+    padding:17px 0;
+    border-bottom:1px solid #edf0f3;
+}
+
+.path-step:last-child{
+    border-bottom:0;
+}
+
+.path-number{
+    min-width:36px;
+    height:36px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#172033;
+    color:white;
+    font-weight:850;
+}
+
+.path-step h3{
+    margin:0 0 6px;
+}
+
+.path-step p{
+    margin:0;
+    font-size:14px;
+}
+
+
+/* ================================
+   SOURCE BUTTON
+================================ */
+
+.source-button{
+    display:inline-block;
+    margin-top:18px;
+    padding:12px 16px;
+    border-radius:10px;
+    background:#172033;
+    color:white;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.source-button:hover{
+    background:#2b3850;
+}
+
+
+/* ================================
+   HOW
+================================ */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:20px;
+}
+
+.step{
+    background:#f7f8fa;
+    border:1px solid #e2e6eb;
+    border-radius:15px;
+    padding:21px;
+}
+
+.step-number{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#172033;
+    color:white;
+    font-weight:850;
+    margin-bottom:12px;
+}
+
+.step h3{
+    margin:0 0 8px;
+}
+
+.step p{
+    margin:0;
+    font-size:14px;
+}
+
+
+/* ================================
+   FEATURES
+================================ */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.feature{
+    border:1px solid #e1e5eb;
+    border-radius:15px;
+    padding:20px;
+}
+
+.feature h3{
+    margin:0 0 9px;
+}
+
+.feature p{
+    margin:0;
+    font-size:14px;
+}
+
+
+/* ================================
    CONTACT
-========================= */
+================================ */
 
-.contact-box {
-    padding: 20px;
-    border-radius: 14px;
-    background: #f5f6f8;
-    border: 1px solid #e1e5eb;
-}
-
-.contact-box p {
-    margin: 0;
-}
-
-.contact-box a {
-    color: #4059a5;
-    font-weight: 800;
+.contact-box{
+    padding:20px;
+    background:#f6f7f9;
+    border:1px solid #e1e5eb;
+    border-radius:14px;
 }
 
 
-/* =========================
-   ARTICLE
-========================= */
-
-.article {
-    max-width: 900px;
-}
-
-.article h3 {
-    font-size: 22px;
-    color: #202b3d;
-}
-
-
-/* =========================
+/* ================================
    FOOTER
-========================= */
+================================ */
 
-footer {
-    background: #172033;
-    color: #c7cfdd;
-    text-align: center;
-    padding: 38px 20px;
+footer{
+    background:#172033;
+    color:#c7cfdd;
+    padding:38px 20px;
+    text-align:center;
 }
 
-.footer-links {
-    margin-top: 14px;
+.footer-links{
+    margin-top:14px;
 }
 
-.footer-links a {
-    margin: 0 8px;
-    color: #dfe6f1;
-    text-decoration: none;
-    font-size: 14px;
+.footer-links a{
+    color:#dfe6f1;
+    text-decoration:none;
+    margin:0 8px;
+    font-size:14px;
 }
 
 
-/* =========================
+/* ================================
    MOBILE
-========================= */
+================================ */
 
-@media (max-width: 800px) {
+@media(max-width:850px){
 
-    .header-inner {
-        flex-direction: column;
+    .header-inner{
+        flex-direction:column;
     }
 
-    nav {
-        justify-content: center;
+    nav{
+        justify-content:center;
     }
 
-    .search-box {
-        flex-direction: column;
+    .search-box{
+        flex-direction:column;
     }
 
-    .search-box button {
-        height: 56px;
+    .search-box button{
+        height:55px;
     }
 
-    .steps,
-    .special-grid,
-    .tool-grid {
-        grid-template-columns: 1fr;
+    .overview-grid{
+        grid-template-columns:1fr;
     }
 
-    .result-card {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .go-button {
-        width: 100%;
+    .key-grid,
+    .related-grid,
+    .feature-grid,
+    .steps{
+        grid-template-columns:1fr;
     }
 
 }
@@ -684,8 +654,6 @@ Mystarsnight <span>Quick Search</span>
 
 <nav>
 <a href="#home">Home</a>
-<a href="#tools">Tools</a>
-<a href="#news">Daily News</a>
 <a href="#how">How It Works</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
@@ -700,57 +668,54 @@ Mystarsnight <span>Quick Search</span>
 
 <section class="hero" id="home">
 
-<h1>Find a better place to search.</h1>
+<h1>Explore what you search.</h1>
 
 <p>
-Mystarsnight Quick Search compares what you are looking for with different
-types of websites and tools to help you choose a useful place to continue.
-Search for coding, videos, products, news, learning, maps, images, games,
-books, music and much more.
+Search for a topic and Mystarsnight Quick Search finds live public information,
+builds a topic overview, shows related subjects, and helps you decide what to
+explore next.
 </p>
 
+<div class="search-wrap">
 
 <div class="search-box">
 
 <input
 id="searchInput"
 type="text"
-placeholder="What are you looking for?"
+placeholder="Search a topic, person, place, object, science idea..."
 autocomplete="off"
 >
 
-<button onclick="performSearch()">
-Quick Search
+<button id="searchButton" onclick="performSearch()">
+Explore
 </button>
 
 </div>
 
-
 <div class="examples">
 
-<button class="example" onclick="exampleSearch('learn javascript coding')">
-Learn coding
+<button class="example" onclick="exampleSearch('black holes')">
+Black holes
 </button>
 
-<button class="example" onclick="exampleSearch('daily technology news')">
-Daily news
+<button class="example" onclick="exampleSearch('JavaScript')">
+JavaScript
 </button>
 
-<button class="example" onclick="exampleSearch('buy a mechanical keyboard')">
-Find products
+<button class="example" onclick="exampleSearch('Raspberry Pi')">
+Raspberry Pi
 </button>
 
-<button class="example" onclick="exampleSearch('watch space videos')">
-Watch videos
+<button class="example" onclick="exampleSearch('Ancient Egypt')">
+Ancient Egypt
 </button>
 
-<button class="example" onclick="exampleSearch('find images of planets')">
-Find images
+<button class="example" onclick="exampleSearch('Solar System')">
+Solar System
 </button>
 
-<button class="example" onclick="exampleSearch('learn about ancient history')">
-Learn something
-</button>
+</div>
 
 </div>
 
@@ -761,350 +726,286 @@ Learn something
 <main>
 
 
+<!-- LOADING -->
+
+<section class="section loading" id="loading">
+
+<div class="spinner"></div>
+
+<h2>Searching live information...</h2>
+
+<p>
+Mystarsnight Quick Search is looking for the closest matching topic and
+building your Topic Explorer.
+</p>
+
+</section>
+
+
+
 <!-- RESULTS -->
 
 <section class="section" id="results">
 
-<h2>Quick Search Results</h2>
+<div class="result-heading">
 
-<p class="search-summary" id="searchSummary"></p>
+<div>
 
-<div id="resultList"></div>
+<div class="topic-badge">
+LIVE TOPIC EXPLORER
+</div>
 
+<h2 id="topicTitle">
+Topic
+</h2>
 
-<div class="redirect-box" id="redirectBox">
-
-<strong>
-Recommended destination: <span id="bestSite"></span>
-</strong>
-
-<br>
-
-Opening in
-
-<div class="countdown" id="countdown">5</div>
-
-seconds.
-
-<div class="redirect-actions">
-
-<button class="cancel-button" onclick="cancelRedirect()">
-Cancel redirect
-</button>
-
-<button class="redirect-now" onclick="goToBest()">
-Go now
-</button>
+<div class="source-note">
+Information loaded from a public knowledge source.
+</div>
 
 </div>
 
 </div>
 
 
-<div class="game-prompt" id="gamePrompt">
+<div class="overview-grid">
 
-<h2>Wait... want to play a game first?</h2>
+<div class="overview-card">
 
-<p>
-Try Quick Catch before you continue. The game pauses the automatic redirect,
-so you stay in control.
+<h3>Overview</h3>
+
+<div
+id="overviewText"
+class="overview-text"
+>
+</div>
+
+</div>
+
+
+<div id="imageContainer">
+
+<div class="no-image">
+No topic image available.
+</div>
+
+</div>
+
+</div>
+
+
+
+<h2 style="margin-top:35px">
+Explore the Topic
+</h2>
+
+<div class="explorer-grid">
+
+<div class="explorer-card">
+
+<h3>What is it?</h3>
+
+<p id="whatIsIt">
+Search for a topic to see an overview.
 </p>
 
-<div class="game-buttons">
+</div>
 
-<button class="play-button" onclick="startGame()">
-Play Quick Catch
-</button>
 
-<button class="skip-button" onclick="goToBest()">
-Continue to result
-</button>
+<div class="explorer-card">
+
+<h3>Why explore it?</h3>
+
+<p id="whyExplore">
+The Topic Explorer helps you move from a broad search into related subjects.
+</p>
 
 </div>
 
 </div>
+
+
+
+<h2 style="margin-top:35px">
+Key Ideas
+</h2>
+
+<div
+id="keyIdeas"
+class="key-grid"
+>
+</div>
+
+
+
+<h2 style="margin-top:35px">
+Related Topics
+</h2>
+
+<p>
+Choose a related result to explore it inside Mystarsnight Quick Search.
+</p>
+
+<div
+id="relatedTopics"
+class="related-grid"
+>
+</div>
+
+
+
+<h2 style="margin-top:35px">
+A Simple Learning Path
+</h2>
+
+<p>
+Use these steps as a starting structure for exploring the topic.
+</p>
+
+<div class="path">
+
+<div class="path-step">
+
+<div class="path-number">
+1
+</div>
+
+<div>
+
+<h3>Start with the overview</h3>
+
+<p>
+Read the main explanation and identify unfamiliar words or ideas.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="path-step">
+
+<div class="path-number">
+2
+</div>
+
+<div>
+
+<h3>Explore related topics</h3>
+
+<p>
+Use the related results above to understand connected ideas and background.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="path-step">
+
+<div class="path-number">
+3
+</div>
+
+<div>
+
+<h3>Ask a more specific question</h3>
+
+<p>
+Search for one part of the topic that you want to understand in more detail.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="path-step">
+
+<div class="path-number">
+4
+</div>
+
+<div>
+
+<h3>Check the original source</h3>
+
+<p>
+Open the source page when you want more detail, references, or additional
+information.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<a
+id="sourceLink"
+class="source-button"
+href="#"
+target="_blank"
+rel="noopener noreferrer"
+>
+Open Topic Source
+</a>
+
 
 </section>
 
 
 
-<!-- GAME -->
+<!-- NO RESULTS -->
 
-<section class="section" id="game">
+<section
+class="section"
+id="noResults"
+style="display:none"
+>
 
-<h2>Quick Catch</h2>
+<h2>No close topic was found</h2>
 
 <p>
-Click the moving targets before time runs out. Each successful catch earns
-one point. Try to beat your saved best score.
+Try using a shorter or more specific search. For example, instead of writing a
+full sentence, try the main topic or name.
 </p>
 
-
-<div class="game-top">
-
-<div class="game-stat">
-Score: <span id="score">0</span>
-</div>
-
-<div class="game-stat">
-Time: <span id="gameTime">15</span>s
-</div>
-
-<div class="game-stat">
-Best: <span id="bestScore">0</span>
-</div>
-
-</div>
-
-
-<div class="game-area" id="gameArea">
-
-<button class="game-item" id="gameItem">
-CATCH
-</button>
-
-</div>
-
-
-<div class="game-result" id="gameResult"></div>
+<p>
+Examples: <strong>volcano</strong>, <strong>Python programming</strong>,
+<strong>Moon</strong>, or <strong>Ancient Rome</strong>.
+</p>
 
 </section>
 
 
 
-<!-- TOOLS -->
-
-<section class="section" id="tools">
-
-<h2>More Mystarsnight Tools</h2>
-
-<p>
-Quick Search is designed to be a starting point. These shortcuts let you
-quickly begin common types of searches.
-</p>
-
-
-<div class="tool-grid">
-
-
-<div class="tool">
-
-<h3>Daily News Search</h3>
-
-<p>
-Search current news topics using a news-focused search.
-</p>
-
-<button onclick="toolSearch('latest daily news')">
-Open News Search
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Code Finder</h3>
-
-<p>
-Search programming resources, source code, repositories and documentation.
-</p>
-
-<button onclick="toolSearch('programming code examples')">
-Find Code
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Learning Search</h3>
-
-<p>
-Find explanations, educational resources and topics to study.
-</p>
-
-<button onclick="toolSearch('learn something new')">
-Start Learning
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Video Search</h3>
-
-<p>
-Find tutorials, entertainment and visual explanations.
-</p>
-
-<button onclick="toolSearch('video tutorial')">
-Find Videos
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Product Finder</h3>
-
-<p>
-Start a search for products, technology, accessories and other items.
-</p>
-
-<button onclick="toolSearch('find products')">
-Find Products
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Image Search</h3>
-
-<p>
-Search for pictures, artwork, photography and visual references.
-</p>
-
-<button onclick="toolSearch('find images')">
-Find Images
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Map Search</h3>
-
-<p>
-Search for places, locations, routes and businesses.
-</p>
-
-<button onclick="toolSearch('find a place on a map')">
-Open Map Search
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Book Search</h3>
-
-<p>
-Look for books, authors, stories and reading material.
-</p>
-
-<button onclick="toolSearch('find books')">
-Find Books
-</button>
-
-</div>
-
-
-<div class="tool">
-
-<h3>Game Search</h3>
-
-<p>
-Search for games, game information, walkthroughs and communities.
-</p>
-
-<button onclick="toolSearch('find games')">
-Find Games
-</button>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- DAILY NEWS -->
-
-<section class="section article" id="news">
-
-<h2>Daily News and Current Topics</h2>
-
-<p>
-News changes throughout the day, which means a useful news tool should help
-you reach current information instead of pretending that a static page always
-contains today's latest events. Mystarsnight Quick Search includes news-related
-keywords so searches about current events can be directed toward a news search.
-</p>
-
-<p>
-You can search for broad topics such as technology news, science news, space
-news, gaming news, sports news, business news, entertainment news, world news,
-or local news. You can also type the name of a specific topic directly into the
-main search bar.
-</p>
-
-<h3>Why Current News Searches Matter</h3>
-
-<p>
-A topic that was accurate yesterday may have changed today. For current events,
-the date of a source and the time it was published can matter just as much as
-the headline. Searching for current information gives visitors an opportunity
-to compare recent sources and learn more about developing stories.
-</p>
-
-<h3>Using Quick Search for News</h3>
-
-<p>
-Try searching for a specific subject instead of only typing "news." For
-example, a search for "latest space news" or "today's technology news" gives
-the search tool more information about what you are interested in.
-</p>
-
-<p>
-Mystarsnight Quick Search is intended to help visitors find a starting point.
-When researching important or fast-changing subjects, it is useful to compare
-multiple sources and check publication dates.
-</p>
-
-<button class="go-button" onclick="toolSearch('latest news today')">
-Search Daily News
-</button>
-
-</section>
-
-
-
-<!-- HOW IT WORKS -->
+<!-- HOW -->
 
 <section class="section" id="how">
 
 <h2>How Mystarsnight Quick Search Works</h2>
 
 <p>
-Different searches have different purposes. Someone looking for programming
-documentation may benefit from a developer resource, while someone looking
-for a video tutorial may prefer a video platform. Quick Search compares the
-words you enter with categories connected to different types of destinations.
+Mystarsnight Quick Search is designed to provide information directly on the
+website instead of immediately sending visitors somewhere else.
 </p>
-
 
 <div class="steps">
 
 <div class="step">
 
-<div class="step-number">1</div>
+<div class="step-number">
+1
+</div>
 
-<h3>Describe your goal</h3>
+<h3>Search a topic</h3>
 
 <p>
-Type what you are trying to find using normal words. You can search for a
-topic, a product, a tutorial, news, code, a location, an image or many other
-subjects.
+Enter a subject, person, place, technology, object, scientific idea or other
+topic you want to explore.
 </p>
 
 </div>
@@ -1112,13 +1013,15 @@ subjects.
 
 <div class="step">
 
-<div class="step-number">2</div>
+<div class="step-number">
+2
+</div>
 
-<h3>Compare categories</h3>
+<h3>Find a close match</h3>
 
 <p>
-Quick Search checks words and phrases against categories such as news,
-learning, programming, videos, shopping, maps and community discussions.
+The website searches for matching public topic pages and selects a useful
+starting point.
 </p>
 
 </div>
@@ -1126,13 +1029,15 @@ learning, programming, videos, shopping, maps and community discussions.
 
 <div class="step">
 
-<div class="step-number">3</div>
+<div class="step-number">
+3
+</div>
 
-<h3>Choose where to continue</h3>
+<h3>Explore on Mystarsnight</h3>
 
 <p>
-The tool displays several possible destinations. You can select one yourself,
-cancel the countdown, or allow the recommended destination to open.
+Read an overview, inspect key ideas and select related topics without being
+automatically redirected away from the website.
 </p>
 
 </div>
@@ -1143,50 +1048,45 @@ cancel the countdown, or allow the recommended destination to open.
 
 
 
-<!-- WHAT MAKES IT DIFFERENT -->
+<!-- FEATURES -->
 
 <section class="section">
 
-<h2>What Makes Quick Search Different?</h2>
+<h2>What You Can Do Here</h2>
 
-<div class="special-grid">
+<div class="feature-grid">
 
+<div class="feature">
 
-<div class="special">
-
-<h3>Purpose-Based Suggestions</h3>
+<h3>Topic Overviews</h3>
 
 <p>
-Recommendations change depending on what you search for instead of always
-showing the same destination.
+Read a live overview of the topic you searched for.
 </p>
 
 </div>
 
 
-<div class="special">
+<div class="feature">
 
-<h3>Multiple Starting Points</h3>
+<h3>Related Exploration</h3>
 
 <p>
-Search results show several possible places to continue, making it easier to
-compare different kinds of resources.
+Move between connected topics to build a broader understanding.
 </p>
 
 </div>
 
 
-<div class="special">
+<div class="feature">
 
-<h3>You Stay in Control</h3>
+<h3>Search Again</h3>
 
 <p>
-You can cancel redirects, choose another result or play the optional mini-game
-before continuing.
+Ask more specific questions or explore completely different subjects.
 </p>
 
 </div>
-
 
 </div>
 
@@ -1194,85 +1094,47 @@ before continuing.
 
 
 
-<!-- LONG ARTICLE -->
-
-<section class="section article">
-
-<h2>Finding Better Information Online</h2>
-
-<p>
-The internet contains an enormous amount of information, but finding the right
-starting point can sometimes be more difficult than finding the answer itself.
-A search for a programming problem, a product, a video tutorial or a current
-event can each benefit from different types of websites.
-</p>
-
-<h3>Choose Resources Based on Your Goal</h3>
-
-<p>
-When you want to learn a technical skill, official documentation and educational
-resources can be useful. When you want to see how something works, a video may
-provide a clearer explanation. When you want to purchase something, product
-searches and reviews may be more relevant than general information pages.
-</p>
-
-<h3>Use Specific Search Terms</h3>
-
-<p>
-Specific searches usually communicate your goal more clearly. Instead of
-searching for "coding," you could search for "learn HTML for beginners" or
-"JavaScript array examples." Instead of searching for "space," you could search
-for "latest space exploration news" or "how planets form."
-</p>
-
-<h3>Compare Information When Necessary</h3>
-
-<p>
-Not every website has the same purpose. Some websites specialize in official
-documentation, while others focus on videos, products, discussions or general
-background information. Comparing multiple sources can help you understand a
-topic more completely.
-</p>
-
-<h3>Remember That Current Information Changes</h3>
-
-<p>
-News, prices, product availability, schedules and other time-sensitive topics
-can change. When searching for something current, checking dates and recent
-updates can be important.
-</p>
-
-<p>
-Mystarsnight Quick Search is built around the idea that finding a useful
-starting point should be quick and understandable. Enter what you are looking
-for, review the suggestions and choose where you want to continue.
-</p>
-
-</section>
-
-
-
-<!-- ABOUT -->
+<!-- ORIGINAL SITE CONTENT -->
 
 <section class="section" id="about">
 
-<h2>About Mystarsnight</h2>
+<h2>About Mystarsnight Quick Search</h2>
 
 <p>
-Mystarsnight is an independent web project focused on creating browser-based
-tools, games and interactive experiences.
+Mystarsnight Quick Search is an independent web tool designed to make online
+topic exploration more useful. Instead of treating a search as only a doorway
+to another website, the goal is to give visitors a clear starting point directly
+inside the Mystarsnight experience.
 </p>
 
 <p>
-Mystarsnight Quick Search was created as a simple tool for helping visitors
-choose where to continue searching. A coding question, a product search, a
-video search and a current news topic may all benefit from different kinds of
-online resources.
+A good search can lead to more questions. Someone researching space may become
+interested in planets, stars, galaxies or black holes. Someone learning
+programming may begin with a language and then explore projects, documentation
+and related technologies.
 </p>
 
 <p>
-The goal is to create useful interactive experiences that are straightforward,
-mobile-friendly and easy to understand.
+The Topic Explorer is designed around this idea of discovery. Visitors can begin
+with one search, read an overview, and then choose related topics that interest
+them.
+</p>
+
+<h3>Why Topic Exploration Matters</h3>
+
+<p>
+Finding a result is only one part of learning. Understanding what the result
+means, recognizing important ideas and knowing what to explore next can make a
+search more useful. Mystarsnight Quick Search organizes this process into a
+simple experience that encourages visitors to explore topics in their own way.
+</p>
+
+<h3>A Tool for Curious Visitors</h3>
+
+<p>
+The website can be used for general knowledge, technology, history, science,
+places, people and many other subjects. Each search is an opportunity to begin
+with a broad overview and then move toward more specific questions.
 </p>
 
 </section>
@@ -1290,21 +1152,16 @@ Questions, suggestions and feedback can help improve Mystarsnight Quick Search
 over time.
 </p>
 
-
 <div class="contact-box">
 
 <p>
-
-<strong>Email:</strong>
-
+<strong>Email:</strong><br>
 <a href="mailto:starsnighthelp@gmail.com">
 starsnighthelp@gmail.com
 </a>
-
 </p>
 
 </div>
-
 
 <p>
 Please do not send passwords, payment information or other sensitive personal
@@ -1322,51 +1179,46 @@ information by email.
 <h2>Privacy Policy</h2>
 
 <p>
-This Privacy Policy explains how Mystarsnight Quick Search handles information
-while you use the website.
+Mystarsnight Quick Search allows visitors to enter topics for searching. Search
+requests are used to request matching public information from the data source
+used by the Topic Explorer.
 </p>
 
-
-<h3>Search Requests</h3>
+<h3>Search Terms</h3>
 
 <p>
-The words entered into Quick Search are processed by the webpage to generate
-destination suggestions. When you choose to visit an external website, your
-search terms may be included in that website's search URL.
+When you search for a topic, your browser sends the search request to the
+public information service used to find matching pages. Mystarsnight Quick
+Search does not require visitors to create an account for basic topic searches.
 </p>
 
-
-<h3>Local Game Scores</h3>
+<h3>External Sources</h3>
 
 <p>
-Quick Catch may save your best score using your browser's local storage. This
-allows the score to remain available when you revisit the website using the
-same browser. This information is stored locally in your browser.
+The website displays information obtained from external public sources. Those
+sources operate under their own terms, licenses and privacy practices.
 </p>
-
 
 <h3>Advertising</h3>
 
 <p>
-This website may use third-party advertising services. Advertising providers
-may use cookies or similar technologies according to their own policies and
-applicable user settings.
+This website may use third-party advertising services. Such services may use
+cookies or similar technologies according to their own policies and applicable
+settings.
 </p>
 
-
-<h3>Third-Party Websites</h3>
+<h3>Local Browser Data</h3>
 
 <p>
-Quick Search can direct visitors to third-party websites. Mystarsnight does not
-control the content or privacy practices of external websites. Visitors should
-review the policies of websites they choose to visit.
+This version of Mystarsnight Quick Search does not require a user account to
+search topics.
 </p>
 
-
-<h3>Changes</h3>
+<h3>Policy Updates</h3>
 
 <p>
-This Privacy Policy may be updated when the website or its features change.
+This Privacy Policy may change if the features or practices of Mystarsnight
+Quick Search change.
 </p>
 
 </section>
@@ -1385,8 +1237,7 @@ This Privacy Policy may be updated when the website or its features change.
 <div class="footer-links">
 
 <a href="#home">Home</a>
-<a href="#tools">Tools</a>
-<a href="#news">Daily News</a>
+<a href="#how">How It Works</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
 <a href="#privacy">Privacy</a>
@@ -1399,873 +1250,714 @@ This Privacy Policy may be updated when the website or its features change.
 
 <script>
 
+/* =================================
+   CONFIGURATION
+================================= */
 
-/* =========================
-   SEARCH DESTINATIONS
-========================= */
-
-const sites = [
-
-{
-name: "Google Search",
-description: "General web searches, questions, information and broad research.",
-tags: [
-"search","find","information","question","questions","answer","answers",
-"facts","fact","research","website","web","internet","topic","topics",
-"explain","explained","definition","meaning","help","guide","guides"
-],
-url: "https://www.google.com/search?q="
-},
-
-{
-name: "Google News",
-description: "Current events, daily news and recent news searches.",
-tags: [
-"news","daily","today","latest","current","breaking","headlines",
-"event","events","politics","business","world","recent","update",
-"updates","technology news","science news","gaming news"
-],
-url: "https://news.google.com/search?q="
-},
-
-{
-name: "YouTube",
-description: "Videos, tutorials, entertainment and visual explanations.",
-tags: [
-"video","videos","watch","tutorial","tutorials","music","song",
-"gaming","gameplay","review","reviews","how to","movie","movies",
-"show","shows","demonstration","explainer","stream"
-],
-url: "https://www.youtube.com/results?search_query="
-},
-
-{
-name: "Wikipedia",
-description: "General background information and encyclopedia topics.",
-tags: [
-"history","science","facts","learn","learning","definition","country",
-"person","people","animal","animals","planet","space","ancient",
-"civilization","biography","background"
-],
-url: "https://en.wikipedia.org/wiki/Special:Search?search="
-},
-
-{
-name: "GitHub",
-description: "Programming projects, open source code and developer resources.",
-tags: [
-"coding","code","programming","developer","software","repository",
-"repositories","github","open source","project","projects","script",
-"source code","javascript","python","html","css","api"
-],
-url: "https://github.com/search?q="
-},
-
-{
-name: "MDN Web Docs",
-description: "Official-style web development documentation and technical references.",
-tags: [
-"html","css","javascript","web development","frontend","front end",
-"browser","dom","web api","web api","web coding","developer docs",
-"documentation","syntax","function"
-],
-url: "https://developer.mozilla.org/en-US/search?q="
-},
-
-{
-name: "Stack Overflow",
-description: "Programming questions, debugging and developer discussions.",
-tags: [
-"error","bug","debug","debugging","problem","coding problem",
-"javascript error","python error","html problem","css problem",
-"stackoverflow","stack overflow","fix code"
-],
-url: "https://stackoverflow.com/search?q="
-},
-
-{
-name: "Google Images",
-description: "Pictures, photographs, artwork and visual references.",
-tags: [
-"image","images","picture","pictures","photo","photos","photograph",
-"art","artwork","drawing","wallpaper","visual","reference"
-],
-url: "https://www.google.com/search?tbm=isch&q="
-},
-
-{
-name: "Google Maps",
-description: "Places, directions, businesses, locations and routes.",
-tags: [
-"map","maps","location","directions","route","place","places",
-"restaurant","store","shop","near me","nearby","address","city",
-"business","businesses","travel"
-],
-url: "https://www.google.com/maps/search/"
-},
-
-{
-name: "Amazon",
-description: "Product searches, shopping and technology.",
-tags: [
-"buy","shopping","shop","product","products","keyboard","electronics",
-"computer","accessory","accessories","price","cheap","best product",
-"purchase","hardware","headphones","monitor"
-],
-url: "https://www.amazon.com/s?k="
-},
-
-{
-name: "Google Books",
-description: "Books, authors, stories and published works.",
-tags: [
-"book","books","reading","read","author","authors","novel","novels",
-"story","stories","literature","library","textbook"
-],
-url: "https://www.google.com/search?tbm=bks&q="
-},
-
-{
-name: "Reddit",
-description: "Community discussions, opinions and personal experiences.",
-tags: [
-"community","discussion","opinion","opinions","recommendation",
-"recommendations","experience","experiences","reddit","people think",
-"discussion forum","community advice"
-],
-url: "https://www.reddit.com/search/?q="
-},
-
-{
-name: "Google Scholar",
-description: "Academic papers, studies and scholarly research.",
-tags: [
-"study","studies","academic","paper","papers","research paper",
-"scientific","journal","university","scholar","scholarly"
-],
-url: "https://scholar.google.com/scholar?q="
-},
-
-{
-name: "Google Search for Games",
-description: "Game information, walkthroughs, game news and communities.",
-tags: [
-"game","games","gaming","walkthrough","walkthroughs","level",
-"levels","game guide","game news","multiplayer","singleplayer",
-"play game"
-],
-url: "https://www.google.com/search?q="
-},
-
-{
-name: "Google Search for AI",
-description: "Artificial intelligence tools, information and learning resources.",
-tags: [
-"ai","artificial intelligence","chatbot","machine learning",
-"generate","generator","ai tool","ai tools","neural network",
-"language model"
-],
-url: "https://www.google.com/search?q="
-},
-
-{
-name: "Google Search for Weather",
-description: "Weather conditions and forecasts.",
-tags: [
-"weather","forecast","temperature","rain","snow","storm","sunny",
-"wind","climate"
-],
-url: "https://www.google.com/search?q="
-}
-
-];
+const API_BASE =
+"https://en.wikipedia.org";
 
 
-/* =========================
-   SEARCH STATE
-========================= */
+/* =================================
+   ELEMENTS
+================================= */
 
-let bestDestination = "";
-let redirectTimer = null;
-let currentQuery = "";
+const searchInput =
+document.getElementById("searchInput");
+
+const searchButton =
+document.getElementById("searchButton");
+
+const loading =
+document.getElementById("loading");
+
+const results =
+document.getElementById("results");
+
+const noResults =
+document.getElementById("noResults");
+
+const topicTitle =
+document.getElementById("topicTitle");
+
+const overviewText =
+document.getElementById("overviewText");
+
+const whatIsIt =
+document.getElementById("whatIsIt");
+
+const whyExplore =
+document.getElementById("whyExplore");
+
+const keyIdeas =
+document.getElementById("keyIdeas");
+
+const relatedTopics =
+document.getElementById("relatedTopics");
+
+const imageContainer =
+document.getElementById("imageContainer");
+
+const sourceLink =
+document.getElementById("sourceLink");
 
 
-/* =========================
+/* =================================
    EXAMPLE SEARCH
-========================= */
+================================= */
 
-function exampleSearch(query) {
+function exampleSearch(query){
 
-document.getElementById("searchInput").value = query;
+    searchInput.value = query;
 
-performSearch();
-
-}
-
-
-/* =========================
-   TOOL SEARCH
-========================= */
-
-function toolSearch(query) {
-
-document.getElementById("searchInput").value = query;
-
-document.getElementById("home").scrollIntoView({
-behavior: "smooth"
-});
-
-setTimeout(() => {
-performSearch();
-}, 350);
+    performSearch();
 
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+/* =================================
+   MAIN SEARCH
+================================= */
 
-function performSearch() {
+async function performSearch(){
 
-const query =
-document.getElementById("searchInput")
-.value
-.trim();
+    const query =
+    searchInput.value.trim();
 
 
-if (!query) {
+    if(!query){
 
-document.getElementById("searchInput").focus();
+        searchInput.focus();
 
-return;
+        return;
 
-}
+    }
 
 
-currentQuery = query;
+    hideAllResults();
 
+    loading.style.display = "block";
 
-clearInterval(redirectTimer);
+    searchButton.disabled = true;
 
+    searchButton.textContent = "Searching...";
 
-/* Split words */
 
-const words =
-query
-.toLowerCase()
-.split(/[^a-z0-9]+/)
-.filter(Boolean);
+    try{
 
 
-/* Score destinations */
+        /* Search Wikipedia */
 
-const ranked =
-sites.map(site => {
+        const searchURL =
+        API_BASE +
+        "/w/rest.php/v1/search/page?q=" +
+        encodeURIComponent(query) +
+        "&limit=8";
 
-let score = 0;
 
+        const searchResponse =
+        await fetch(searchURL);
 
-/* Individual word matching */
 
-words.forEach(word => {
+        if(!searchResponse.ok){
 
-site.tags.forEach(tag => {
+            throw new Error("Search failed");
 
-const normalizedTag =
-tag.toLowerCase();
+        }
 
 
-if (word === normalizedTag) {
+        const searchData =
+        await searchResponse.json();
 
-score += 12;
 
-}
+        const pages =
+        searchData.pages || [];
 
-else if (
-word.length > 3 &&
-(
-word.includes(normalizedTag) ||
-normalizedTag.includes(word)
-)
-) {
 
-score += 4;
+        if(!pages.length){
 
-}
+            showNoResults();
 
-});
+            return;
 
-});
+        }
 
 
-/* Full phrase matching */
+        /* Best matching page */
 
-site.tags.forEach(tag => {
+        const bestPage =
+        pages[0];
 
-if (
-query.toLowerCase().includes(
-tag.toLowerCase()
-)
-) {
 
-score += 15;
+        const title =
+        bestPage.title;
 
-}
 
-});
+        /*
+        Get live page summary.
+        This is separate from the search endpoint.
+        */
 
+        const summaryURL =
+        API_BASE +
+        "/api/rest_v1/page/summary/" +
+        encodeURIComponent(
+        title.replace(/ /g,"_")
+        );
 
-return {
-...site,
-score: score
-};
 
-})
+        const summaryResponse =
+        await fetch(summaryURL);
 
 
-.sort((a,b) => b.score - a.score);
+        if(!summaryResponse.ok){
 
+            throw new Error(
+            "Could not load topic summary"
+            );
 
-/* If nothing strongly matches, Google stays useful */
+        }
 
-if (
-ranked[0].score === 0
-) {
 
-const google =
-ranked.find(
-site => site.name === "Google Search"
-);
+        const summary =
+        await summaryResponse.json();
 
-google.score = 1;
 
-ranked.sort(
-(a,b) => b.score - a.score
-);
+        displayTopic(
+            query,
+            title,
+            summary,
+            pages
+        );
 
-}
 
+    }
 
-const best =
-ranked[0];
 
+    catch(error){
 
-bestDestination =
-best.url +
-encodeURIComponent(query);
+        console.error(error);
 
+        showNoResults();
 
-/* Show results */
+    }
 
-document
-.getElementById("results")
-.style.display = "block";
 
+    finally{
 
-document
-.getElementById("searchSummary")
-.textContent =
-'Results for "' +
-query +
-'". These destinations are ranked based on the type of search you entered.';
+        loading.style.display = "none";
 
+        searchButton.disabled = false;
 
-document
-.getElementById("bestSite")
-.textContent =
-best.name;
+        searchButton.textContent = "Explore";
 
-
-const list =
-document.getElementById("resultList");
-
-
-list.innerHTML = "";
-
-
-/* Show top five */
-
-ranked
-.slice(0,5)
-.forEach((site,index) => {
-
-const card =
-document.createElement("div");
-
-
-card.className =
-"result-card" +
-(index === 0 ? " best" : "");
-
-
-const info =
-document.createElement("div");
-
-
-if (index === 0) {
-
-const label =
-document.createElement("div");
-
-label.className =
-"best-label";
-
-label.textContent =
-"RECOMMENDED STARTING POINT";
-
-info.appendChild(label);
-
-}
-
-
-const title =
-document.createElement("h3");
-
-title.textContent =
-site.name;
-
-
-const description =
-document.createElement("p");
-
-description.textContent =
-site.description;
-
-
-info.appendChild(title);
-
-info.appendChild(description);
-
-
-const button =
-document.createElement("button");
-
-button.className =
-"go-button";
-
-button.textContent =
-"Visit";
-
-
-button.onclick =
-function() {
-
-clearInterval(redirectTimer);
-
-window.location.href =
-site.url +
-encodeURIComponent(currentQuery);
-
-};
-
-
-card.appendChild(info);
-
-card.appendChild(button);
-
-list.appendChild(card);
-
-});
-
-
-document
-.getElementById("gamePrompt")
-.style.display =
-"block";
-
-
-document
-.getElementById("game")
-.style.display =
-"none";
-
-
-startRedirect();
-
-
-document
-.getElementById("results")
-.scrollIntoView({
-behavior: "smooth"
-});
+    }
 
 }
 
 
 
-/* =========================
-   REDIRECT
-========================= */
+/* =================================
+   DISPLAY TOPIC
+================================= */
 
-function startRedirect() {
+function displayTopic(
+query,
+title,
+summary,
+pages
+){
 
-clearInterval(redirectTimer);
 
+    results.style.display =
+    "block";
 
-let seconds = 5;
 
+    topicTitle.textContent =
+    summary.title || title;
 
-document
-.getElementById("redirectBox")
-.style.display =
-"block";
 
+    const extract =
+    summary.extract ||
+    "A detailed overview was not available for this topic.";
 
-document
-.getElementById("countdown")
-.textContent =
-seconds;
 
+    overviewText.textContent =
+    extract;
 
-redirectTimer =
-setInterval(() => {
 
-seconds--;
+    whatIsIt.textContent =
+    makeWhatIsIt(
+        summary.title || title,
+        summary.description,
+        extract
+    );
 
 
-document
-.getElementById("countdown")
-.textContent =
-seconds;
+    whyExplore.textContent =
+    makeWhyExplore(
+        summary.title || title,
+        extract
+    );
 
 
-if (seconds <= 0) {
+    displayImage(summary);
 
-clearInterval(redirectTimer);
 
-goToBest();
+    displayKeyIdeas(
+        query,
+        summary.title || title,
+        summary.description,
+        extract
+    );
 
-}
 
-},1000);
+    displayRelatedTopics(
+        pages,
+        title
+    );
 
-}
 
+    const sourceURL =
+    summary.content_urls &&
+    summary.content_urls.desktop &&
+    summary.content_urls.desktop.page
+    ? summary.content_urls.desktop.page
+    : "https://en.wikipedia.org/wiki/" +
+      encodeURIComponent(
+      title.replace(/ /g,"_")
+      );
 
 
-function cancelRedirect() {
+    sourceLink.href =
+    sourceURL;
 
-clearInterval(redirectTimer);
 
+    setTimeout(() => {
 
-document
-.getElementById("redirectBox")
-.style.display =
-"none";
+        results.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
-}
-
-
-
-function goToBest() {
-
-clearInterval(redirectTimer);
-
-
-if (bestDestination) {
-
-window.location.href =
-bestDestination;
-
-}
-
-}
-
-
-
-/* =========================
-   GAME
-========================= */
-
-let score = 0;
-let time = 15;
-let gameTimer = null;
-let gameRunning = false;
-
-
-const gameItem =
-document.getElementById("gameItem");
-
-
-let bestScore =
-Number(
-localStorage.getItem(
-"mystarsnightQuickSearchBestScore"
-)
-) || 0;
-
-
-document
-.getElementById("bestScore")
-.textContent =
-bestScore;
-
-
-gameItem.addEventListener(
-"click",
-hitTarget
-);
-
-
-
-function startGame() {
-
-
-/* Pause redirect */
-
-clearInterval(redirectTimer);
-
-
-document
-.getElementById("redirectBox")
-.style.display =
-"none";
-
-
-document
-.getElementById("gamePrompt")
-.style.display =
-"none";
-
-
-document
-.getElementById("game")
-.style.display =
-"block";
-
-
-document
-.getElementById("gameResult")
-.style.display =
-"none";
-
-
-score = 0;
-
-time = 15;
-
-gameRunning = true;
-
-
-document
-.getElementById("score")
-.textContent =
-score;
-
-
-document
-.getElementById("gameTime")
-.textContent =
-time;
-
-
-gameItem.style.display =
-"block";
-
-
-moveTarget();
-
-
-clearInterval(gameTimer);
-
-
-gameTimer =
-setInterval(() => {
-
-time--;
-
-
-document
-.getElementById("gameTime")
-.textContent =
-time;
-
-
-if (time <= 0) {
-
-endGame();
-
-}
-
-},1000);
-
-
-document
-.getElementById("game")
-.scrollIntoView({
-behavior: "smooth"
-});
+    },100);
 
 }
 
 
 
-function hitTarget() {
+/* =================================
+   WHAT IS IT
+================================= */
 
-if (!gameRunning) return;
+function makeWhatIsIt(
+title,
+description,
+extract
+){
 
+    if(description){
 
-score++;
+        return (
+        title +
+        " is described as " +
+        description +
+        "."
+        );
 
-
-document
-.getElementById("score")
-.textContent =
-score;
-
-
-moveTarget();
-
-}
-
-
-
-function moveTarget() {
-
-const area =
-document.getElementById("gameArea");
+    }
 
 
-const maxX =
-area.clientWidth - 62;
+    const firstSentence =
+    getFirstSentence(extract);
 
 
-const maxY =
-area.clientHeight - 62;
-
-
-/* Keep target inside area */
-
-const x =
-Math.random() *
-Math.max(0,maxX);
-
-
-const y =
-Math.random() *
-Math.max(0,maxY);
-
-
-gameItem.style.left =
-x + "px";
-
-
-gameItem.style.top =
-y + "px";
+    return firstSentence;
 
 }
 
 
 
-function endGame() {
+/* =================================
+   WHY EXPLORE
+================================= */
 
-if (!gameRunning) return;
+function makeWhyExplore(
+title,
+extract
+){
 
-
-gameRunning =
-false;
-
-
-clearInterval(gameTimer);
-
-
-gameItem.style.display =
-"none";
-
-
-let newRecord =
-false;
+    const words =
+    extract
+    .split(/\s+/)
+    .length;
 
 
-/* Save best score */
+    if(words > 20){
 
-if (score > bestScore) {
+        return (
+        "Exploring " +
+        title +
+        " can help you understand related ideas and discover more specific questions to research next."
+        );
 
-bestScore = score;
-
-newRecord = true;
-
-
-localStorage.setItem(
-"mystarsnightQuickSearchBestScore",
-bestScore
-);
+    }
 
 
-document
-.getElementById("bestScore")
-.textContent =
-bestScore;
-
-}
-
-
-const result =
-document.getElementById("gameResult");
-
-
-result.innerHTML =
-"<h3>" +
-(newRecord
-? "New Best Score!"
-: "Game Finished") +
-"</h3>" +
-
-"<p>You scored <strong>" +
-score +
-"</strong> points.</p>" +
-
-"<button class='go-button' onclick='goToBest()'>" +
-"Continue to Search Result" +
-"</button>";
-
-
-result.style.display =
-"block";
-
-
-document
-.getElementById("gamePrompt")
-.style.display =
-"block";
+    return (
+    "Use this topic as a starting point and explore connected subjects for more detail."
+    );
 
 }
 
 
 
-/* =========================
+/* =================================
+   IMAGE
+================================= */
+
+function displayImage(summary){
+
+    imageContainer.innerHTML = "";
+
+
+    if(
+        summary.thumbnail &&
+        summary.thumbnail.source
+    ){
+
+        const image =
+        document.createElement("img");
+
+
+        image.className =
+        "topic-image";
+
+
+        image.src =
+        summary.thumbnail.source;
+
+
+        image.alt =
+        summary.title || "Topic image";
+
+
+        imageContainer.appendChild(
+        image
+        );
+
+
+    }
+
+    else{
+
+        const noImage =
+        document.createElement("div");
+
+
+        noImage.className =
+        "no-image";
+
+
+        noImage.textContent =
+        "No topic image was available for this result.";
+
+
+        imageContainer.appendChild(
+        noImage
+        );
+
+    }
+
+}
+
+
+
+/* =================================
+   KEY IDEAS
+================================= */
+
+function displayKeyIdeas(
+query,
+title,
+description,
+extract
+){
+
+    keyIdeas.innerHTML = "";
+
+
+    const ideas = [];
+
+
+    if(description){
+
+        ideas.push({
+
+            title:"Topic type",
+
+            text:description
+
+        });
+
+    }
+
+
+    const firstSentence =
+    getFirstSentence(extract);
+
+
+    if(firstSentence){
+
+        ideas.push({
+
+            title:"Main idea",
+
+            text:firstSentence
+
+        });
+
+    }
+
+
+    ideas.push({
+
+        title:"Explore further",
+
+        text:
+        "Search for specific questions about " +
+        title +
+        " to move from a broad overview into more detailed information."
+
+    });
+
+
+    ideas.forEach(idea => {
+
+
+        const card =
+        document.createElement("div");
+
+
+        card.className =
+        "key-card";
+
+
+        const heading =
+        document.createElement("h4");
+
+
+        heading.textContent =
+        idea.title;
+
+
+        const text =
+        document.createElement("p");
+
+
+        text.textContent =
+        idea.text;
+
+
+        card.appendChild(heading);
+
+        card.appendChild(text);
+
+        keyIdeas.appendChild(card);
+
+    });
+
+}
+
+
+
+/* =================================
+   RELATED TOPICS
+================================= */
+
+function displayRelatedTopics(
+pages,
+currentTitle
+){
+
+    relatedTopics.innerHTML = "";
+
+
+    const related =
+    pages
+    .filter(page =>
+        page.title !== currentTitle
+    )
+    .slice(0,6);
+
+
+    if(!related.length){
+
+        const message =
+        document.createElement("p");
+
+
+        message.textContent =
+        "Search again using a more specific question to explore another angle of this topic.";
+
+
+        relatedTopics.appendChild(
+        message
+        );
+
+
+        return;
+
+    }
+
+
+    related.forEach(page => {
+
+
+        const button =
+        document.createElement("button");
+
+
+        button.className =
+        "related-card";
+
+
+        const title =
+        document.createElement("strong");
+
+
+        title.textContent =
+        page.title;
+
+
+        const description =
+        document.createElement("span");
+
+
+        description.textContent =
+        page.description ||
+        "Explore this related topic.";
+
+
+        button.appendChild(title);
+
+        button.appendChild(description);
+
+
+        button.onclick =
+        function(){
+
+            searchInput.value =
+            page.title;
+
+            performSearch();
+
+        };
+
+
+        relatedTopics.appendChild(
+        button
+        );
+
+    });
+
+}
+
+
+
+/* =================================
+   HELPERS
+================================= */
+
+function getFirstSentence(text){
+
+    if(!text){
+
+        return "";
+
+    }
+
+
+    const match =
+    text.match(/^.*?[.!?](?:\s|$)/);
+
+
+    if(match){
+
+        return match[0].trim();
+
+    }
+
+
+    return text;
+
+}
+
+
+
+function hideAllResults(){
+
+    results.style.display =
+    "none";
+
+
+    noResults.style.display =
+    "none";
+
+}
+
+
+
+function showNoResults(){
+
+    results.style.display =
+    "none";
+
+
+    noResults.style.display =
+    "block";
+
+
+    setTimeout(() => {
+
+        noResults.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    },100);
+
+}
+
+
+
+/* =================================
    ENTER KEY
-========================= */
+================================= */
 
-document
-.getElementById("searchInput")
-.addEventListener(
+searchInput.addEventListener(
 "keydown",
 event => {
 
-if (
-event.key === "Enter"
-) {
+    if(event.key === "Enter"){
 
-performSearch();
+        performSearch();
 
-}
+    }
 
 }
 );
 
 
 
-/* =========================
+/* =================================
    YEAR
-========================= */
+================================= */
 
 document
 .getElementById("year")
 .textContent =
 new Date().getFullYear();
-
 
 </script>
 
