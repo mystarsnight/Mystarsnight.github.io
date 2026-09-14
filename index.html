@@ -2,1963 +2,3472 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="description" content="Mystarsnight Quick Search">
 <title>Mystarsnight Quick Search</title>
 
-<meta name="description" content="Search topics and explore live information, related topics, key ideas and useful resources with Mystarsnight Quick Search.">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114" crossorigin="anonymous"></script>
 
-<meta name="google-adsense-account" content="ca-pub-6476815184336114">
-
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114"
-crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ================================
-   GLOBAL
-================================ */
-
-*{
-    box-sizing:border-box;
+:root{
+  --bg:#f4f7fb;
+  --panel:#fff;
+  --panel2:#f7f9fc;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e3e8f0;
+  --accent:#3478f6;
+  --accent2:#6d5dfc;
+  --danger:#e5484d;
+  --success:#1c9c68;
+  --shadow:0 12px 35px rgba(20,35,60,.09);
 }
 
-html{
-    scroll-behavior:smooth;
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:"Fredoka",sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f8;
-    color:#172033;
+  overflow-x:hidden;
+  transition:.25s;
 }
 
-button,
-input{
-    font:inherit;
+button,input,select{
+  font:inherit;
 }
 
 button{
-    cursor:pointer;
+  cursor:pointer;
 }
 
-a{
-    color:#41599f;
+button:active{
+  transform:scale(.98);
 }
 
-
-/* ================================
-   HEADER
-================================ */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:#ffffff;
-    border-bottom:1px solid #dfe4ea;
+.app{
+  min-height:100vh;
 }
 
-.header-inner{
-    max-width:1150px;
-    margin:auto;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
+.header{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:10px 18px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 3px 18px rgba(0,0,0,.04);
+}
+
+.iconBtn{
+  width:44px;
+  height:44px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:var(--panel2);
+  color:var(--text);
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  transition:.2s;
+}
+
+.iconBtn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.brandArea{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+  flex:1;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:-.5px;
-    white-space:nowrap;
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  object-fit:cover;
+  pointer-events:none;
+  user-select:none;
 }
 
-.logo span{
-    color:#5369ae;
+.brand{
+  min-width:0;
 }
 
-nav{
-    display:flex;
-    gap:4px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
+.brandTitle{
+  font-size:21px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-nav a{
-    text-decoration:none;
-    color:#526076;
-    font-size:14px;
-    font-weight:700;
-    padding:9px 11px;
-    border-radius:8px;
+.brandSub{
+  font-size:12px;
+  color:var(--muted);
 }
 
-nav a:hover{
-    background:#f0f2f5;
-    color:#172033;
+.headerActions{
+  display:flex;
+  gap:8px;
 }
 
+.sidebar{
+  position:fixed;
+  left:0;
+  top:72px;
+  bottom:0;
+  width:275px;
+  z-index:45;
+  background:var(--panel);
+  border-right:1px solid var(--border);
+  padding:18px 13px;
+  overflow-y:auto;
+  transform:translateX(-100%);
+  transition:transform .25s ease;
+  box-shadow:8px 0 30px rgba(0,0,0,.06);
+}
 
-/* ================================
-   HERO
-================================ */
+.sidebar.open{
+  transform:translateX(0);
+}
+
+.sidebarTitle{
+  padding:6px 10px 12px;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.navBtn{
+  width:100%;
+  padding:12px 13px;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  border-radius:12px;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-bottom:4px;
+  transition:.18s;
+}
+
+.navBtn:hover,
+.navBtn.active{
+  background:var(--panel2);
+  color:var(--accent);
+}
+
+/* FIXED SIDEBAR TEXT LAYOUT */
+.navIcon{
+  width:auto;
+  min-width:0;
+  flex:1;
+  text-align:left;
+}
+
+.navBtn > span:last-child{
+  display:none;
+}
+
+.sidebarOverlay{
+  display:none;
+  position:fixed;
+  inset:72px 0 0;
+  background:rgba(0,0,0,.3);
+  z-index:40;
+}
+
+.sidebarOverlay.show{
+  display:block;
+}
+
+.main{
+  max-width:1200px;
+  margin:0 auto;
+  padding:28px 18px 60px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
 
 .hero{
-    background:#ffffff;
-    border-bottom:1px solid #e1e5eb;
-    padding:72px 20px 62px;
-    text-align:center;
+  text-align:center;
+  padding:22px 0 20px;
 }
 
 .hero h1{
-    max-width:900px;
-    margin:auto;
-    font-size:clamp(42px,7vw,70px);
-    letter-spacing:-3px;
-    line-height:1.03;
+  margin:0;
+  font-size:clamp(31px,6vw,54px);
+  letter-spacing:-.03em;
 }
 
 .hero p{
-    max-width:760px;
-    margin:20px auto 0;
-    color:#5c687a;
-    line-height:1.7;
-    font-size:18px;
+  margin:9px auto 0;
+  max-width:650px;
+  color:var(--muted);
+  font-size:16px;
 }
 
-
-/* ================================
-   SEARCH
-================================ */
-
-.search-wrap{
-    max-width:850px;
-    margin:32px auto 0;
+.searchBox{
+  max-width:850px;
+  margin:25px auto 14px;
+  display:flex;
+  gap:9px;
+  padding:8px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
 }
 
-.search-box{
-    display:flex;
-    gap:10px;
+.searchBox input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  padding:13px 14px;
+  background:transparent;
+  color:var(--text);
+  font-size:17px;
 }
 
-.search-box input{
-    flex:1;
-    min-width:0;
-    padding:19px;
-    border:2px solid #d8dee7;
-    border-radius:14px;
-    outline:none;
-    font-size:17px;
-    color:#172033;
+.searchBtn{
+  border:0;
+  border-radius:13px;
+  padding:0 22px;
+  background:var(--accent);
+  color:white;
+  font-weight:600;
 }
 
-.search-box input:focus{
-    border-color:#5d72b5;
+.searchBtn:hover{
+  filter:brightness(.95);
 }
 
-.search-box button{
-    border:0;
-    padding:0 25px;
-    border-radius:14px;
-    background:#172033;
-    color:white;
-    font-weight:800;
+.quickActions{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:12px 0 22px;
 }
 
-.search-box button:hover{
-    background:#2b3850;
+.actionBtn{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:12px;
+  padding:10px 15px;
 }
 
-.examples{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:16px;
+.actionBtn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
 }
 
-.example{
-    background:white;
-    border:1px solid #dce2e9;
-    border-radius:20px;
-    padding:8px 13px;
-    color:#536076;
+.sourceArea{
+  max-width:1050px;
+  margin:0 auto 18px;
 }
 
-.example:hover{
-    background:#f0f2f5;
+.sourceLabel{
+  font-size:13px;
+  color:var(--muted);
+  margin:0 0 9px 2px;
 }
 
-
-/* ================================
-   MAIN
-================================ */
-
-main{
-    max-width:1120px;
-    margin:auto;
-    padding:35px 18px;
+.sources{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
 }
 
-.section{
-    background:white;
-    border:1px solid #e1e5eb;
-    border-radius:20px;
-    padding:30px;
-    margin-bottom:22px;
-    box-shadow:0 6px 25px rgba(20,30,50,.04);
+.sourceChip{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 13px;
+  transition:.18s;
 }
 
-.section h2{
-    margin:0 0 14px;
-    font-size:30px;
-    letter-spacing:-.7px;
+.sourceChip:hover{
+  border-color:var(--accent);
 }
 
-.section h3{
-    margin-top:24px;
+.sourceChip.active{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
 }
 
-.section p{
-    color:#566176;
-    line-height:1.75;
+.sourceChip.liveGames{
+  width:45px;
+  height:45px;
+  padding:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:11px;
+  font-weight:600;
+  text-align:center;
+  line-height:1.05;
+  border:2px solid var(--accent2);
 }
 
+.sourceChip.liveGames.active{
+  background:var(--accent2);
+  color:white;
+  border-color:var(--accent2);
+}
 
-/* ================================
-   LOADING
-================================ */
+.status{
+  max-width:1050px;
+  margin:12px auto;
+  min-height:24px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.results{
+  max-width:1050px;
+  margin:auto;
+}
+
+.resultGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:18px;
+  box-shadow:0 7px 24px rgba(20,35,60,.045);
+}
+
+.card h3{
+  margin:0 0 7px;
+  font-size:18px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.55;
+  margin:8px 0;
+}
+
+.cardMeta{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:12px;
+}
+
+.cardActions{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+  flex-wrap:wrap;
+}
+
+.smallBtn{
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  border-radius:10px;
+  padding:8px 11px;
+}
+
+.smallBtn.primary{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.smallBtn.danger{
+  color:var(--danger);
+}
+
+.bestCard{
+  border:2px solid var(--accent);
+  margin-bottom:17px;
+  position:relative;
+  overflow:hidden;
+}
+
+.bestBadge{
+  display:inline-block;
+  background:var(--accent);
+  color:white;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  margin-bottom:9px;
+}
+
+.bestTitle{
+  font-size:25px!important;
+  line-height:1.2;
+}
+
+.bestOverview{
+  color:var(--text)!important;
+  font-size:16px;
+  line-height:1.75!important;
+  background:var(--panel2);
+  border-radius:13px;
+  padding:14px;
+  margin-top:13px!important;
+}
 
 .loading{
-    display:none;
-    text-align:center;
-    padding:42px 20px;
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
 }
 
 .spinner{
-    width:42px;
-    height:42px;
-    margin:auto auto 18px;
-    border:4px solid #e1e5eb;
-    border-top-color:#5369ae;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
+  width:31px;
+  height:31px;
+  margin:0 auto 10px;
+  border:3px solid var(--border);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
+  to{transform:rotate(360deg)}
 }
 
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  background:var(--panel);
+  border:1px dashed var(--border);
+  border-radius:17px;
+  color:var(--muted);
+}
 
-/* ================================
-   RESULTS
-================================ */
+.sectionTitle{
+  font-size:30px;
+  margin:10px 0 7px;
+}
 
-#results{
+.sectionText{
+  color:var(--muted);
+  line-height:1.65;
+  max-width:800px;
+}
+
+.list{
+  display:grid;
+  gap:11px;
+  margin-top:20px;
+}
+
+.listItem{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:15px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.listMain{
+  min-width:0;
+}
+
+.listTitle{
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.listSub{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.settingsGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.settingCard{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:17px;
+}
+
+.settingCard label{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.settingCard select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:10px;
+  outline:0;
+}
+
+.scoresHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.scoreGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:13px;
+  margin-top:20px;
+}
+
+.gameCard{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+}
+
+.league{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.team{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:7px 0;
+  font-size:17px;
+}
+
+.teamScore{
+  font-size:22px;
+  font-weight:700;
+}
+
+.gameStatus{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.gameSearchMatch{
+  border-color:var(--accent);
+}
+
+.modalBack{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modalBack.show{
+  display:flex;
+}
+
+.modal{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 25px 80px rgba(0,0,0,.2);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.modalHeader h2{
+  margin:0;
+}
+
+.modalClose{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:25px;
+}
+
+.announcement{
+  width:min(480px,calc(100% - 30px));
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.25);
+  padding:25px;
+}
+
+.announcement h2{
+  margin:0 0 10px;
+}
+
+.announcement p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.announcementActions{
+  display:flex;
+  gap:9px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.cookie{
+  position:fixed;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  z-index:90;
+  max-width:760px;
+  margin:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:14px 16px;
+  display:flex;
+  gap:13px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.cookie p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+
+.cookie button{
+  flex:none;
+  border:0;
+  border-radius:10px;
+  background:var(--accent);
+  color:white;
+  padding:9px 14px;
+}
+
+.notice{
+  padding:12px 14px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:13px;
+  color:var(--muted);
+  margin-top:15px;
+}
+
+@media(max-width:700px){
+  .header{
+    height:64px;
+    padding:8px 11px;
+  }
+
+  .sidebar{
+    top:64px;
+    width:min(300px,88vw);
+  }
+
+  .sidebarOverlay{
+    inset:64px 0 0;
+  }
+
+  .brandTitle{
+    font-size:17px;
+  }
+
+  .brandSub{
     display:none;
+  }
+
+  .logo{
+    width:38px;
+    height:38px;
+  }
+
+  .headerActions .iconBtn{
+    width:40px;
+    height:40px;
+  }
+
+  .main{
+    padding:18px 12px 45px;
+  }
+
+  .hero{
+    padding-top:14px;
+  }
+
+  .searchBox{
+    border-radius:15px;
+  }
+
+  .searchBox input{
+    font-size:16px;
+    padding:11px 9px;
+  }
+
+  .searchBtn{
+    padding:0 15px;
+  }
+
+  .cookie{
+    align-items:flex-end;
+  }
 }
 
-.result-heading{
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
+@media(max-width:460px){
+  .brandArea{
+    gap:7px;
+  }
 
-.topic-badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:8px;
-    background:#edf0f8;
-    color:#4b61a4;
-    font-size:12px;
-    font-weight:850;
-    margin-bottom:10px;
-}
+  .brandTitle{
+    max-width:150px;
+  }
 
-.source-note{
-    font-size:13px;
-    color:#738096;
-    margin-top:4px;
-}
+  .searchBox{
+    flex-direction:column;
+  }
 
-.overview-grid{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 280px;
-    gap:25px;
-    margin-top:22px;
-}
+  .searchBtn{
+    height:45px;
+  }
 
-.overview-card{
-    padding:24px;
-    border:1px solid #e1e5eb;
-    border-radius:17px;
-    background:#fafbfc;
-}
+  .cookie{
+    flex-direction:column;
+    align-items:stretch;
+  }
 
-.overview-card h3{
-    margin-top:0;
-}
-
-.overview-text{
-    white-space:pre-line;
-    color:#3f4c60;
-    line-height:1.8;
-}
-
-.topic-image{
+  .cookie button{
     width:100%;
-    border-radius:16px;
-    object-fit:cover;
-    max-height:300px;
-    background:#eef1f4;
+  }
 }
-
-.no-image{
-    min-height:180px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-    border:1px solid #e1e5eb;
-    border-radius:16px;
-    color:#7a8595;
-    background:#f7f8fa;
-}
-
-
-/* ================================
-   KEY IDEAS
-================================ */
-
-.key-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:13px;
-    margin-top:18px;
-}
-
-.key-card{
-    border:1px solid #e1e5eb;
-    border-radius:14px;
-    padding:18px;
-}
-
-.key-card h4{
-    margin:0 0 8px;
-    color:#27334a;
-}
-
-.key-card p{
-    margin:0;
-    font-size:14px;
-}
-
-
-/* ================================
-   RELATED
-================================ */
-
-.related-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:18px;
-}
-
-.related-card{
-    text-align:left;
-    padding:17px;
-    border:1px solid #e0e5ec;
-    border-radius:14px;
-    background:white;
-}
-
-.related-card:hover{
-    background:#f5f6f8;
-}
-
-.related-card strong{
-    display:block;
-    color:#263248;
-    margin-bottom:7px;
-}
-
-.related-card span{
-    display:block;
-    font-size:13px;
-    color:#69758a;
-    line-height:1.5;
-}
-
-
-/* ================================
-   EXPLORER
-================================ */
-
-.explorer-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    margin-top:20px;
-}
-
-.explorer-card{
-    border:1px solid #e1e5eb;
-    border-radius:15px;
-    padding:20px;
-}
-
-.explorer-card h3{
-    margin:0 0 9px;
-}
-
-.explorer-card p{
-    margin:0;
-    font-size:14px;
-}
-
-.explorer-card button{
-    margin-top:15px;
-    border:1px solid #d8dee7;
-    background:white;
-    padding:9px 13px;
-    border-radius:9px;
-    font-weight:750;
-}
-
-
-/* ================================
-   LEARNING PATH
-================================ */
-
-.path{
-    margin-top:20px;
-}
-
-.path-step{
-    display:flex;
-    gap:15px;
-    align-items:flex-start;
-    padding:17px 0;
-    border-bottom:1px solid #edf0f3;
-}
-
-.path-step:last-child{
-    border-bottom:0;
-}
-
-.path-number{
-    min-width:36px;
-    height:36px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#172033;
-    color:white;
-    font-weight:850;
-}
-
-.path-step h3{
-    margin:0 0 6px;
-}
-
-.path-step p{
-    margin:0;
-    font-size:14px;
-}
-
-
-/* ================================
-   SOURCE BUTTON
-================================ */
-
-.source-button{
-    display:inline-block;
-    margin-top:18px;
-    padding:12px 16px;
-    border-radius:10px;
-    background:#172033;
-    color:white;
-    text-decoration:none;
-    font-weight:800;
-}
-
-.source-button:hover{
-    background:#2b3850;
-}
-
-
-/* ================================
-   HOW
-================================ */
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:20px;
-}
-
-.step{
-    background:#f7f8fa;
-    border:1px solid #e2e6eb;
-    border-radius:15px;
-    padding:21px;
-}
-
-.step-number{
-    width:35px;
-    height:35px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:#172033;
-    color:white;
-    font-weight:850;
-    margin-bottom:12px;
-}
-
-.step h3{
-    margin:0 0 8px;
-}
-
-.step p{
-    margin:0;
-    font-size:14px;
-}
-
-
-/* ================================
-   FEATURES
-================================ */
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-}
-
-.feature{
-    border:1px solid #e1e5eb;
-    border-radius:15px;
-    padding:20px;
-}
-
-.feature h3{
-    margin:0 0 9px;
-}
-
-.feature p{
-    margin:0;
-    font-size:14px;
-}
-
-
-/* ================================
-   CONTACT
-================================ */
-
-.contact-box{
-    padding:20px;
-    background:#f6f7f9;
-    border:1px solid #e1e5eb;
-    border-radius:14px;
-}
-
-
-/* ================================
-   FOOTER
-================================ */
-
-footer{
-    background:#172033;
-    color:#c7cfdd;
-    padding:38px 20px;
-    text-align:center;
-}
-
-.footer-links{
-    margin-top:14px;
-}
-
-.footer-links a{
-    color:#dfe6f1;
-    text-decoration:none;
-    margin:0 8px;
-    font-size:14px;
-}
-
-
-/* ================================
-   MOBILE
-================================ */
-
-@media(max-width:850px){
-
-    .header-inner{
-        flex-direction:column;
-    }
-
-    nav{
-        justify-content:center;
-    }
-
-    .search-box{
-        flex-direction:column;
-    }
-
-    .search-box button{
-        height:55px;
-    }
-
-    .overview-grid{
-        grid-template-columns:1fr;
-    }
-
-    .key-grid,
-    .related-grid,
-    .feature-grid,
-    .steps{
-        grid-template-columns:1fr;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
+<div class="app">
 
-<header>
+<header class="header">
 
-<div class="header-inner">
+  <button class="iconBtn" id="sidebarToggle" aria-label="Open menu">☰</button>
 
-<div class="logo">
-Mystarsnight <span>Quick Search</span>
-</div>
+  <div class="brandArea">
+    <img
+      class="logo"
+      src="https://i.postimg.cc/sMhHs66p/IMG-1649.jpg"
+      alt="Mystarsnight"
+      draggable="false"
+    >
 
-<nav>
-<a href="#home">Home</a>
-<a href="#how">How It Works</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-<a href="#privacy">Privacy</a>
-</nav>
+    <div class="brand">
+      <div class="brandTitle">Mystarsnight Quick Search</div>
+      <div class="brandSub">Search more. Find better.</div>
+    </div>
+  </div>
 
-</div>
+  <div class="headerActions">
+    <button class="iconBtn" id="themeBtn" title="Change theme">◐</button>
+    <button class="iconBtn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
+  </div>
 
 </header>
 
+<aside class="sidebar" id="sidebar">
 
+  <div class="sidebarTitle">Navigation</div>
 
-<section class="hero" id="home">
+  <button class="navBtn active" data-page="search">
+    <span class="navIcon">Search</span>
+    <span>Search</span>
+  </button>
 
-<h1>Explore what you search.</h1>
+  <button class="navBtn" data-page="history">
+    <span class="navIcon">History</span>
+    <span>History</span>
+  </button>
 
-<p>
-Search for a topic and Mystarsnight Quick Search finds live public information,
-builds a topic overview, shows related subjects, and helps you decide what to
-explore next.
-</p>
+  <button class="navBtn" data-page="saved">
+    <span class="navIcon">Saved</span>
+    <span>Saved</span>
+  </button>
 
-<div class="search-wrap">
+  <button class="navBtn" data-page="about">
+    <span class="navIcon">About</span>
+    <span>About</span>
+  </button>
 
-<div class="search-box">
+  <button class="navBtn" data-page="quality">
+    <span class="navIcon">Quality</span>
+    <span>Source Quality</span>
+  </button>
 
-<input
-id="searchInput"
-type="text"
-placeholder="Search a topic, person, place, object, science idea..."
-autocomplete="off"
->
+  <button class="navBtn" data-page="contact">
+    <span class="navIcon">Contact</span>
+    <span>Contact</span>
+  </button>
 
-<button id="searchButton" onclick="performSearch()">
-Explore
-</button>
+  <button class="navBtn" data-page="privacy">
+    <span class="navIcon">Privacy</span>
+    <span>Privacy</span>
+  </button>
 
-</div>
+  <button class="navBtn" data-page="terms">
+    <span class="navIcon">Terms</span>
+    <span>Terms</span>
+  </button>
 
-<div class="examples">
+</aside>
 
-<button class="example" onclick="exampleSearch('black holes')">
-Black holes
-</button>
+<div class="sidebarOverlay" id="sidebarOverlay"></div>
 
-<button class="example" onclick="exampleSearch('JavaScript')">
-JavaScript
-</button>
+<main class="main">
 
-<button class="example" onclick="exampleSearch('Raspberry Pi')">
-Raspberry Pi
-</button>
+<section class="page active" id="page-search">
 
-<button class="example" onclick="exampleSearch('Ancient Egypt')">
-Ancient Egypt
-</button>
+  <div class="hero">
+    <h1>Search the web smarter.</h1>
+    <p>
+      Search across reliable sources and get a useful overview of the best match.
+    </p>
+  </div>
 
-<button class="example" onclick="exampleSearch('Solar System')">
-Solar System
-</button>
+  <form class="searchBox" id="searchForm">
 
-</div>
+    <input
+      id="searchInput"
+      type="search"
+      autocomplete="off"
+      placeholder="Search anything..."
+      aria-label="Search"
+    >
 
-</div>
+    <button class="searchBtn" type="submit">
+      Search
+    </button>
+
+  </form>
+
+  <div class="quickActions">
+
+    <button class="actionBtn" id="clearSearchBtn">
+      Clear
+    </button>
+
+  </div>
+
+  <div class="sourceArea">
+
+    <div class="sourceLabel">
+      Search source
+    </div>
+
+    <div class="sources" id="sources">
+
+      <button class="sourceChip active" data-source="wikipedia">
+        Wikipedia
+      </button>
+
+      <button class="sourceChip" data-source="wiktionary">
+        Wiktionary
+      </button>
+
+      <button class="sourceChip" data-source="wikisource">
+        Wikisource
+      </button>
+
+      <button class="sourceChip" data-source="wikibooks">
+        Wikibooks
+      </button>
+
+      <button class="sourceChip" data-source="wikiversity">
+        Wikiversity
+      </button>
+
+      <button class="sourceChip" data-source="github">
+        GitHub
+      </button>
+
+      <button class="sourceChip" data-source="stackoverflow">
+        Stack Overflow
+      </button>
+
+      <button class="sourceChip" data-source="arxiv">
+        arXiv
+      </button>
+
+      <button class="sourceChip" data-source="pubmed">
+        PubMed
+      </button>
+
+      <button class="sourceChip" data-source="nasa">
+        NASA
+      </button>
+
+      <button class="sourceChip" data-source="archive">
+        Internet Archive
+      </button>
+
+      <button class="sourceChip" data-source="loc">
+        Library of Congress
+      </button>
+
+      <button
+        class="sourceChip liveGames"
+        data-source="games"
+        title="Search games"
+        aria-label="Live Games"
+      >
+        Games
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <div class="results" id="results">
+
+    <div class="empty">
+      Search for something to see results.
+    </div>
+
+  </div>
 
 </section>
 
+<section class="page" id="page-history">
 
+  <h2 class="sectionTitle">Search History</h2>
 
-<main>
+  <div class="sectionText">
+    Your recent searches are stored only in this browser.
+  </div>
 
+  <div class="quickActions" style="justify-content:flex-start">
 
-<!-- LOADING -->
+    <button class="actionBtn" id="clearHistoryBtn">
+      Clear History
+    </button>
 
-<section class="section loading" id="loading">
+  </div>
 
-<div class="spinner"></div>
-
-<h2>Searching live information...</h2>
-
-<p>
-Mystarsnight Quick Search is looking for the closest matching topic and
-building your Topic Explorer.
-</p>
+  <div class="list" id="historyList"></div>
 
 </section>
 
+<section class="page" id="page-saved">
 
+  <h2 class="sectionTitle">Saved Results</h2>
 
-<!-- RESULTS -->
+  <div class="sectionText">
+    Save useful results so you can find them again on this device.
+  </div>
 
-<section class="section" id="results">
-
-<div class="result-heading">
-
-<div>
-
-<div class="topic-badge">
-LIVE TOPIC EXPLORER
-</div>
-
-<h2 id="topicTitle">
-Topic
-</h2>
-
-<div class="source-note">
-Information loaded from a public knowledge source.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="overview-grid">
-
-<div class="overview-card">
-
-<h3>Overview</h3>
-
-<div
-id="overviewText"
-class="overview-text"
->
-</div>
-
-</div>
-
-
-<div id="imageContainer">
-
-<div class="no-image">
-No topic image available.
-</div>
-
-</div>
-
-</div>
-
-
-
-<h2 style="margin-top:35px">
-Explore the Topic
-</h2>
-
-<div class="explorer-grid">
-
-<div class="explorer-card">
-
-<h3>What is it?</h3>
-
-<p id="whatIsIt">
-Search for a topic to see an overview.
-</p>
-
-</div>
-
-
-<div class="explorer-card">
-
-<h3>Why explore it?</h3>
-
-<p id="whyExplore">
-The Topic Explorer helps you move from a broad search into related subjects.
-</p>
-
-</div>
-
-</div>
-
-
-
-<h2 style="margin-top:35px">
-Key Ideas
-</h2>
-
-<div
-id="keyIdeas"
-class="key-grid"
->
-</div>
-
-
-
-<h2 style="margin-top:35px">
-Related Topics
-</h2>
-
-<p>
-Choose a related result to explore it inside Mystarsnight Quick Search.
-</p>
-
-<div
-id="relatedTopics"
-class="related-grid"
->
-</div>
-
-
-
-<h2 style="margin-top:35px">
-A Simple Learning Path
-</h2>
-
-<p>
-Use these steps as a starting structure for exploring the topic.
-</p>
-
-<div class="path">
-
-<div class="path-step">
-
-<div class="path-number">
-1
-</div>
-
-<div>
-
-<h3>Start with the overview</h3>
-
-<p>
-Read the main explanation and identify unfamiliar words or ideas.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="path-step">
-
-<div class="path-number">
-2
-</div>
-
-<div>
-
-<h3>Explore related topics</h3>
-
-<p>
-Use the related results above to understand connected ideas and background.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="path-step">
-
-<div class="path-number">
-3
-</div>
-
-<div>
-
-<h3>Ask a more specific question</h3>
-
-<p>
-Search for one part of the topic that you want to understand in more detail.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="path-step">
-
-<div class="path-number">
-4
-</div>
-
-<div>
-
-<h3>Check the original source</h3>
-
-<p>
-Open the source page when you want more detail, references, or additional
-information.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-<a
-id="sourceLink"
-class="source-button"
-href="#"
-target="_blank"
-rel="noopener noreferrer"
->
-Open Topic Source
-</a>
-
+  <div class="list" id="savedList"></div>
 
 </section>
 
+<section class="page" id="page-about">
 
+  <h2 class="sectionTitle">About Mystarsnight Quick Search</h2>
 
-<!-- NO RESULTS -->
+  <p class="sectionText">
+    Mystarsnight Quick Search brings multiple useful sources into one
+    simple search experience.
+  </p>
 
-<section
-class="section"
-id="noResults"
-style="display:none"
->
+  <p class="sectionText">
+    Switch sources whenever you want to compare different types of
+    information.
+  </p>
 
-<h2>No close topic was found</h2>
-
-<p>
-Try using a shorter or more specific search. For example, instead of writing a
-full sentence, try the main topic or name.
-</p>
-
-<p>
-Examples: <strong>volcano</strong>, <strong>Python programming</strong>,
-<strong>Moon</strong>, or <strong>Ancient Rome</strong>.
-</p>
+  <div class="notice">
+    More sources and features are planned for future versions.
+  </div>
 
 </section>
 
+<section class="page" id="page-quality">
 
+  <h2 class="sectionTitle">Source Quality</h2>
 
-<!-- HOW -->
+  <p class="sectionText">
+    Different sources are useful for different types of searches.
+  </p>
 
-<section class="section" id="how">
+  <div class="resultGrid" style="margin-top:20px">
 
-<h2>How Mystarsnight Quick Search Works</h2>
+    <div class="card">
+      <h3>Wikipedia</h3>
+      <p>
+        General background information, people, places, events and concepts.
+      </p>
+    </div>
 
-<p>
-Mystarsnight Quick Search is designed to provide information directly on the
-website instead of immediately sending visitors somewhere else.
-</p>
+    <div class="card">
+      <h3>PubMed</h3>
+      <p>
+        Scientific and medical research literature.
+      </p>
+    </div>
 
-<div class="steps">
+    <div class="card">
+      <h3>arXiv</h3>
+      <p>
+        Research papers in areas including computer science,
+        mathematics and physics.
+      </p>
+    </div>
 
-<div class="step">
+    <div class="card">
+      <h3>NASA</h3>
+      <p>
+        NASA-related images and media.
+      </p>
+    </div>
 
-<div class="step-number">
-1
-</div>
+    <div class="card">
+      <h3>GitHub</h3>
+      <p>
+        Open-source software repositories and developer projects.
+      </p>
+    </div>
 
-<h3>Search a topic</h3>
+    <div class="card">
+      <h3>Library of Congress</h3>
+      <p>
+        Historical, cultural and archival material.
+      </p>
+    </div>
 
-<p>
-Enter a subject, person, place, technology, object, scientific idea or other
-topic you want to explore.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">
-2
-</div>
-
-<h3>Find a close match</h3>
-
-<p>
-The website searches for matching public topic pages and selects a useful
-starting point.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">
-3
-</div>
-
-<h3>Explore on Mystarsnight</h3>
-
-<p>
-Read an overview, inspect key ideas and select related topics without being
-automatically redirected away from the website.
-</p>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
+<section class="page" id="page-contact">
 
+  <h2 class="sectionTitle">Contact</h2>
 
-<!-- FEATURES -->
+  <p class="sectionText">
+    Questions, suggestions, source requests or bug reports can be sent to:
+  </p>
 
-<section class="section">
-
-<h2>What You Can Do Here</h2>
-
-<div class="feature-grid">
-
-<div class="feature">
-
-<h3>Topic Overviews</h3>
-
-<p>
-Read a live overview of the topic you searched for.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>Related Exploration</h3>
-
-<p>
-Move between connected topics to build a broader understanding.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>Search Again</h3>
-
-<p>
-Ask more specific questions or explore completely different subjects.
-</p>
-
-</div>
-
-</div>
+  <div class="card" style="margin-top:20px">
+    <h3>starsnighthelp@gmail.com</h3>
+  </div>
 
 </section>
 
+<section class="page" id="page-privacy">
 
+  <h2 class="sectionTitle">Privacy</h2>
 
-<!-- ORIGINAL SITE CONTENT -->
+  <p class="sectionText">
+    Search history and saved results are stored locally in your browser.
+    Mystarsnight Quick Search does not require an account for these features.
+  </p>
 
-<section class="section" id="about">
-
-<h2>About Mystarsnight Quick Search</h2>
-
-<p>
-Mystarsnight Quick Search is an independent web tool designed to make online
-topic exploration more useful. Instead of treating a search as only a doorway
-to another website, the goal is to give visitors a clear starting point directly
-inside the Mystarsnight experience.
-</p>
-
-<p>
-A good search can lead to more questions. Someone researching space may become
-interested in planets, stars, galaxies or black holes. Someone learning
-programming may begin with a language and then explore projects, documentation
-and related technologies.
-</p>
-
-<p>
-The Topic Explorer is designed around this idea of discovery. Visitors can begin
-with one search, read an overview, and then choose related topics that interest
-them.
-</p>
-
-<h3>Why Topic Exploration Matters</h3>
-
-<p>
-Finding a result is only one part of learning. Understanding what the result
-means, recognizing important ideas and knowing what to explore next can make a
-search more useful. Mystarsnight Quick Search organizes this process into a
-simple experience that encourages visitors to explore topics in their own way.
-</p>
-
-<h3>A Tool for Curious Visitors</h3>
-
-<p>
-The website can be used for general knowledge, technology, history, science,
-places, people and many other subjects. Each search is an opportunity to begin
-with a broad overview and then move toward more specific questions.
-</p>
+  <p class="sectionText">
+    Searches made against external sources are sent to the selected source
+    so that the source can provide results.
+  </p>
 
 </section>
 
+<section class="page" id="page-terms">
 
+  <h2 class="sectionTitle">Terms</h2>
 
-<!-- CONTACT -->
-
-<section class="section" id="contact">
-
-<h2>Contact</h2>
-
-<p>
-Questions, suggestions and feedback can help improve Mystarsnight Quick Search
-over time.
-</p>
-
-<div class="contact-box">
-
-<p>
-<strong>Email:</strong><br>
-<a href="mailto:starsnighthelp@gmail.com">
-starsnighthelp@gmail.com
-</a>
-</p>
-
-</div>
-
-<p>
-Please do not send passwords, payment information or other sensitive personal
-information by email.
-</p>
+  <p class="sectionText">
+    Mystarsnight Quick Search is provided as a search and research utility.
+    Information returned from third-party sources may change and should be
+    checked against the original source when accuracy is important.
+  </p>
 
 </section>
-
-
-
-<!-- PRIVACY -->
-
-<section class="section" id="privacy">
-
-<h2>Privacy Policy</h2>
-
-<p>
-Mystarsnight Quick Search allows visitors to enter topics for searching. Search
-requests are used to request matching public information from the data source
-used by the Topic Explorer.
-</p>
-
-<h3>Search Terms</h3>
-
-<p>
-When you search for a topic, your browser sends the search request to the
-public information service used to find matching pages. Mystarsnight Quick
-Search does not require visitors to create an account for basic topic searches.
-</p>
-
-<h3>External Sources</h3>
-
-<p>
-The website displays information obtained from external public sources. Those
-sources operate under their own terms, licenses and privacy practices.
-</p>
-
-<h3>Advertising</h3>
-
-<p>
-This website may use third-party advertising services. Such services may use
-cookies or similar technologies according to their own policies and applicable
-settings.
-</p>
-
-<h3>Local Browser Data</h3>
-
-<p>
-This version of Mystarsnight Quick Search does not require a user account to
-search topics.
-</p>
-
-<h3>Policy Updates</h3>
-
-<p>
-This Privacy Policy may change if the features or practices of Mystarsnight
-Quick Search change.
-</p>
-
-</section>
-
 
 </main>
-
-
-
-<footer>
-
-<div>
-© <span id="year"></span> Mystarsnight Quick Search
 </div>
 
-<div class="footer-links">
+<!-- SETTINGS -->
+<div class="modalBack" id="settingsModal">
 
-<a href="#home">Home</a>
-<a href="#how">How It Works</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-<a href="#privacy">Privacy</a>
+  <div class="modal">
+
+    <div class="modalHeader">
+
+      <h2>Settings</h2>
+
+      <button class="modalClose" id="closeSettings">
+        ×
+      </button>
+
+    </div>
+
+    <div class="settingsGrid">
+
+      <div class="settingCard">
+
+        <label for="themeSelect">
+          Theme
+        </label>
+
+        <select id="themeSelect">
+
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="midnight">Midnight</option>
+          <option value="ocean">Ocean</option>
+          <option value="forest">Forest</option>
+          <option value="rose">Rose</option>
+          <option value="sunset">Sunset</option>
+          <option value="slate">Slate</option>
+          <option value="purple">Purple</option>
+
+        </select>
+
+      </div>
+
+      <div class="settingCard">
+
+        <label for="defaultSourceSelect">
+          Default search source
+        </label>
+
+        <select id="defaultSourceSelect">
+
+          <option value="wikipedia">Wikipedia</option>
+          <option value="wiktionary">Wiktionary</option>
+          <option value="wikisource">Wikisource</option>
+          <option value="wikibooks">Wikibooks</option>
+          <option value="wikiversity">Wikiversity</option>
+          <option value="github">GitHub</option>
+          <option value="stackoverflow">Stack Overflow</option>
+          <option value="arxiv">arXiv</option>
+          <option value="pubmed">PubMed</option>
+          <option value="nasa">NASA</option>
+          <option value="archive">Internet Archive</option>
+          <option value="loc">Library of Congress</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="notice">
+      Settings and saved information are stored locally on this device.
+    </div>
+
+  </div>
 
 </div>
 
-</footer>
+<!-- ANNOUNCEMENT -->
+<div class="modalBack" id="announcementBack">
 
+  <div class="announcement" id="announcement">
 
+    <h2>Welcome to Mystarsnight Quick Search</h2>
+
+    <p>
+      There are a lot of AI-powered features planned for Mystarsnight,
+      along with more sources and improvements coming soon.
+    </p>
+
+    <div class="announcementActions">
+
+      <button class="actionBtn" id="announcementClose">
+        Continue
+      </button>
+
+      <button class="actionBtn" id="announcementNever">
+        Don't show again
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- COOKIE -->
+<div class="cookie" id="cookieBanner">
+
+  <p>
+    This site uses browser storage for history, saved results and settings.
+  </p>
+
+  <button id="cookieOk">
+    OK
+  </button>
+
+</div>
 
 <script>
+"use strict";
 
-/* =================================
-   CONFIGURATION
-================================= */
+const STORAGE={
+  theme:"msq_theme_v4",
+  source:"msq_source_v4",
+  history:"msq_history_v4",
+  saved:"msq_saved_v4",
+  sidebar:"msq_sidebar_v4",
+  announcement:"msq_announcement_v4",
+  cookies:"msq_cookie_v4"
+};
 
-const API_BASE =
-"https://en.wikipedia.org";
+const SOURCE_INFO={
+  wikipedia:{name:"Wikipedia",domain:"en.wikipedia.org",type:"wiki"},
+  wiktionary:{name:"Wiktionary",domain:"en.wiktionary.org",type:"wiki"},
+  wikisource:{name:"Wikisource",domain:"en.wikisource.org",type:"wiki"},
+  wikibooks:{name:"Wikibooks",domain:"en.wikibooks.org",type:"wiki"},
+  wikiversity:{name:"Wikiversity",domain:"en.wikiversity.org",type:"wiki"},
+  github:{name:"GitHub",domain:"github.com",type:"github"},
+  stackoverflow:{name:"Stack Overflow",domain:"stackoverflow.com",type:"stackoverflow"},
+  arxiv:{name:"arXiv",domain:"arxiv.org",type:"arxiv"},
+  pubmed:{name:"PubMed",domain:"pubmed.ncbi.nlm.nih.gov",type:"pubmed"},
+  nasa:{name:"NASA",domain:"images.nasa.gov",type:"nasa"},
+  archive:{name:"Internet Archive",domain:"archive.org",type:"archive"},
+  loc:{name:"Library of Congress",domain:"loc.gov",type:"loc"}
+};
 
+const THEMES={
+  light:{
+    bg:"#f4f7fb",
+    panel:"#fff",
+    panel2:"#f7f9fc",
+    text:"#172033",
+    muted:"#667085",
+    border:"#e3e8f0",
+    accent:"#3478f6",
+    accent2:"#6d5dfc"
+  },
+  dark:{
+    bg:"#10131a",
+    panel:"#181d27",
+    panel2:"#202632",
+    text:"#f2f5fa",
+    muted:"#9ba5b5",
+    border:"#2b3443",
+    accent:"#5b91ff",
+    accent2:"#8b7cff"
+  },
+  midnight:{
+    bg:"#070b16",
+    panel:"#0e1424",
+    panel2:"#151d31",
+    text:"#eef3ff",
+    muted:"#8995ad",
+    border:"#25314a",
+    accent:"#4d8dff",
+    accent2:"#755cff"
+  },
+  ocean:{
+    bg:"#eef8fb",
+    panel:"#fff",
+    panel2:"#edf7fa",
+    text:"#102a35",
+    muted:"#64808b",
+    border:"#d5e9ee",
+    accent:"#168bb5",
+    accent2:"#4376d9"
+  },
+  forest:{
+    bg:"#f0f7f2",
+    panel:"#fff",
+    panel2:"#edf6ef",
+    text:"#183124",
+    muted:"#688073",
+    border:"#d8e8dc",
+    accent:"#23845b",
+    accent2:"#4b8f50"
+  },
+  rose:{
+    bg:"#fff3f7",
+    panel:"#fff",
+    panel2:"#fff0f4",
+    text:"#351722",
+    muted:"#8a6873",
+    border:"#efd9e1",
+    accent:"#d64e78",
+    accent2:"#9d5ce0"
+  },
+  sunset:{
+    bg:"#fff6ef",
+    panel:"#fff",
+    panel2:"#fff1e7",
+    text:"#392319",
+    muted:"#896e60",
+    border:"#f0ddd0",
+    accent:"#e66a27",
+    accent2:"#d24f72"
+  },
+  slate:{
+    bg:"#edf0f3",
+    panel:"#fff",
+    panel2:"#e8edf1",
+    text:"#1c242d",
+    muted:"#65717d",
+    border:"#d6dde4",
+    accent:"#465f77",
+    accent2:"#6d718b"
+  },
+  purple:{
+    bg:"#f6f2ff",
+    panel:"#fff",
+    panel2:"#f1ecff",
+    text:"#281b3e",
+    muted:"#786b8c",
+    border:"#e2d9f5",
+    accent:"#7456d8",
+    accent2:"#a14fca"
+  }
+};
 
-/* =================================
-   ELEMENTS
-================================= */
+const ESPN_LEAGUES=[
+  ["football","nfl","NFL"],
+  ["basketball","nba","NBA"],
+  ["baseball","mlb","MLB"],
+  ["hockey","nhl","NHL"],
+  ["football","college-football","College Football"],
+  ["basketball","mens-college-basketball","College Basketball"],
+  ["soccer","eng.1","Premier League"],
+  ["soccer","esp.1","LaLiga"],
+  ["soccer","ger.1","Bundesliga"],
+  ["soccer","ita.1","Serie A"],
+  ["soccer","fra.1","Ligue 1"]
+];
 
-const searchInput =
-document.getElementById("searchInput");
+let currentTheme="light";
+let currentSource="wikipedia";
+let history=[];
+let saved=[];
+let isSearching=false;
 
-const searchButton =
-document.getElementById("searchButton");
+function $(id){
+  return document.getElementById(id);
+}
 
-const loading =
-document.getElementById("loading");
+function getStorage(key,fallback=null){
+  try{
+    const v=localStorage.getItem(key);
+    return v===null?fallback:v;
+  }catch(e){
+    return fallback;
+  }
+}
 
-const results =
-document.getElementById("results");
+function setStorage(key,value){
+  try{
+    localStorage.setItem(key,value);
+  }catch(e){}
+}
 
-const noResults =
-document.getElementById("noResults");
+function getJSON(key,fallback){
+  try{
+    const v=localStorage.getItem(key);
+    if(!v)return fallback;
 
-const topicTitle =
-document.getElementById("topicTitle");
+    const parsed=JSON.parse(v);
 
-const overviewText =
-document.getElementById("overviewText");
+    return parsed;
+  }catch(e){
+    return fallback;
+  }
+}
 
-const whatIsIt =
-document.getElementById("whatIsIt");
+function setJSON(key,value){
+  try{
+    localStorage.setItem(key,JSON.stringify(value));
+  }catch(e){}
+}
 
-const whyExplore =
-document.getElementById("whyExplore");
+function escapeHTML(value){
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-const keyIdeas =
-document.getElementById("keyIdeas");
+function safeURL(value){
+  try{
+    const u=new URL(value);
 
-const relatedTopics =
-document.getElementById("relatedTopics");
+    if(u.protocol==="http:"||u.protocol==="https:"){
+      return u.href;
+    }
+  }catch(e){}
 
-const imageContainer =
-document.getElementById("imageContainer");
+  return "#";
+}
 
-const sourceLink =
-document.getElementById("sourceLink");
+function truncate(text,max=300){
+  const s=String(text||"")
+    .replace(/\s+/g," ")
+    .trim();
 
+  if(s.length<=max)return s;
 
-/* =================================
-   EXAMPLE SEARCH
-================================= */
+  return s.slice(0,max-1)+"...";
+}
 
-function exampleSearch(query){
+function stripHTML(text){
+  const div=document.createElement("div");
+  div.innerHTML=String(text||"");
 
-    searchInput.value = query;
+  return div.textContent||div.innerText||"";
+}
 
-    performSearch();
+function formatDate(time){
+  try{
+    return new Date(time).toLocaleString();
+  }catch(e){
+    return "";
+  }
+}
+
+/* THEMES */
+
+function applyTheme(theme){
+
+  if(!THEMES[theme]){
+    theme="light";
+  }
+
+  currentTheme=theme;
+
+  const t=THEMES[theme];
+
+  Object.keys(t).forEach(key=>{
+    document.documentElement.style.setProperty(
+      "--"+key,
+      t[key]
+    );
+  });
+
+  if($("themeSelect")){
+    $("themeSelect").value=theme;
+  }
+
+  setStorage(STORAGE.theme,theme);
+}
+
+function cycleTheme(){
+
+  const names=Object.keys(THEMES);
+
+  const index=names.indexOf(currentTheme);
+
+  const next=names[
+    (index+1)%names.length
+  ];
+
+  applyTheme(next);
+}
+
+/* SIDEBAR */
+
+function setSidebar(open){
+
+  const sidebar=$("sidebar");
+  const overlay=$("sidebarOverlay");
+  const toggle=$("sidebarToggle");
+
+  if(!sidebar)return;
+
+  sidebar.classList.toggle("open",open);
+
+  if(overlay){
+    overlay.classList.toggle("show",open);
+  }
+
+  if(toggle){
+    toggle.textContent=open?"×":"☰";
+    toggle.setAttribute(
+      "aria-label",
+      open?"Close menu":"Open menu"
+    );
+  }
+
+  setStorage(
+    STORAGE.sidebar,
+    open?"1":"0"
+  );
+}
+
+function toggleSidebar(){
+
+  const sidebar=$("sidebar");
+
+  if(!sidebar)return;
+
+  setSidebar(
+    !sidebar.classList.contains("open")
+  );
+}
+
+/* NAVIGATION */
+
+function showPage(name){
+
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.toggle(
+      "active",
+      page.id==="page-"+name
+    );
+  });
+
+  document.querySelectorAll(".navBtn").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.page===name
+    );
+  });
+
+  setSidebar(false);
+
+  if(name==="history"){
+    renderHistory();
+  }
+
+  if(name==="saved"){
+    renderSaved();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+/* SOURCE */
+
+function selectSource(source){
+
+  if(source!=="games"&&!SOURCE_INFO[source]){
+    source="wikipedia";
+  }
+
+  currentSource=source;
+
+  setStorage(
+    STORAGE.source,
+    source
+  );
+
+  document.querySelectorAll(".sourceChip").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.source===source
+    );
+  });
+
+  if($("defaultSourceSelect")&&source!=="games"){
+    $("defaultSourceSelect").value=source;
+  }
+}
+
+/* HISTORY */
+
+function loadData(){
+
+  history=getJSON(
+    STORAGE.history,
+    []
+  );
+
+  saved=getJSON(
+    STORAGE.saved,
+    []
+  );
+
+  if(!Array.isArray(history)){
+    history=[];
+  }
+
+  if(!Array.isArray(saved)){
+    saved=[];
+  }
+}
+
+function addHistory(query,source){
+
+  if(!query)return;
+
+  history=history.filter(item=>!(
+    item.query.toLowerCase()===query.toLowerCase() &&
+    item.source===source
+  ));
+
+  history.unshift({
+    query,
+    source,
+    time:Date.now()
+  });
+
+  history=history.slice(0,50);
+
+  setJSON(
+    STORAGE.history,
+    history
+  );
+}
+
+function renderHistory(){
+
+  const box=$("historyList");
+
+  if(!box)return;
+
+  if(!history.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        No searches yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML=history.map((item,index)=>`
+
+    <div class="listItem">
+
+      <div class="listMain">
+
+        <div class="listTitle">
+          ${escapeHTML(item.query)}
+        </div>
+
+        <div class="listSub">
+          ${
+            item.source==="games"
+            ?"Live Games"
+            :(SOURCE_INFO[item.source]?.name||item.source)
+          }
+          ·
+          ${formatDate(item.time)}
+        </div>
+
+      </div>
+
+      <div class="cardActions">
+
+        <button
+          class="smallBtn primary"
+          data-history-search="${index}">
+          Search
+        </button>
+
+        <button
+          class="smallBtn danger"
+          data-history-delete="${index}">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+  box.querySelectorAll(
+    "[data-history-search]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        history[
+          Number(button.dataset.historySearch)
+        ];
+
+      if(!item)return;
+
+      $("searchInput").value=item.query;
+
+      selectSource(item.source);
+
+      showPage("search");
+
+      performSearch(item.query);
+    });
+
+  });
+
+  box.querySelectorAll(
+    "[data-history-delete]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      history.splice(
+        Number(button.dataset.historyDelete),
+        1
+      );
+
+      setJSON(
+        STORAGE.history,
+        history
+      );
+
+      renderHistory();
+    });
+
+  });
+}
+
+/* SAVED */
+
+function isSaved(result){
+
+  return saved.some(item=>
+    item.url===result.url &&
+    item.title===result.title
+  );
+}
+
+function saveResult(result){
+
+  if(!result)return;
+
+  if(isSaved(result)){
+
+    saved=saved.filter(item=>!(
+      item.url===result.url &&
+      item.title===result.title
+    ));
+
+  }else{
+
+    saved.unshift({
+      ...result,
+      savedAt:Date.now()
+    });
+
+  }
+
+  saved=saved.slice(0,100);
+
+  setJSON(
+    STORAGE.saved,
+    saved
+  );
+
+  renderSaved();
+}
+
+function renderSaved(){
+
+  const box=$("savedList");
+
+  if(!box)return;
+
+  if(!saved.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        Nothing saved yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML=saved.map((item,index)=>`
+
+    <div class="listItem">
+
+      <div class="listMain">
+
+        <div class="listTitle">
+          ${escapeHTML(item.title)}
+        </div>
+
+        <div class="listSub">
+          ${escapeHTML(item.sourceName||"")}
+          ·
+          ${formatDate(item.savedAt)}
+        </div>
+
+      </div>
+
+      <div class="cardActions">
+
+        <button
+          class="smallBtn primary"
+          data-open-saved="${index}">
+          Open
+        </button>
+
+        <button
+          class="smallBtn danger"
+          data-delete-saved="${index}">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+  box.querySelectorAll(
+    "[data-open-saved]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        saved[
+          Number(button.dataset.openSaved)
+        ];
+
+      if(item?.url){
+
+        window.open(
+          safeURL(item.url),
+          "_blank",
+          "noopener"
+        );
+
+      }
+
+    });
+
+  });
+
+  box.querySelectorAll(
+    "[data-delete-saved]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      saved.splice(
+        Number(button.dataset.deleteSaved),
+        1
+      );
+
+      setJSON(
+        STORAGE.saved,
+        saved
+      );
+
+      renderSaved();
+    });
+
+  });
+}
+
+/* FETCH */
+
+async function fetchJSON(url){
+
+  const controller=
+    new AbortController();
+
+  const timeout=
+    setTimeout(
+      ()=>controller.abort(),
+      14000
+    );
+
+  try{
+
+    const response=
+      await fetch(
+        url,
+        {
+          signal:controller.signal,
+          headers:{
+            "Accept":"application/json"
+          }
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        "HTTP "+response.status
+      );
+    }
+
+    return await response.json();
+
+  }finally{
+
+    clearTimeout(timeout);
+
+  }
+}
+
+/* WIKIMEDIA */
+
+async function searchWiki(source,query){
+
+  const domain=
+    SOURCE_INFO[source].domain;
+
+  const url=
+    "https://"+domain+
+    "/w/api.php?action=query"+
+    "&list=search"+
+    "&srsearch="+encodeURIComponent(query)+
+    "&srlimit=8"+
+    "&format=json"+
+    "&origin=*";
+
+  const data=
+    await fetchJSON(url);
+
+  const items=
+    data?.query?.search||[];
+
+  return items.map(item=>({
+
+    title:item.title,
+
+    snippet:
+      stripHTML(
+        item.snippet||""
+      ),
+
+    url:
+      "https://"+domain+
+      "/wiki/"+
+      encodeURIComponent(
+        item.title.replace(/ /g,"_")
+      ),
+
+    source,
+    sourceName:
+      SOURCE_INFO[source].name
+
+  }));
 
 }
 
+async function wikiOverview(source,title){
 
-/* =================================
-   MAIN SEARCH
-================================= */
+  const domain=
+    SOURCE_INFO[source].domain;
 
-async function performSearch(){
+  try{
 
-    const query =
-    searchInput.value.trim();
+    const url=
+      "https://"+domain+
+      "/w/api.php?action=query"+
+      "&prop=extracts"+
+      "&exintro=1"+
+      "&explaintext=1"+
+      "&redirects=1"+
+      "&titles="+encodeURIComponent(title)+
+      "&format=json"+
+      "&origin=*";
 
+    const data=
+      await fetchJSON(url);
 
-    if(!query){
+    const pages=
+      data?.query?.pages||{};
 
-        searchInput.focus();
+    const page=
+      Object.values(pages)[0];
 
-        return;
+    return page?.extract||"";
 
+  }catch(e){
+
+    return "";
+
+  }
+}
+
+/* GITHUB */
+
+async function searchGitHub(query){
+
+  const url=
+    "https://api.github.com/search/repositories"+
+    "?q="+encodeURIComponent(query)+
+    "&per_page=8";
+
+  const data=
+    await fetchJSON(url);
+
+  return (data.items||[]).map(item=>({
+
+    title:item.full_name,
+
+    snippet:
+      item.description||
+      "GitHub repository.",
+
+    url:item.html_url,
+
+    source:"github",
+
+    sourceName:"GitHub",
+
+    meta:
+      "Stars: "+
+      (item.stargazers_count||0)+
+      " · "+
+      (item.language||"No language")
+
+  }));
+
+}
+
+/* STACK OVERFLOW */
+
+async function searchStackOverflow(query){
+
+  const url=
+    "https://api.stackexchange.com/2.3/search/advanced"+
+    "?order=desc"+
+    "&sort=relevance"+
+    "&site=stackoverflow"+
+    "&pagesize=8"+
+    "&q="+encodeURIComponent(query);
+
+  const data=
+    await fetchJSON(url);
+
+  return (data.items||[]).map(item=>({
+
+    title:item.title,
+
+    snippet:
+      "Answers: "+
+      (item.answer_count||0)+
+      " · Score: "+
+      (item.score||0),
+
+    url:item.link,
+
+    source:"stackoverflow",
+
+    sourceName:"Stack Overflow"
+
+  }));
+
+}
+
+/* ARXIV */
+
+function xmlText(parent,tag){
+
+  const node=
+    parent.getElementsByTagName(tag)[0];
+
+  return node?
+    (node.textContent||"").trim():
+    "";
+
+}
+
+async function searchArxiv(query){
+
+  const url=
+    "https://export.arxiv.org/api/query"+
+    "?search_query=all:"+
+    encodeURIComponent(query)+
+    "&start=0"+
+    "&max_results=8";
+
+  const response=
+    await fetch(url);
+
+  if(!response.ok){
+    throw new Error(
+      "arXiv HTTP "+response.status
+    );
+  }
+
+  const text=
+    await response.text();
+
+  const xml=
+    new DOMParser()
+      .parseFromString(
+        text,
+        "application/xml"
+      );
+
+  return Array.from(
+    xml.getElementsByTagName("entry")
+  ).map(entry=>({
+
+    title:
+      xmlText(entry,"title")
+      .replace(/\s+/g," "),
+
+    snippet:
+      truncate(
+        xmlText(entry,"summary")
+        .replace(/\s+/g," "),
+        300
+      ),
+
+    url:
+      xmlText(entry,"id"),
+
+    source:"arxiv",
+
+    sourceName:"arXiv"
+
+  }));
+
+}
+
+/* PUBMED */
+
+async function searchPubMed(query){
+
+  const searchURL=
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"+
+    "?db=pubmed"+
+    "&retmode=json"+
+    "&retmax=8"+
+    "&term="+encodeURIComponent(query);
+
+  const searchData=
+    await fetchJSON(searchURL);
+
+  const ids=
+    searchData?.esearchresult?.idlist||[];
+
+  if(!ids.length){
+    return [];
+  }
+
+  const summaryURL=
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"+
+    "?db=pubmed"+
+    "&retmode=json"+
+    "&id="+ids.join(",");
+
+  const summary=
+    await fetchJSON(summaryURL);
+
+  return ids.map(id=>{
+
+    const item=
+      summary?.result?.[id]||{};
+
+    return {
+
+      title:
+        item.title||
+        ("PubMed article "+id),
+
+      snippet:
+        item.sortfirstauthor
+          ?"Author: "+item.sortfirstauthor
+          :"PubMed research article",
+
+      url:
+        "https://pubmed.ncbi.nlm.nih.gov/"+
+        id+"/",
+
+      source:"pubmed",
+
+      sourceName:"PubMed"
+
+    };
+
+  });
+
+}
+
+/* NASA */
+
+async function searchNASA(query){
+
+  const url=
+    "https://images-api.nasa.gov/search"+
+    "?q="+encodeURIComponent(query)+
+    "&media_type=image";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.collection?.items||[]
+  ).slice(0,8).map(item=>{
+
+    const info=
+      item.data?.[0]||{};
+
+    const preview=
+      item.links?.find(
+        x=>x.rel==="preview"
+      );
+
+    return {
+
+      title:
+        info.title||
+        "NASA image",
+
+      snippet:
+        truncate(
+          info.description||
+          "NASA image and media result.",
+          300
+        ),
+
+      url:
+        item.href||
+        "https://images.nasa.gov/",
+
+      image:
+        preview?.href||"",
+
+      source:"nasa",
+
+      sourceName:"NASA"
+
+    };
+
+  });
+
+}
+
+/* INTERNET ARCHIVE */
+
+async function searchArchive(query){
+
+  const url=
+    "https://archive.org/advancedsearch.php"+
+    "?q="+encodeURIComponent(query)+
+    "&fl[]=identifier"+
+    "&fl[]=title"+
+    "&fl[]=description"+
+    "&rows=8"+
+    "&page=1"+
+    "&output=json";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.response?.docs||[]
+  ).map(item=>{
+
+    const identifier=
+      item.identifier;
+
+    return {
+
+      title:
+        item.title||
+        identifier,
+
+      snippet:
+        truncate(
+          Array.isArray(item.description)
+            ?item.description.join(" ")
+            :(item.description||
+              "Internet Archive item"),
+          300
+        ),
+
+      url:
+        "https://archive.org/details/"+
+        encodeURIComponent(identifier),
+
+      source:"archive",
+
+      sourceName:"Internet Archive"
+
+    };
+
+  });
+
+}
+
+/* LIBRARY OF CONGRESS */
+
+async function searchLOC(query){
+
+  const url=
+    "https://www.loc.gov/search/"+
+    "?q="+encodeURIComponent(query)+
+    "&fo=json"+
+    "&c=8";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.results||[]
+  ).map(item=>({
+
+    title:
+      item.title||
+      "Library of Congress result",
+
+    snippet:
+      truncate(
+        item.description||
+        "Library of Congress collection item.",
+        300
+      ),
+
+    url:
+      item.id||
+      "https://www.loc.gov/",
+
+    source:"loc",
+
+    sourceName:"Library of Congress"
+
+  }));
+
+}
+
+/* ESPN GAME SEARCH */
+
+async function getGamesFromLeague(
+  sport,
+  league,
+  label
+){
+
+  const url=
+    "https://site.api.espn.com/apis/site/v2/sports/"+
+    sport+"/"+league+"/scoreboard";
+
+  try{
+
+    const data=
+      await fetchJSON(url);
+
+    return (data.events||[]).map(event=>{
+
+      const competition=
+        event.competitions?.[0];
+
+      const competitors=
+        competition?.competitors||[];
+
+      const teams=
+        competitors.map(team=>({
+
+          name:
+            team.team?.displayName||
+            team.team?.shortDisplayName||
+            "Team",
+
+          score:
+            team.score??"",
+
+          abbreviation:
+            team.team?.abbreviation||
+            ""
+
+        }));
+
+      return {
+
+        league:label,
+
+        name:
+          event.name||"",
+
+        teams,
+
+        status:
+          event.status?.type?.shortDetail||
+          event.status?.type?.detail||
+          "Scheduled",
+
+        state:
+          event.status?.type?.state||
+          "pre",
+
+        date:
+          event.date||"",
+
+        url:
+          "https://www.espn.com/"
+
+      };
+
+    });
+
+  }catch(error){
+
+    console.warn(
+      "Could not load "+label,
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+function gameMatchesQuery(game,query){
+
+  const q=
+    query.toLowerCase()
+    .trim();
+
+  if(!q)return true;
+
+  const text=[
+    game.league,
+    game.name,
+    ...(game.teams||[]).map(team=>team.name),
+    ...(game.teams||[]).map(team=>team.abbreviation)
+  ]
+  .join(" ")
+  .toLowerCase();
+
+  const words=
+    q.split(/\s+/)
+    .filter(Boolean);
+
+  return words.every(word=>
+    text.includes(word)
+  );
+}
+
+async function searchGames(query){
+
+  const responses=
+    await Promise.all(
+      ESPN_LEAGUES.map(item=>
+        getGamesFromLeague(
+          item[0],
+          item[1],
+          item[2]
+        )
+      )
+    );
+
+  let games=
+    responses.flat();
+
+  const matched=
+    games.filter(
+      game=>gameMatchesQuery(game,query)
+    );
+
+  games=matched;
+
+  games.sort((a,b)=>{
+
+    if(a.state==="in"&&b.state!=="in"){
+      return -1;
     }
 
+    if(a.state!=="in"&&b.state==="in"){
+      return 1;
+    }
 
-    hideAllResults();
+    return new Date(a.date||0)-
+           new Date(b.date||0);
 
-    loading.style.display = "block";
+  });
 
-    searchButton.disabled = true;
+  return games.slice(0,30);
 
-    searchButton.textContent = "Searching...";
+}
 
+function renderGameResults(games,query){
+
+  const box=$("results");
+
+  if(!box)return;
+
+  if(!games.length){
+
+    box.innerHTML=`
+
+      <div class="empty">
+
+        <strong>No matching games found.</strong>
+
+        <br><br>
+
+        Try a team, league or sport name.
+
+        <br><br>
+
+        Examples: Lakers, Yankees, Chiefs, NFL, NBA, MLB
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  const best=games[0];
+
+  const bestTeams=best.teams||[];
+
+  box.innerHTML=`
+
+    <div class="card bestCard">
+
+      <span class="bestBadge">
+        BEST MATCH
+      </span>
+
+      <h3 class="bestTitle">
+        ${escapeHTML(best.name)}
+      </h3>
+
+      <div class="bestOverview">
+
+        ${bestTeams.map(team=>`
+
+          <div class="team">
+
+            <span>
+              ${escapeHTML(team.name)}
+            </span>
+
+            <span class="teamScore">
+              ${escapeHTML(team.score)}
+            </span>
+
+          </div>
+
+        `).join("")}
+
+        <div class="gameStatus">
+          ${escapeHTML(best.league)}
+          ·
+          ${escapeHTML(best.status)}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="resultGrid">
+
+      ${games.slice(1).map(game=>`
+
+        <div class="card">
+
+          <div class="cardMeta">
+            ${escapeHTML(game.league)}
+          </div>
+
+          <h3>
+            ${escapeHTML(game.name)}
+          </h3>
+
+          ${(game.teams||[]).map(team=>`
+
+            <div class="team">
+
+              <span>
+                ${escapeHTML(team.name)}
+              </span>
+
+              <span class="teamScore">
+                ${escapeHTML(team.score)}
+              </span>
+
+            </div>
+
+          `).join("")}
+
+          <div class="gameStatus">
+            ${escapeHTML(game.status)}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+}
+
+/* MAIN SEARCH */
+
+async function performSearch(rawQuery){
+
+  const query=
+    String(rawQuery||"").trim();
+
+  if(!query)return;
+
+  if(isSearching)return;
+
+  isSearching=true;
+
+  addHistory(
+    query,
+    currentSource
+  );
+
+  const status=$("status");
+  const results=$("results");
+
+  if(currentSource==="games"){
+
+    if(status){
+      status.textContent=
+        "Searching live and scheduled games for "+
+        query+"...";
+    }
+
+    results.innerHTML=`
+
+      <div class="loading">
+
+        <div class="spinner"></div>
+
+        Searching games...
+
+      </div>
+
+    `;
 
     try{
 
+      const games=
+        await searchGames(query);
 
-        /* Search Wikipedia */
+      if(games.length){
 
-        const searchURL =
-        API_BASE +
-        "/w/rest.php/v1/search/page?q=" +
-        encodeURIComponent(query) +
-        "&limit=8";
+        status.textContent=
+          games.length+
+          " matching game"+
+          (games.length===1?"":"s")+
+          " found.";
 
+      }else{
 
-        const searchResponse =
-        await fetch(searchURL);
+        status.textContent=
+          "No matching games found.";
 
+      }
 
-        if(!searchResponse.ok){
-
-            throw new Error("Search failed");
-
-        }
-
-
-        const searchData =
-        await searchResponse.json();
-
-
-        const pages =
-        searchData.pages || [];
-
-
-        if(!pages.length){
-
-            showNoResults();
-
-            return;
-
-        }
-
-
-        /* Best matching page */
-
-        const bestPage =
-        pages[0];
-
-
-        const title =
-        bestPage.title;
-
-
-        /*
-        Get live page summary.
-        This is separate from the search endpoint.
-        */
-
-        const summaryURL =
-        API_BASE +
-        "/api/rest_v1/page/summary/" +
-        encodeURIComponent(
-        title.replace(/ /g,"_")
-        );
-
-
-        const summaryResponse =
-        await fetch(summaryURL);
-
-
-        if(!summaryResponse.ok){
-
-            throw new Error(
-            "Could not load topic summary"
-            );
-
-        }
-
-
-        const summary =
-        await summaryResponse.json();
-
-
-        displayTopic(
-            query,
-            title,
-            summary,
-            pages
-        );
-
-
-    }
-
-
-    catch(error){
-
-        console.error(error);
-
-        showNoResults();
-
-    }
-
-
-    finally{
-
-        loading.style.display = "none";
-
-        searchButton.disabled = false;
-
-        searchButton.textContent = "Explore";
-
-    }
-
-}
-
-
-
-/* =================================
-   DISPLAY TOPIC
-================================= */
-
-function displayTopic(
-query,
-title,
-summary,
-pages
-){
-
-
-    results.style.display =
-    "block";
-
-
-    topicTitle.textContent =
-    summary.title || title;
-
-
-    const extract =
-    summary.extract ||
-    "A detailed overview was not available for this topic.";
-
-
-    overviewText.textContent =
-    extract;
-
-
-    whatIsIt.textContent =
-    makeWhatIsIt(
-        summary.title || title,
-        summary.description,
-        extract
-    );
-
-
-    whyExplore.textContent =
-    makeWhyExplore(
-        summary.title || title,
-        extract
-    );
-
-
-    displayImage(summary);
-
-
-    displayKeyIdeas(
-        query,
-        summary.title || title,
-        summary.description,
-        extract
-    );
-
-
-    displayRelatedTopics(
-        pages,
-        title
-    );
-
-
-    const sourceURL =
-    summary.content_urls &&
-    summary.content_urls.desktop &&
-    summary.content_urls.desktop.page
-    ? summary.content_urls.desktop.page
-    : "https://en.wikipedia.org/wiki/" +
-      encodeURIComponent(
-      title.replace(/ /g,"_")
+      renderGameResults(
+        games,
+        query
       );
 
+    }catch(error){
 
-    sourceLink.href =
-    sourceURL;
+      console.error(error);
 
+      status.textContent=
+        "Game search could not be completed.";
 
-    setTimeout(() => {
+      results.innerHTML=`
 
-        results.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
+        <div class="empty">
 
-    },100);
+          The game sources could not be reached.
+          Try again in a moment.
 
-}
+        </div>
 
+      `;
 
+    }finally{
 
-/* =================================
-   WHAT IS IT
-================================= */
-
-function makeWhatIsIt(
-title,
-description,
-extract
-){
-
-    if(description){
-
-        return (
-        title +
-        " is described as " +
-        description +
-        "."
-        );
+      isSearching=false;
 
     }
 
+    return;
+  }
 
-    const firstSentence =
-    getFirstSentence(extract);
+  const sourceName=
+    SOURCE_INFO[currentSource].name;
 
+  if(status){
+    status.textContent=
+      "Searching "+sourceName+"...";
+  }
 
-    return firstSentence;
+  results.innerHTML=`
 
-}
+    <div class="loading">
 
+      <div class="spinner"></div>
 
+      Searching ${escapeHTML(sourceName)}...
 
-/* =================================
-   WHY EXPLORE
-================================= */
+    </div>
 
-function makeWhyExplore(
-title,
-extract
-){
+  `;
 
-    const words =
-    extract
-    .split(/\s+/)
-    .length;
+  try{
 
+    let resultsData=[];
 
-    if(words > 20){
+    switch(currentSource){
 
-        return (
-        "Exploring " +
-        title +
-        " can help you understand related ideas and discover more specific questions to research next."
-        );
+      case "wikipedia":
+      case "wiktionary":
+      case "wikisource":
+      case "wikibooks":
+      case "wikiversity":
+        resultsData=
+          await searchWiki(
+            currentSource,
+            query
+          );
+        break;
+
+      case "github":
+        resultsData=
+          await searchGitHub(query);
+        break;
+
+      case "stackoverflow":
+        resultsData=
+          await searchStackOverflow(query);
+        break;
+
+      case "arxiv":
+        resultsData=
+          await searchArxiv(query);
+        break;
+
+      case "pubmed":
+        resultsData=
+          await searchPubMed(query);
+        break;
+
+      case "nasa":
+        resultsData=
+          await searchNASA(query);
+        break;
+
+      case "archive":
+        resultsData=
+          await searchArchive(query);
+        break;
+
+      case "loc":
+        resultsData=
+          await searchLOC(query);
+        break;
 
     }
 
+    if(!resultsData.length){
 
-    return (
-    "Use this topic as a starting point and explore connected subjects for more detail."
+      status.textContent=
+        "No results found.";
+
+      results.innerHTML=`
+
+        <div class="empty">
+
+          <strong>No results found.</strong>
+
+          <br><br>
+
+          Try a different search or switch sources.
+
+        </div>
+
+      `;
+
+      return;
+    }
+
+    status.textContent=
+      resultsData.length+
+      " result"+
+      (resultsData.length===1?"":"s")+
+      " found from "+
+      sourceName+".";
+
+    window.currentResults=
+      resultsData;
+
+    let overview="";
+
+    if(currentSource==="wikipedia"||
+       currentSource==="wiktionary"||
+       currentSource==="wikisource"||
+       currentSource==="wikibooks"||
+       currentSource==="wikiversity"){
+
+      overview=
+        await wikiOverview(
+          currentSource,
+          resultsData[0].title
+        );
+
+      if(overview){
+        resultsData[0].overview=
+          overview;
+      }
+    }
+
+    renderNormalResults(
+      resultsData,
+      query
     );
 
+  }catch(error){
+
+    console.error(error);
+
+    status.textContent=
+      "The source could not be reached.";
+
+    results.innerHTML=`
+
+      <div class="empty">
+
+        <strong>Search could not be completed.</strong>
+
+        <br><br>
+
+        The selected source may be temporarily unavailable
+        or may block browser requests.
+
+        <br><br>
+
+        Try another source.
+
+      </div>
+
+    `;
+
+  }finally{
+
+    isSearching=false;
+
+  }
 }
 
+function renderNormalResults(resultsData,query){
 
+  const box=$("results");
 
-/* =================================
-   IMAGE
-================================= */
+  const best=resultsData[0];
 
-function displayImage(summary){
+  const overview=
+    best.overview||
+    best.snippet||
+    "No overview was returned by this source.";
 
-    imageContainer.innerHTML = "";
+  box.innerHTML=`
 
+    <div class="card bestCard">
 
-    if(
-        summary.thumbnail &&
-        summary.thumbnail.source
-    ){
+      <span class="bestBadge">
+        BEST MATCH
+      </span>
 
-        const image =
-        document.createElement("img");
+      <h3 class="bestTitle">
+        ${escapeHTML(best.title)}
+      </h3>
 
+      <div class="bestOverview">
+        ${escapeHTML(overview)}
+      </div>
 
-        image.className =
-        "topic-image";
+      <div class="cardMeta">
+        ${escapeHTML(best.sourceName||"")}
+      </div>
 
+      <div class="cardActions">
 
-        image.src =
-        summary.thumbnail.source;
+        <button
+          class="smallBtn primary"
+          id="bestOpenBtn">
+          Open Result
+        </button>
 
+        <button
+          class="smallBtn"
+          id="bestSaveBtn">
+          ${isSaved(best)?"Saved":"Save"}
+        </button>
 
-        image.alt =
-        summary.title || "Topic image";
+      </div>
 
+    </div>
 
-        imageContainer.appendChild(
-        image
+    <div class="resultGrid">
+
+      ${resultsData.slice(1).map((item,index)=>`
+
+        <div class="card">
+
+          <h3>
+            ${escapeHTML(item.title)}
+          </h3>
+
+          ${
+            item.image
+            ?`
+              <img
+                src="${safeURL(item.image)}"
+                alt=""
+                loading="lazy"
+                style="
+                  width:100%;
+                  max-height:180px;
+                  object-fit:cover;
+                  border-radius:11px;
+                  margin:4px 0 10px
+                "
+                onerror="this.style.display='none'"
+              >
+            `
+            :""
+          }
+
+          <p>
+            ${escapeHTML(
+              item.snippet||
+              "No description available."
+            )}
+          </p>
+
+          <div class="cardMeta">
+            ${escapeHTML(
+              item.meta||
+              item.sourceName||
+              ""
+            )}
+          </div>
+
+          <div class="cardActions">
+
+            <button
+              class="smallBtn primary"
+              data-open-result="${index+1}">
+              Open
+            </button>
+
+            <button
+              class="smallBtn"
+              data-save-result="${index+1}">
+              ${isSaved(item)?"Saved":"Save"}
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+  $("bestOpenBtn")?.addEventListener(
+    "click",
+    ()=>{
+      if(best.url){
+        window.open(
+          safeURL(best.url),
+          "_blank",
+          "noopener"
+        );
+      }
+    }
+  );
+
+  $("bestSaveBtn")?.addEventListener(
+    "click",
+    ()=>{
+      saveResult(best);
+
+      $("bestSaveBtn").textContent=
+        isSaved(best)
+        ?"Saved"
+        :"Save";
+    }
+  );
+
+  box.querySelectorAll(
+    "[data-open-result]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        resultsData[
+          Number(button.dataset.openResult)
+        ];
+
+      if(item?.url){
+
+        window.open(
+          safeURL(item.url),
+          "_blank",
+          "noopener"
         );
 
+      }
 
-    }
+    });
 
-    else{
+  });
 
-        const noImage =
-        document.createElement("div");
+  box.querySelectorAll(
+    "[data-save-result]"
+  ).forEach(button=>{
 
+    button.addEventListener("click",()=>{
 
-        noImage.className =
-        "no-image";
+      const item=
+        resultsData[
+          Number(button.dataset.saveResult)
+        ];
 
+      if(!item)return;
 
-        noImage.textContent =
-        "No topic image was available for this result.";
+      saveResult(item);
 
+      button.textContent=
+        isSaved(item)
+        ?"Saved"
+        :"Save";
 
-        imageContainer.appendChild(
-        noImage
-        );
+    });
 
-    }
+  });
 
 }
 
+/* SETTINGS */
 
+function openSettings(){
+  $("settingsModal")?.classList.add("show");
+}
 
-/* =================================
-   KEY IDEAS
-================================= */
+function closeSettings(){
+  $("settingsModal")?.classList.remove("show");
+}
 
-function displayKeyIdeas(
-query,
-title,
-description,
-extract
+/* ANNOUNCEMENT */
+
+function setupAnnouncement(){
+
+  if(
+    getStorage(
+      STORAGE.announcement,
+      "0"
+    )==="1"
+  ){
+    return;
+  }
+
+  $("announcementBack")
+    ?.classList.add("show");
+}
+
+function closeAnnouncement(){
+
+  $("announcementBack")
+    ?.classList.remove("show");
+
+}
+
+function neverShowAnnouncement(){
+
+  setStorage(
+    STORAGE.announcement,
+    "1"
+  );
+
+  closeAnnouncement();
+}
+
+/* COOKIE */
+
+function setupCookie(){
+
+  if(
+    getStorage(
+      STORAGE.cookies,
+      "0"
+    )==="1"
+  ){
+
+    $("cookieBanner")
+      .style.display="none";
+
+  }
+
+}
+
+function acceptCookie(){
+
+  setStorage(
+    STORAGE.cookies,
+    "1"
+  );
+
+  $("cookieBanner")
+    .style.display="none";
+
+}
+
+/* EVENTS */
+
+function setupEvents(){
+
+  $("sidebarToggle")
+    ?.addEventListener(
+      "click",
+      toggleSidebar
+    );
+
+  $("sidebarOverlay")
+    ?.addEventListener(
+      "click",
+      ()=>setSidebar(false)
+    );
+
+  document.querySelectorAll(
+    ".navBtn"
+  ).forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+        showPage(
+          button.dataset.page
+        );
+      }
+    );
+
+  });
+
+  $("themeBtn")
+    ?.addEventListener(
+      "click",
+      cycleTheme
+    );
+
+  $("settingsBtn")
+    ?.addEventListener(
+      "click",
+      openSettings
+    );
+
+  $("closeSettings")
+    ?.addEventListener(
+      "click",
+      closeSettings
+    );
+
+  $("settingsModal")
+    ?.addEventListener(
+      "click",
+      event=>{
+        if(
+          event.target===
+          $("settingsModal")
+        ){
+          closeSettings();
+        }
+      }
+    );
+
+  $("themeSelect")
+    ?.addEventListener(
+      "change",
+      event=>{
+        applyTheme(
+          event.target.value
+        );
+      }
+    );
+
+  $("defaultSourceSelect")
+    ?.addEventListener(
+      "change",
+      event=>{
+        selectSource(
+          event.target.value
+        );
+      }
+    );
+
+  document.querySelectorAll(
+    ".sourceChip"
+  ).forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+        selectSource(
+          button.dataset.source
+        );
+
+        const query=
+          $("searchInput")
+          ?.value
+          .trim();
+
+        if(query){
+          performSearch(query);
+        }
+      }
+    );
+
+  });
+
+  $("searchForm")
+    ?.addEventListener(
+      "submit",
+      event=>{
+
+        event.preventDefault();
+
+        const query=
+          $("searchInput")
+          ?.value
+          .trim();
+
+        if(query){
+          performSearch(query);
+        }
+
+      }
+    );
+
+  $("clearSearchBtn")
+    ?.addEventListener(
+      "click",
+      ()=>{
+
+        $("searchInput").value="";
+
+        $("status").textContent="";
+
+        $("results").innerHTML=`
+
+          <div class="empty">
+            Search for something to see results.
+          </div>
+
+        `;
+
+        $("searchInput").focus();
+
+      }
+    );
+
+  $("clearHistoryBtn")
+    ?.addEventListener(
+      "click",
+      ()=>{
+
+        history=[];
+
+        setJSON(
+          STORAGE.history,
+          history
+        );
+
+        renderHistory();
+
+      }
+    );
+
+  $("announcementClose")
+    ?.addEventListener(
+      "click",
+      closeAnnouncement
+    );
+
+  $("announcementNever")
+    ?.addEventListener(
+      "click",
+      neverShowAnnouncement
+    );
+
+  $("cookieOk")
+    ?.addEventListener(
+      "click",
+      acceptCookie
+    );
+
+  document.addEventListener(
+    "keydown",
+    event=>{
+
+      if(
+        event.key==="/" &&
+        document.activeElement?.tagName!=="INPUT" &&
+        document.activeElement?.tagName!=="TEXTAREA"
+      ){
+
+        event.preventDefault();
+
+        $("searchInput")?.focus();
+
+      }
+
+      if(event.key==="Escape"){
+
+        closeSettings();
+        closeAnnouncement();
+        setSidebar(false);
+
+      }
+
+    }
+  );
+
+}
+
+/* START */
+
+function startApp(){
+
+  try{
+
+    loadData();
+
+    const storedTheme=
+      getStorage(
+        STORAGE.theme,
+        "light"
+      );
+
+    applyTheme(
+      THEMES[storedTheme]
+      ?storedTheme
+      :"light"
+    );
+
+    const storedSource=
+      getStorage(
+        STORAGE.source,
+        "wikipedia"
+      );
+
+    selectSource(
+      storedSource==="games"||
+      SOURCE_INFO[storedSource]
+      ?storedSource
+      :"wikipedia"
+    );
+
+    setSidebar(false);
+
+    renderHistory();
+    renderSaved();
+
+    setupCookie();
+    setupAnnouncement();
+    setupEvents();
+
+  }catch(error){
+
+    console.error(
+      "Mystarsnight startup error:",
+      error
+    );
+
+  }
+
+}
+
+if(
+  document.readyState==="loading"
 ){
 
-    keyIdeas.innerHTML = "";
+  document.addEventListener(
+    "DOMContentLoaded",
+    startApp
+  );
 
+}else{
 
-    const ideas = [];
-
-
-    if(description){
-
-        ideas.push({
-
-            title:"Topic type",
-
-            text:description
-
-        });
-
-    }
-
-
-    const firstSentence =
-    getFirstSentence(extract);
-
-
-    if(firstSentence){
-
-        ideas.push({
-
-            title:"Main idea",
-
-            text:firstSentence
-
-        });
-
-    }
-
-
-    ideas.push({
-
-        title:"Explore further",
-
-        text:
-        "Search for specific questions about " +
-        title +
-        " to move from a broad overview into more detailed information."
-
-    });
-
-
-    ideas.forEach(idea => {
-
-
-        const card =
-        document.createElement("div");
-
-
-        card.className =
-        "key-card";
-
-
-        const heading =
-        document.createElement("h4");
-
-
-        heading.textContent =
-        idea.title;
-
-
-        const text =
-        document.createElement("p");
-
-
-        text.textContent =
-        idea.text;
-
-
-        card.appendChild(heading);
-
-        card.appendChild(text);
-
-        keyIdeas.appendChild(card);
-
-    });
+  startApp();
 
 }
-
-
-
-/* =================================
-   RELATED TOPICS
-================================= */
-
-function displayRelatedTopics(
-pages,
-currentTitle
-){
-
-    relatedTopics.innerHTML = "";
-
-
-    const related =
-    pages
-    .filter(page =>
-        page.title !== currentTitle
-    )
-    .slice(0,6);
-
-
-    if(!related.length){
-
-        const message =
-        document.createElement("p");
-
-
-        message.textContent =
-        "Search again using a more specific question to explore another angle of this topic.";
-
-
-        relatedTopics.appendChild(
-        message
-        );
-
-
-        return;
-
-    }
-
-
-    related.forEach(page => {
-
-
-        const button =
-        document.createElement("button");
-
-
-        button.className =
-        "related-card";
-
-
-        const title =
-        document.createElement("strong");
-
-
-        title.textContent =
-        page.title;
-
-
-        const description =
-        document.createElement("span");
-
-
-        description.textContent =
-        page.description ||
-        "Explore this related topic.";
-
-
-        button.appendChild(title);
-
-        button.appendChild(description);
-
-
-        button.onclick =
-        function(){
-
-            searchInput.value =
-            page.title;
-
-            performSearch();
-
-        };
-
-
-        relatedTopics.appendChild(
-        button
-        );
-
-    });
-
-}
-
-
-
-/* =================================
-   HELPERS
-================================= */
-
-function getFirstSentence(text){
-
-    if(!text){
-
-        return "";
-
-    }
-
-
-    const match =
-    text.match(/^.*?[.!?](?:\s|$)/);
-
-
-    if(match){
-
-        return match[0].trim();
-
-    }
-
-
-    return text;
-
-}
-
-
-
-function hideAllResults(){
-
-    results.style.display =
-    "none";
-
-
-    noResults.style.display =
-    "none";
-
-}
-
-
-
-function showNoResults(){
-
-    results.style.display =
-    "none";
-
-
-    noResults.style.display =
-    "block";
-
-
-    setTimeout(() => {
-
-        noResults.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-    },100);
-
-}
-
-
-
-/* =================================
-   ENTER KEY
-================================= */
-
-searchInput.addEventListener(
-"keydown",
-event => {
-
-    if(event.key === "Enter"){
-
-        performSearch();
-
-    }
-
-}
-);
-
-
-
-/* =================================
-   YEAR
-================================= */
-
-document
-.getElementById("year")
-.textContent =
-new Date().getFullYear();
-
 </script>
 
 </body>
