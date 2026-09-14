@@ -3,340 +3,996 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0d12">
-<title>ScreenDraw</title>
+<meta name="theme-color" content="#111827">
+<meta name="description" content="Mystarsnight Quick Search">
+<title>Mystarsnight Quick Search</title>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6476815184336114" crossorigin="anonymous"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+:root{
+  --bg:#f4f7fb;
+  --panel:#fff;
+  --panel2:#f7f9fc;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e3e8f0;
+  --accent:#3478f6;
+  --accent2:#6d5dfc;
+  --danger:#e5484d;
+  --success:#1c9c68;
+  --shadow:0 12px 35px rgba(20,35,60,.09);
 }
 
-html,body{
-  width:100%;
-  height:100%;
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
   margin:0;
-  overflow:hidden;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:#080a0f;
-  color:#fff;
+  min-height:100%;
+  font-family:"Fredoka",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:.25s;
 }
 
-button,input{
+button,input,select{
   font:inherit;
 }
 
-#app{
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
+button{
+  cursor:pointer;
 }
 
-#topbar{
-  height:70px;
-  min-height:70px;
+button:active{
+  transform:scale(.98);
+}
+
+.app{
+  min-height:100vh;
+}
+
+.header{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:50;
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  background:rgba(15,17,23,.97);
-  border-bottom:1px solid rgba(255,255,255,.09);
-  z-index:20;
+  gap:14px;
+  padding:10px 18px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 3px 18px rgba(0,0,0,.04);
+}
+
+.iconBtn{
+  width:44px;
+  height:44px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:var(--panel2);
+  color:var(--text);
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  transition:.2s;
+}
+
+.iconBtn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.brandArea{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+  flex:1;
 }
 
 .logo{
-  font-size:19px;
-  font-weight:800;
-  white-space:nowrap;
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  object-fit:cover;
+  pointer-events:none;
+  user-select:none;
 }
 
-.logo span{
-  color:#4d9cff;
-}
-
-#urlBox{
-  flex:1;
+.brand{
   min-width:0;
-  height:44px;
+}
+
+.brandTitle{
+  font-size:21px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.brandSub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.headerActions{
+  display:flex;
+  gap:8px;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:72px;
+  bottom:0;
+  width:275px;
+  z-index:45;
+  background:var(--panel);
+  border-right:1px solid var(--border);
+  padding:18px 13px;
+  overflow-y:auto;
+  transform:translateX(-100%);
+  transition:transform .25s ease;
+  box-shadow:8px 0 30px rgba(0,0,0,.06);
+}
+
+.sidebar.open{
+  transform:translateX(0);
+}
+
+.sidebarTitle{
+  padding:6px 10px 12px;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.navBtn{
+  width:100%;
+  padding:12px 13px;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  border-radius:12px;
+  text-align:left;
   display:flex;
   align-items:center;
-  background:#20242d;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:13px;
-  overflow:hidden;
+  gap:11px;
+  margin-bottom:4px;
+  transition:.18s;
 }
 
-#url{
-  width:100%;
-  height:100%;
-  padding:0 14px;
-  border:0;
-  outline:none;
-  background:transparent;
-  color:#fff;
-  font-size:15px;
+.navBtn:hover,
+.navBtn.active{
+  background:var(--panel2);
+  color:var(--accent);
 }
 
-#url::placeholder{
-  color:#89909d;
-}
-
-#go{
-  height:44px;
-  padding:0 18px;
-  border:0;
-  border-radius:12px;
-  background:#287cff;
-  color:#fff;
-  font-weight:800;
-  cursor:pointer;
-}
-
-#go:active{
-  transform:scale(.97);
-}
-
-#viewer{
-  position:relative;
+.navIcon{
+  width:auto;
+  min-width:0;
   flex:1;
-  min-height:0;
-  overflow:hidden;
-  background:#fff;
+  text-align:left;
 }
 
-#website{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+.navBtn > span:last-child{
+  display:none;
+}
+
+.sidebarOverlay{
+  display:none;
+  position:fixed;
+  inset:72px 0 0;
+  background:rgba(0,0,0,.3);
+  z-index:40;
+}
+
+.sidebarOverlay.show{
+  display:block;
+}
+
+.main{
+  max-width:1200px;
+  margin:0 auto;
+  padding:28px 18px 60px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* SUPPORT SECTIONS STAY ON THE MAIN PAGE */
+.supportPage{
+  display:block;
+  padding-top:75px;
+  scroll-margin-top:85px;
+}
+
+.hero{
+  text-align:center;
+  padding:22px 0 20px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(31px,6vw,54px);
+  letter-spacing:-.03em;
+}
+
+.hero p{
+  margin:9px auto 0;
+  max-width:650px;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.searchBox{
+  max-width:850px;
+  margin:25px auto 14px;
+  display:flex;
+  gap:9px;
+  padding:8px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+}
+
+.searchBox input{
+  flex:1;
+  min-width:0;
   border:0;
-  background:#fff;
-  z-index:1;
+  outline:0;
+  padding:13px 14px;
+  background:transparent;
+  color:var(--text);
+  font-size:17px;
 }
 
-/*
-  Drawing layer.
-  It starts enabled because Pen mode is the default.
-*/
-#drawCanvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:5;
-  touch-action:none;
-  pointer-events:auto;
+.searchBtn{
+  border:0;
+  border-radius:13px;
+  padding:0 22px;
+  background:var(--accent);
+  color:white;
+  font-weight:600;
 }
 
-/*
-  When Click mode is active, the website receives
-  the mouse/touch events instead.
-*/
-#viewer.clickMode #drawCanvas{
+.searchBtn:hover{
+  filter:brightness(.95);
+}
+
+.quickActions{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:12px 0 22px;
+}
+
+.actionBtn{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:12px;
+  padding:10px 15px;
+}
+
+.actionBtn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.sourceArea{
+  max-width:1050px;
+  margin:0 auto 18px;
+}
+
+.sourceLabel{
+  font-size:13px;
+  color:var(--muted);
+  margin:0 0 9px 2px;
+}
+
+.sources{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.sourceChip{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 13px;
+  transition:.18s;
+}
+
+.sourceChip:hover{
+  border-color:var(--accent);
+}
+
+.sourceChip.active{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+/* DISABLED ARXIV */
+.sourceChip.disabledSource{
+  color:#98a0ad;
+  background:#e8ebef;
+  border-color:#d8dce2;
+  cursor:not-allowed;
+  opacity:.65;
   pointer-events:none;
 }
 
-#toolbar{
-  position:absolute;
-  z-index:10;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:9px;
-  border-radius:17px;
-  background:rgba(18,21,28,.94);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 12px 40px rgba(0,0,0,.4);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+.sourceChip.liveGames{
+  width:45px;
+  height:45px;
+  padding:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:11px;
+  font-weight:600;
+  text-align:center;
+  line-height:1.05;
+  border:2px solid var(--accent2);
 }
 
-.tool{
-  width:43px;
-  height:43px;
-  border:0;
-  border-radius:11px;
-  background:#292e38;
-  color:#fff;
-  cursor:pointer;
+.sourceChip.liveGames.active{
+  background:var(--accent2);
+  color:white;
+  border-color:var(--accent2);
+}
+
+.status{
+  max-width:1050px;
+  margin:12px auto;
+  min-height:24px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.results{
+  max-width:1050px;
+  margin:auto;
+}
+
+.resultGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:18px;
+  box-shadow:0 7px 24px rgba(20,35,60,.045);
+}
+
+.card h3{
+  margin:0 0 7px;
   font-size:18px;
 }
 
-.tool:active{
-  transform:scale(.94);
+.card p{
+  color:var(--muted);
+  line-height:1.55;
+  margin:8px 0;
 }
 
-.tool.active{
-  background:#287cff;
+.cardMeta{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:12px;
 }
 
-#color{
-  width:43px;
-  height:43px;
-  padding:5px;
-  border:0;
-  border-radius:11px;
-  background:#292e38;
+.cardActions{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+  flex-wrap:wrap;
 }
 
-#size{
-  width:95px;
-  accent-color:#4d9cff;
+.smallBtn{
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  border-radius:10px;
+  padding:8px 11px;
 }
 
-#strokeInfo{
-  position:absolute;
-  z-index:11;
-  top:15px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:8px 14px;
+.smallBtn.primary{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.smallBtn.danger{
+  color:var(--danger);
+}
+
+.bestCard{
+  border:2px solid var(--accent);
+  margin-bottom:17px;
+  position:relative;
+  overflow:hidden;
+}
+
+.bestBadge{
+  display:inline-block;
+  background:var(--accent);
+  color:white;
   border-radius:999px;
-  background:rgba(15,17,23,.9);
-  border:1px solid rgba(255,255,255,.1);
-  color:#dce3ef;
-  font-size:13px;
-  font-weight:600;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .2s;
+  padding:5px 9px;
+  font-size:11px;
+  margin-bottom:9px;
 }
 
-#strokeInfo.show{
-  opacity:1;
+.bestTitle{
+  font-size:25px!important;
+  line-height:1.2;
 }
 
-#loading{
-  position:absolute;
-  inset:0;
-  z-index:30;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:#0c0f15;
+.bestOverview{
+  color:var(--text)!important;
+  font-size:16px;
+  line-height:1.75!important;
+  background:var(--panel2);
+  border-radius:13px;
+  padding:14px;
+  margin-top:13px!important;
 }
 
-.loaderBox{
+.loading{
+  padding:30px;
   text-align:center;
+  color:var(--muted);
 }
 
 .spinner{
-  width:42px;
-  height:42px;
-  margin:0 auto 14px;
-  border:4px solid rgba(255,255,255,.12);
-  border-top-color:#4d9cff;
+  width:31px;
+  height:31px;
+  margin:0 auto 10px;
+  border:3px solid var(--border);
+  border-top-color:var(--accent);
   border-radius:50%;
   animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg)}
 }
 
-#blocked{
-  position:absolute;
-  inset:0;
-  z-index:40;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-  background:#0b0e14;
-}
-
-.blockedCard{
-  width:min(470px,100%);
-  padding:30px;
+.empty{
   text-align:center;
-  border-radius:22px;
-  background:#151922;
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 20px 70px rgba(0,0,0,.4);
+  padding:40px 20px;
+  background:var(--panel);
+  border:1px dashed var(--border);
+  border-radius:17px;
+  color:var(--muted);
 }
 
-.blockedIcon{
-  width:65px;
-  height:65px;
-  margin:0 auto 18px;
+.sectionTitle{
+  font-size:30px;
+  margin:10px 0 7px;
+}
+
+.sectionText{
+  color:var(--muted);
+  line-height:1.65;
+  max-width:800px;
+}
+
+.list{
+  display:grid;
+  gap:11px;
+  margin-top:20px;
+}
+
+.listItem{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:15px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.listMain{
+  min-width:0;
+}
+
+.listTitle{
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.listSub{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.settingsGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.settingCard{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:17px;
+}
+
+.settingCard label{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.settingCard select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--panel2);
+  color:var(--text);
+  padding:10px;
+  outline:0;
+}
+
+.scoresHeader{
   display:flex;
   align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#292f3b;
-  font-size:29px;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.blockedCard h1{
-  margin:0 0 10px;
-  font-size:25px;
-}
-
-.blockedCard p{
-  margin:0;
-  color:#aab3c2;
-  line-height:1.55;
-}
-
-.blockedCard button{
+.scoreGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:13px;
   margin-top:20px;
-  padding:11px 18px;
-  border:0;
-  border-radius:11px;
-  background:#287cff;
-  color:#fff;
+}
+
+.gameCard{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+}
+
+.league{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.team{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:7px 0;
+  font-size:17px;
+}
+
+.teamScore{
+  font-size:22px;
   font-weight:700;
 }
 
-body.fullscreen #topbar{
+.gameStatus{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.gameSearchMatch{
+  border-color:var(--accent);
+}
+
+.modalBack{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modalBack.show{
+  display:flex;
+}
+
+.modal{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 25px 80px rgba(0,0,0,.2);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.modalHeader h2{
+  margin:0;
+}
+
+.modalClose{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:25px;
+}
+
+.announcement{
+  width:min(480px,calc(100% - 30px));
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:0 30px 100px rgba(0,0,0,.25);
+  padding:25px;
+}
+
+.announcement h2{
+  margin:0 0 10px;
+}
+
+.announcement p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.announcementActions{
+  display:flex;
+  gap:9px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.cookie{
+  position:fixed;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  z-index:90;
+  max-width:760px;
+  margin:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:14px 16px;
+  display:flex;
+  gap:13px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.cookie p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+
+.cookie button{
+  flex:none;
+  border:0;
+  border-radius:10px;
+  background:var(--accent);
+  color:white;
+  padding:9px 14px;
+}
+
+.notice{
+  padding:12px 14px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:13px;
+  color:var(--muted);
+  margin-top:15px;
+}
+
+/* BOTTOM AREA */
+.bottomArea{
+  margin-top:100px;
+  padding-top:40px;
+  border-top:1px solid var(--border);
+}
+
+.bottomTitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.bottomLinks{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.bottomLink{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--muted);
+  border-radius:10px;
+  padding:8px 12px;
+}
+
+.bottomLink:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* SECRET GAME */
+.secretGame{
+  margin-top:55px;
+  padding:22px;
+  border-radius:20px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+}
+
+.secretGameHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.secretGameHeader h3{
+  margin:0;
+}
+
+.gameHint{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.gameBoard{
+  position:relative;
+  width:100%;
+  height:340px;
+  overflow:hidden;
+  border-radius:16px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  touch-action:none;
+  user-select:none;
+}
+
+.playerDot{
+  position:absolute;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#3478f6;
+  box-shadow:0 4px 15px rgba(52,120,246,.35);
+  transform:translate(-50%,-50%);
+  z-index:3;
+  touch-action:none;
+}
+
+.enemyDot{
+  position:absolute;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#e5484d;
+  transform:translate(-50%,-50%);
+  z-index:2;
+}
+
+.gameOverlay{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.12);
+  pointer-events:none;
+  opacity:0;
+  transition:.2s;
+}
+
+.gameOverlay.show{
+  opacity:1;
+}
+
+.gameMessage{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.gameScore{
+  font-weight:600;
+}
+
+.gameControls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
+.secretTrigger{
+  display:block;
+  margin:30px auto 0;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  opacity:.45;
+}
+
+.secretTrigger:hover{
+  opacity:1;
+  color:var(--accent);
+}
+
+.secretGame.hiddenGame{
   display:none;
 }
 
-body.fullscreen #viewer{
-  position:fixed;
-  inset:0;
-  z-index:100;
+.adInfo{
+  margin-top:20px;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--panel2);
 }
 
-body.fullscreen #toolbar{
-  bottom:22px;
+.adInfo h3{
+  margin:0 0 8px;
 }
 
-@media(max-width:650px){
+.adInfo p{
+  color:var(--muted);
+  line-height:1.6;
+  margin:6px 0;
+}
 
-  #topbar{
-    height:62px;
-    min-height:62px;
-    padding:8px;
-    gap:7px;
+@media(max-width:700px){
+  .header{
+    height:64px;
+    padding:8px 11px;
   }
 
-  .logo{
+  .sidebar{
+    top:64px;
+    width:min(300px,88vw);
+  }
+
+  .sidebarOverlay{
+    inset:64px 0 0;
+  }
+
+  .brandTitle{
+    font-size:17px;
+  }
+
+  .brandSub{
     display:none;
   }
 
-  #urlBox{
-    height:44px;
+  .logo{
+    width:38px;
+    height:38px;
   }
 
-  #go{
-    padding:0 14px;
+  .headerActions .iconBtn{
+    width:40px;
+    height:40px;
   }
 
-  #toolbar{
-    bottom:12px;
-    max-width:calc(100% - 14px);
-    overflow-x:auto;
+  .main{
+    padding:18px 12px 45px;
   }
 
-  #size{
-    width:70px;
+  .hero{
+    padding-top:14px;
+  }
+
+  .searchBox{
+    border-radius:15px;
+  }
+
+  .searchBox input{
+    font-size:16px;
+    padding:11px 9px;
+  }
+
+  .searchBtn{
+    padding:0 15px;
+  }
+
+  .cookie{
+    align-items:flex-end;
+  }
+
+  .gameBoard{
+    height:300px;
+  }
+}
+
+@media(max-width:460px){
+  .brandArea{
+    gap:7px;
+  }
+
+  .brandTitle{
+    max-width:150px;
+  }
+
+  .searchBox{
+    flex-direction:column;
+  }
+
+  .searchBtn{
+    height:45px;
+  }
+
+  .cookie{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .cookie button{
+    width:100%;
   }
 }
 </style>
@@ -344,899 +1000,3155 @@ body.fullscreen #toolbar{
 
 <body>
 
-<div id="app">
+<div class="app">
 
-  <header id="topbar">
+<header class="header">
 
-    <div class="logo">
-      Screen<span>Draw</span>
+  <button class="iconBtn" id="sidebarToggle" aria-label="Open menu">☰</button>
+
+  <div class="brandArea">
+    <img
+      class="logo"
+      src="https://i.postimg.cc/sMhHs66p/IMG-1649.jpg"
+      alt="Mystarsnight"
+      draggable="false"
+    >
+
+    <div class="brand">
+      <div class="brandTitle">Mystarsnight Quick Search</div>
+      <div class="brandSub">Search more. Find better.</div>
+    </div>
+  </div>
+
+  <div class="headerActions">
+    <button class="iconBtn" id="themeBtn" title="Change theme">◐</button>
+    <button class="iconBtn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
+  </div>
+
+</header>
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebarTitle">Navigation</div>
+
+  <button class="navBtn active" data-page="search">
+    <span class="navIcon">Search</span>
+    <span>Search</span>
+  </button>
+
+  <button class="navBtn" data-page="history">
+    <span class="navIcon">History</span>
+    <span>History</span>
+  </button>
+
+  <button class="navBtn" data-page="saved">
+    <span class="navIcon">Saved</span>
+    <span>Saved</span>
+  </button>
+
+  <button class="navBtn" data-page="about">
+    <span class="navIcon">About</span>
+    <span>About</span>
+  </button>
+
+  <button class="navBtn" data-page="quality">
+    <span class="navIcon">Quality</span>
+    <span>Source Quality</span>
+  </button>
+
+  <button class="navBtn" data-page="contact">
+    <span class="navIcon">Contact</span>
+    <span>Contact</span>
+  </button>
+
+  <button class="navBtn" data-page="privacy">
+    <span class="navIcon">Privacy</span>
+    <span>Privacy</span>
+  </button>
+
+  <button class="navBtn" data-page="terms">
+    <span class="navIcon">Terms</span>
+    <span>Terms</span>
+  </button>
+
+</aside>
+
+<div class="sidebarOverlay" id="sidebarOverlay"></div>
+
+<main class="main">
+
+<section class="page active" id="page-search">
+
+  <div class="hero">
+    <h1>Search the web smarter.</h1>
+    <p>
+      Quickly Search Different Sources To Find The Best Result
+    </p>
+  </div>
+
+  <form class="searchBox" id="searchForm">
+
+    <input
+      id="searchInput"
+      type="search"
+      autocomplete="off"
+      placeholder="Search anything..."
+      aria-label="Search"
+    >
+
+    <button class="searchBtn" type="submit">
+      Search
+    </button>
+
+  </form>
+
+  <div class="quickActions">
+
+    <button class="actionBtn" id="clearSearchBtn">
+      Clear
+    </button>
+
+  </div>
+
+  <div class="sourceArea">
+
+    <div class="sourceLabel">
+      Search source
     </div>
 
-    <div id="urlBox">
-      <input
-        id="url"
-        type="text"
-        value="https://example.com"
-        placeholder="Enter a website..."
-        autocomplete="off"
-        autocapitalize="none"
-        spellcheck="false"
+    <div class="sources" id="sources">
+
+      <button class="sourceChip active" data-source="wikipedia">
+        Wikipedia
+      </button>
+
+      <button class="sourceChip" data-source="wiktionary">
+        Wiktionary
+      </button>
+
+      <button class="sourceChip" data-source="wikisource">
+        Wikisource
+      </button>
+
+      <button class="sourceChip" data-source="wikibooks">
+        Wikibooks
+      </button>
+
+      <button class="sourceChip" data-source="wikiversity">
+        Wikiversity
+      </button>
+
+      <button class="sourceChip" data-source="github">
+        GitHub
+      </button>
+
+      <button class="sourceChip" data-source="stackoverflow">
+        Stack Overflow
+      </button>
+
+      <button
+        class="sourceChip disabledSource"
+        data-source="arxiv"
+        disabled
+        title="arXiv is currently unavailable"
+        aria-disabled="true"
       >
-    </div>
+        arXiv
+      </button>
 
-    <button id="go">Go</button>
+      <button class="sourceChip" data-source="pubmed">
+        PubMed
+      </button>
 
-  </header>
+      <button class="sourceChip" data-source="nasa">
+        NASA
+      </button>
 
-  <main id="viewer">
+      <button class="sourceChip" data-source="archive">
+        Internet Archive
+      </button>
 
-    <iframe
-      id="website"
-      title="Website"
-      src="https://example.com"
-      allow="fullscreen"
-    ></iframe>
+      <button class="sourceChip" data-source="loc">
+        Library of Congress
+      </button>
 
-    <canvas id="drawCanvas"></canvas>
-
-    <div id="strokeInfo">
-      Drawing disappears after 7 seconds
-    </div>
-
-    <div id="toolbar">
-
-      <!-- CLICK MODE -->
       <button
-        class="tool"
-        id="clickMode"
-        title="Interact with website"
-      >☝</button>
-
-      <!-- PEN -->
-      <button
-        class="tool active"
-        id="pen"
-        title="Draw"
-      >✎</button>
-
-      <!-- ERASER -->
-      <button
-        class="tool"
-        id="eraser"
-        title="Erase drawing"
-      >⌫</button>
-
-      <!-- COLOR -->
-      <input
-        id="color"
-        type="color"
-        value="#ff2d55"
-        title="Color"
+        class="sourceChip liveGames"
+        data-source="games"
+        title="Search games"
+        aria-label="Live Games"
       >
-
-      <!-- SIZE -->
-      <input
-        id="size"
-        type="range"
-        min="2"
-        max="30"
-        value="6"
-        title="Brush size"
-      >
-
-      <!-- CLEAR -->
-      <button
-        class="tool"
-        id="clear"
-        title="Clear drawings"
-      >×</button>
-
-      <!-- FULLSCREEN -->
-      <button
-        class="tool"
-        id="fullscreen"
-        title="Fullscreen"
-      >⛶</button>
+        Games
+      </button>
 
     </div>
 
-    <div id="loading">
+  </div>
 
-      <div class="loaderBox">
-        <div class="spinner"></div>
-        <div>Loading website...</div>
+  <div class="status" id="status"></div>
+
+  <div class="results" id="results">
+
+    <div class="empty">
+      Search for something to see results.
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page" id="page-history">
+
+  <h2 class="sectionTitle">Search History</h2>
+
+  <div class="sectionText">
+    Your recent searches are stored only in this browser.
+  </div>
+
+  <div class="quickActions" style="justify-content:flex-start">
+
+    <button class="actionBtn" id="clearHistoryBtn">
+      Clear History
+    </button>
+
+  </div>
+
+  <div class="list" id="historyList"></div>
+
+</section>
+
+<section class="page" id="page-saved">
+
+  <h2 class="sectionTitle">Saved Results</h2>
+
+  <div class="sectionText">
+    Save useful results so you can find them again on this device.
+  </div>
+
+  <div class="list" id="savedList"></div>
+
+</section>
+
+<section class="page supportPage" id="page-about">
+
+  <h2 class="sectionTitle">About Mystarsnight Quick Search</h2>
+
+  <p class="sectionText">
+    Mystarsnight Quick Search brings multiple useful sources into one
+    simple search experience.
+  </p>
+
+  <p class="sectionText">
+    Switch sources whenever you want to compare different types of
+    information.
+  </p>
+
+  <div class="notice">
+    More sources and features are planned for future versions.
+  </div>
+
+</section>
+
+<section class="page supportPage" id="page-quality">
+
+  <h2 class="sectionTitle">Source Quality</h2>
+
+  <p class="sectionText">
+    Different sources are useful for different types of searches.
+  </p>
+
+  <div class="resultGrid" style="margin-top:20px">
+
+    <div class="card">
+      <h3>Wikipedia</h3>
+      <p>
+        General background information, people, places, events and concepts.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>PubMed</h3>
+      <p>
+        Scientific and medical research literature.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>arXiv</h3>
+      <p>
+        arXiv is currently unavailable as a selectable search source.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>NASA</h3>
+      <p>
+        NASA-related images and media.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>GitHub</h3>
+      <p>
+        Open-source software repositories and developer projects.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Library of Congress</h3>
+      <p>
+        Historical, cultural and archival material.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page supportPage" id="page-contact">
+
+  <h2 class="sectionTitle">Contact</h2>
+
+  <p class="sectionText">
+    Questions, suggestions, source requests or bug reports can be sent to:
+  </p>
+
+  <div class="card" style="margin-top:20px">
+    <h3>starsnighthelp@gmail.com</h3>
+  </div>
+
+</section>
+
+<section class="page supportPage" id="page-privacy">
+
+  <h2 class="sectionTitle">Privacy & Advertising</h2>
+
+  <p class="sectionText">
+    Search history, saved results and settings are stored locally in your
+    browser. Mystarsnight Quick Search does not require an account for these
+    features.
+  </p>
+
+  <p class="sectionText">
+    Searches made against external sources are sent to the selected source
+    so that the source can provide results.
+  </p>
+
+  <div class="adInfo">
+
+    <h3>Google Advertising</h3>
+
+    <p>
+      This site may display advertisements provided by Google. Google and
+      its advertising partners may use cookies or similar technologies to
+      help serve, measure and personalize advertising.
+    </p>
+
+    <p>
+      Advertising cookies may be used to help show ads that are more
+      relevant to visitors and to measure advertising performance.
+    </p>
+
+    <p>
+      Your browser may provide controls for managing cookies and
+      personalized advertising. You can also review Google's advertising
+      privacy information and controls through Google's own services.
+    </p>
+
+    <p>
+      Mystarsnight Quick Search does not sell your search history or saved
+      results.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="page supportPage" id="page-terms">
+
+  <h2 class="sectionTitle">Terms</h2>
+
+  <p class="sectionText">
+    Mystarsnight Quick Search is provided as a search and research utility.
+    Information returned from third-party sources may change and should be
+    checked against the original source when accuracy is important.
+  </p>
+
+</section>
+
+<!-- EVERYTHING FURTHER DOWN THE PAGE -->
+
+<div class="bottomArea">
+
+  <div class="bottomTitle">
+    Mystarsnight Quick Search
+  </div>
+
+  <div class="bottomLinks">
+
+    <button class="bottomLink" data-scroll="page-about">
+      About
+    </button>
+
+    <button class="bottomLink" data-scroll="page-quality">
+      Source Quality
+    </button>
+
+    <button class="bottomLink" data-scroll="page-contact">
+      Contact
+    </button>
+
+    <button class="bottomLink" data-scroll="page-privacy">
+      Privacy
+    </button>
+
+    <button class="bottomLink" data-scroll="page-terms">
+      Terms
+    </button>
+
+  </div>
+
+  <!-- HIDDEN GAME -->
+  <button class="secretTrigger" id="secretTrigger">
+    •
+  </button>
+
+  <section class="secretGame hiddenGame" id="secretGame">
+
+    <div class="secretGameHeader">
+
+      <div>
+        <h3>Secret Dodge</h3>
+        <div class="gameHint">
+          Swipe the blue dot and dodge the red dots.
+        </div>
+      </div>
+
+      <div class="gameScore">
+        Score: <span id="gameScore">0</span>
       </div>
 
     </div>
 
-    <div id="blocked">
+    <div class="gameBoard" id="gameBoard">
 
-      <div class="blockedCard">
+      <div class="playerDot" id="playerDot"></div>
 
-        <div class="blockedIcon">↗</div>
+      <div class="gameOverlay" id="gameOverlay">
 
-        <h1>Embed blocked by site</h1>
+        <div class="gameMessage">
 
-        <p>
-          This website doesn't allow itself to be displayed
-          inside another website. Try another website or open
-          the site directly.
-        </p>
+          <strong id="gameMessage">
+            Game Over
+          </strong>
 
-        <button id="tryAgain">
-          Try Again
+          <br><br>
+
+          Score:
+          <span id="finalScore">0</span>
+
+          <div class="gameControls">
+
+            <button class="smallBtn primary" id="restartGame">
+              Play Again
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="gameControls">
+
+      <button class="smallBtn primary" id="startGame">
+        Start Game
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+</main>
+</div>
+
+<!-- SETTINGS -->
+<div class="modalBack" id="settingsModal">
+
+  <div class="modal">
+
+    <div class="modalHeader">
+
+      <h2>Settings</h2>
+
+      <button class="modalClose" id="closeSettings">
+        ×
+      </button>
+
+    </div>
+
+    <div class="settingsGrid">
+
+      <div class="settingCard">
+
+        <label for="themeSelect">
+          Theme
+        </label>
+
+        <select id="themeSelect">
+
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="midnight">Midnight</option>
+          <option value="ocean">Ocean</option>
+          <option value="forest">Forest</option>
+          <option value="rose">Rose</option>
+          <option value="sunset">Sunset</option>
+          <option value="slate">Slate</option>
+          <option value="purple">Purple</option>
+
+        </select>
+
+      </div>
+
+      <div class="settingCard">
+
+        <label for="defaultSourceSelect">
+          Default search source
+        </label>
+
+        <select id="defaultSourceSelect">
+
+          <option value="wikipedia">Wikipedia</option>
+          <option value="wiktionary">Wiktionary</option>
+          <option value="wikisource">Wikisource</option>
+          <option value="wikibooks">Wikibooks</option>
+          <option value="wikiversity">Wikiversity</option>
+          <option value="github">GitHub</option>
+          <option value="stackoverflow">Stack Overflow</option>
+          <option value="pubmed">PubMed</option>
+          <option value="nasa">NASA</option>
+          <option value="archive">Internet Archive</option>
+          <option value="loc">Library of Congress</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="notice">
+      Settings and saved information are stored locally on this device.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ANNOUNCEMENT -->
+<div class="modalBack" id="announcementBack">
+
+  <div class="announcement" id="announcement">
+
+    <h2>Welcome to Mystarsnight Quick Search</h2>
+
+    <p>
+     We will be adding a major upgrade to Mystarsnight Quick Search with AI-powered search, smarter answers, better results, more search categories and sources, Study Mode, Coding Mode, research tools, and features like summaries, comparisons, quizzes, flashcards, and follow-up questions. We will also add a Search Workspace for saving results, notes, collections, and sources, along with search suggestions, deeper searches, timelines, official-source searches, and many more tools to make Quick Search faster, smarter, and more useful as Mystarsnight quick search continues.
+    </p>
+
+    <div class="announcementActions">
+
+      <button class="actionBtn" id="announcementClose">
+        Continue
+      </button>
+
+      <button class="actionBtn" id="announcementNever">
+        Don't show again
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- COOKIE -->
+<div class="cookie" id="cookieBanner">
+
+  <p>
+    This site uses browser storage for history, saved results and settings.
+    Google advertising may also use cookies or similar technologies for
+    advertising and measurement.
+  </p>
+
+  <button id="cookieOk">
+    OK
+  </button>
+
+</div>
+
+<script>
+"use strict";
+
+const STORAGE={
+  theme:"msq_theme_v4",
+  source:"msq_source_v4",
+  history:"msq_history_v4",
+  saved:"msq_saved_v4",
+  sidebar:"msq_sidebar_v4",
+  announcement:"msq_announcement_v4",
+  cookies:"msq_cookie_v4"
+};
+
+const SOURCE_INFO={
+  wikipedia:{name:"Wikipedia",domain:"en.wikipedia.org",type:"wiki"},
+  wiktionary:{name:"Wiktionary",domain:"en.wiktionary.org",type:"wiki"},
+  wikisource:{name:"Wikisource",domain:"en.wikisource.org",type:"wiki"},
+  wikibooks:{name:"Wikibooks",domain:"en.wikibooks.org",type:"wiki"},
+  wikiversity:{name:"Wikiversity",domain:"en.wikiversity.org",type:"wiki"},
+  github:{name:"GitHub",domain:"github.com",type:"github"},
+  stackoverflow:{name:"Stack Overflow",domain:"stackoverflow.com",type:"stackoverflow"},
+  arxiv:{name:"arXiv",domain:"arxiv.org",type:"arxiv"},
+  pubmed:{name:"PubMed",domain:"pubmed.ncbi.nlm.nih.gov",type:"pubmed"},
+  nasa:{name:"NASA",domain:"images.nasa.gov",type:"nasa"},
+  archive:{name:"Internet Archive",domain:"archive.org",type:"archive"},
+  loc:{name:"Library of Congress",domain:"loc.gov",type:"loc"}
+};
+
+const THEMES={
+  light:{
+    bg:"#f4f7fb",
+    panel:"#fff",
+    panel2:"#f7f9fc",
+    text:"#172033",
+    muted:"#667085",
+    border:"#e3e8f0",
+    accent:"#3478f6",
+    accent2:"#6d5dfc"
+  },
+  dark:{
+    bg:"#10131a",
+    panel:"#181d27",
+    panel2:"#202632",
+    text:"#f2f5fa",
+    muted:"#9ba5b5",
+    border:"#2b3443",
+    accent:"#5b91ff",
+    accent2:"#8b7cff"
+  },
+  midnight:{
+    bg:"#070b16",
+    panel:"#0e1424",
+    panel2:"#151d31",
+    text:"#eef3ff",
+    muted:"#8995ad",
+    border:"#25314a",
+    accent:"#4d8dff",
+    accent2:"#755cff"
+  },
+  ocean:{
+    bg:"#eef8fb",
+    panel:"#fff",
+    panel2:"#edf7fa",
+    text:"#102a35",
+    muted:"#64808b",
+    border:"#d5e9ee",
+    accent:"#168bb5",
+    accent2:"#4376d9"
+  },
+  forest:{
+    bg:"#f0f7f2",
+    panel:"#fff",
+    panel2:"#edf6ef",
+    text:"#183124",
+    muted:"#688073",
+    border:"#d8e8dc",
+    accent:"#23845b",
+    accent2:"#4b8f50"
+  },
+  rose:{
+    bg:"#fff3f7",
+    panel:"#fff",
+    panel2:"#fff0f4",
+    text:"#351722",
+    muted:"#8a6873",
+    border:"#efd9e1",
+    accent:"#d64e78",
+    accent2:"#9d5ce0"
+  },
+  sunset:{
+    bg:"#fff6ef",
+    panel:"#fff",
+    panel2:"#fff1e7",
+    text:"#392319",
+    muted:"#896e60",
+    border:"#f0ddd0",
+    accent:"#e66a27",
+    accent2:"#d24f72"
+  },
+  slate:{
+    bg:"#edf0f3",
+    panel:"#fff",
+    panel2:"#e8edf1",
+    text:"#1c242d",
+    muted:"#65717d",
+    border:"#d6dde4",
+    accent:"#465f77",
+    accent2:"#6d718b"
+  },
+  purple:{
+    bg:"#f6f2ff",
+    panel:"#fff",
+    panel2:"#f1ecff",
+    text:"#281b3e",
+    muted:"#786b8c",
+    border:"#e2d9f5",
+    accent:"#7456d8",
+    accent2:"#a14fca"
+  }
+};
+
+const ESPN_LEAGUES=[
+  ["football","nfl","NFL"],
+  ["basketball","nba","NBA"],
+  ["baseball","mlb","MLB"],
+  ["hockey","nhl","NHL"],
+  ["football","college-football","College Football"],
+  ["basketball","mens-college-basketball","College Basketball"],
+  ["soccer","eng.1","Premier League"],
+  ["soccer","esp.1","LaLiga"],
+  ["soccer","ger.1","Bundesliga"],
+  ["soccer","ita.1","Serie A"],
+  ["soccer","fra.1","Ligue 1"]
+];
+
+let currentTheme="light";
+let currentSource="wikipedia";
+let history=[];
+let saved=[];
+let isSearching=false;
+
+/* SECRET GAME VARIABLES */
+let dodgeRunning=false;
+let dodgeAnimation=null;
+let dodgeEnemies=[];
+let dodgeScore=0;
+let dodgeLastTime=0;
+let dodgeSpawnTimer=0;
+let dodgeSpeed=1;
+let playerX=50;
+let playerY=82;
+let draggingPlayer=false;
+
+function $(id){
+  return document.getElementById(id);
+}
+
+function getStorage(key,fallback=null){
+  try{
+    const v=localStorage.getItem(key);
+    return v===null?fallback:v;
+  }catch(e){
+    return fallback;
+  }
+}
+
+function setStorage(key,value){
+  try{
+    localStorage.setItem(key,value);
+  }catch(e){}
+}
+
+function getJSON(key,fallback){
+  try{
+    const v=localStorage.getItem(key);
+    if(!v)return fallback;
+
+    const parsed=JSON.parse(v);
+
+    return parsed;
+  }catch(e){
+    return fallback;
+  }
+}
+
+function setJSON(key,value){
+  try{
+    localStorage.setItem(key,JSON.stringify(value));
+  }catch(e){}
+}
+
+function escapeHTML(value){
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function safeURL(value){
+  try{
+    const u=new URL(value);
+
+    if(u.protocol==="http:"||u.protocol==="https:"){
+      return u.href;
+    }
+  }catch(e){}
+
+  return "#";
+}
+
+function truncate(text,max=300){
+  const s=String(text||"")
+    .replace(/\s+/g," ")
+    .trim();
+
+  if(s.length<=max)return s;
+
+  return s.slice(0,max-1)+"...";
+}
+
+function stripHTML(text){
+  const div=document.createElement("div");
+  div.innerHTML=String(text||"");
+
+  return div.textContent||div.innerText||"";
+}
+
+function formatDate(time){
+  try{
+    return new Date(time).toLocaleString();
+  }catch(e){
+    return "";
+  }
+}
+
+/* THEMES */
+
+function applyTheme(theme){
+
+  if(!THEMES[theme]){
+    theme="light";
+  }
+
+  currentTheme=theme;
+
+  const t=THEMES[theme];
+
+  Object.keys(t).forEach(key=>{
+    document.documentElement.style.setProperty(
+      "--"+key,
+      t[key]
+    );
+  });
+
+  if($("themeSelect")){
+    $("themeSelect").value=theme;
+  }
+
+  setStorage(STORAGE.theme,theme);
+}
+
+function cycleTheme(){
+
+  const names=Object.keys(THEMES);
+
+  const index=names.indexOf(currentTheme);
+
+  const next=names[
+    (index+1)%names.length
+  ];
+
+  applyTheme(next);
+}
+
+/* SIDEBAR */
+
+function setSidebar(open){
+
+  const sidebar=$("sidebar");
+  const overlay=$("sidebarOverlay");
+  const toggle=$("sidebarToggle");
+
+  if(!sidebar)return;
+
+  sidebar.classList.toggle("open",open);
+
+  if(overlay){
+    overlay.classList.toggle("show",open);
+  }
+
+  if(toggle){
+    toggle.textContent="☰";
+    toggle.setAttribute(
+      "aria-label",
+      open?"Close menu":"Open menu"
+    );
+  }
+
+  setStorage(
+    STORAGE.sidebar,
+    open?"1":"0"
+  );
+}
+
+function toggleSidebar(){
+
+  const sidebar=$("sidebar");
+
+  if(!sidebar)return;
+
+  setSidebar(
+    !sidebar.classList.contains("open")
+  );
+}
+
+/* NAVIGATION */
+
+function showPage(name){
+
+  const supportNames=[
+    "about",
+    "quality",
+    "contact",
+    "privacy",
+    "terms"
+  ];
+
+  if(supportNames.includes(name)){
+
+    document.querySelectorAll(".navBtn").forEach(button=>{
+      button.classList.toggle(
+        "active",
+        button.dataset.page===name
+      );
+    });
+
+    setSidebar(false);
+
+    const target=$("page-"+name);
+
+    if(target){
+      target.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+    }
+
+    return;
+  }
+
+  document.querySelectorAll(".page").forEach(page=>{
+
+    if(page.classList.contains("supportPage")){
+      return;
+    }
+
+    page.classList.toggle(
+      "active",
+      page.id==="page-"+name
+    );
+
+  });
+
+  document.querySelectorAll(".navBtn").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.page===name
+    );
+  });
+
+  setSidebar(false);
+
+  if(name==="history"){
+    renderHistory();
+  }
+
+  if(name==="saved"){
+    renderSaved();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+/* BOTTOM SCROLL LINKS */
+
+function setupBottomLinks(){
+
+  document.querySelectorAll("[data-scroll]").forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const target=
+        $(button.dataset.scroll);
+
+      if(target){
+
+        target.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      }
+
+    });
+
+  });
+
+}
+
+/* SOURCE */
+
+function selectSource(source){
+
+  if(source==="arxiv"){
+    return;
+  }
+
+  if(source!=="games"&&!SOURCE_INFO[source]){
+    source="wikipedia";
+  }
+
+  currentSource=source;
+
+  setStorage(
+    STORAGE.source,
+    source
+  );
+
+  document.querySelectorAll(".sourceChip").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.source===source
+    );
+  });
+
+  if($("defaultSourceSelect")&&source!=="games"){
+    $("defaultSourceSelect").value=source;
+  }
+}
+
+/* HISTORY */
+
+function loadData(){
+
+  history=getJSON(
+    STORAGE.history,
+    []
+  );
+
+  saved=getJSON(
+    STORAGE.saved,
+    []
+  );
+
+  if(!Array.isArray(history)){
+    history=[];
+  }
+
+  if(!Array.isArray(saved)){
+    saved=[];
+  }
+}
+
+function addHistory(query,source){
+
+  if(!query)return;
+
+  history=history.filter(item=>!(
+    item.query.toLowerCase()===query.toLowerCase() &&
+    item.source===source
+  ));
+
+  history.unshift({
+    query,
+    source,
+    time:Date.now()
+  });
+
+  history=history.slice(0,50);
+
+  setJSON(
+    STORAGE.history,
+    history
+  );
+}
+
+function renderHistory(){
+
+  const box=$("historyList");
+
+  if(!box)return;
+
+  if(!history.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        No searches yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML=history.map((item,index)=>`
+
+    <div class="listItem">
+
+      <div class="listMain">
+
+        <div class="listTitle">
+          ${escapeHTML(item.query)}
+        </div>
+
+        <div class="listSub">
+          ${
+            item.source==="games"
+            ?"Live Games"
+            :(SOURCE_INFO[item.source]?.name||item.source)
+          }
+          ·
+          ${formatDate(item.time)}
+        </div>
+
+      </div>
+
+      <div class="cardActions">
+
+        <button
+          class="smallBtn primary"
+          data-history-search="${index}">
+          Search
+        </button>
+
+        <button
+          class="smallBtn danger"
+          data-history-delete="${index}">
+          Delete
         </button>
 
       </div>
 
     </div>
 
-  </main>
+  `).join("");
 
-</div>
+  box.querySelectorAll(
+    "[data-history-search]"
+  ).forEach(button=>{
 
-<script>
-const viewer = document.getElementById("viewer");
-const website = document.getElementById("website");
-const canvas = document.getElementById("drawCanvas");
-const ctx = canvas.getContext("2d");
+    button.addEventListener("click",()=>{
 
-const urlInput = document.getElementById("url");
-const goButton = document.getElementById("go");
+      const item=
+        history[
+          Number(button.dataset.historySearch)
+        ];
 
-const clickModeButton =
-  document.getElementById("clickMode");
+      if(!item)return;
 
-const penButton =
-  document.getElementById("pen");
+      $("searchInput").value=item.query;
 
-const eraserButton =
-  document.getElementById("eraser");
+      selectSource(item.source);
 
-const clearButton =
-  document.getElementById("clear");
+      showPage("search");
 
-const fullscreenButton =
-  document.getElementById("fullscreen");
+      performSearch(item.query);
+    });
 
-const colorInput =
-  document.getElementById("color");
+  });
 
-const sizeInput =
-  document.getElementById("size");
+  box.querySelectorAll(
+    "[data-history-delete]"
+  ).forEach(button=>{
 
-const strokeInfo =
-  document.getElementById("strokeInfo");
+    button.addEventListener("click",()=>{
 
-const loading =
-  document.getElementById("loading");
-
-const blocked =
-  document.getElementById("blocked");
-
-const tryAgain =
-  document.getElementById("tryAgain");
-
-
-let strokes = [];
-let currentStroke = null;
-let drawing = false;
-let erasing = false;
-let clickMode = false;
-
-let infoTimeout = null;
-let loadTimer = null;
-let loaded = false;
-
-
-/* =========================
-   CANVAS SIZE
-========================= */
-
-function resizeCanvas(){
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-  const old =
-    document.createElement("canvas");
-
-  old.width = canvas.width;
-  old.height = canvas.height;
-
-  if(canvas.width && canvas.height){
-
-    old
-      .getContext("2d")
-      .drawImage(
-        canvas,
-        0,
-        0
+      history.splice(
+        Number(button.dataset.historyDelete),
+        1
       );
-  }
 
-  const dpr =
-    window.devicePixelRatio || 1;
+      setJSON(
+        STORAGE.history,
+        history
+      );
 
-  canvas.width =
-    Math.round(rect.width * dpr);
+      renderHistory();
+    });
 
-  canvas.height =
-    Math.round(rect.height * dpr);
-
-  ctx.setTransform(
-    dpr,
-    0,
-    0,
-    dpr,
-    0,
-    0
-  );
-
-  if(old.width && old.height){
-
-    ctx.drawImage(
-      old,
-      0,
-      0,
-      old.width,
-      old.height,
-      0,
-      0,
-      rect.width,
-      rect.height
-    );
-  }
+  });
 }
 
-window.addEventListener(
-  "resize",
-  resizeCanvas
-);
+/* SAVED */
 
+function isSaved(result){
 
-/* =========================
-   DRAWING
-========================= */
-
-function getPoint(event){
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-  return {
-    x:event.clientX - rect.left,
-    y:event.clientY - rect.top
-  };
-}
-
-
-function startDrawing(event){
-
-  if(clickMode) return;
-
-  drawing = true;
-
-  const p =
-    getPoint(event);
-
-  currentStroke = {
-
-    points:[p],
-
-    color:
-      colorInput.value,
-
-    size:
-      Number(sizeInput.value),
-
-    eraser:
-      erasing,
-
-    created:
-      performance.now(),
-
-    expires:
-      performance.now() + 7000
-  };
-
-  strokes.push(currentStroke);
-
-  canvas.setPointerCapture?.(
-    event.pointerId
-  );
-
-  showStrokeMessage();
-}
-
-
-function continueDrawing(event){
-
-  if(
-    !drawing ||
-    !currentStroke ||
-    clickMode
-  ){
-    return;
-  }
-
-  const p =
-    getPoint(event);
-
-  const previous =
-    currentStroke.points[
-      currentStroke.points.length - 1
-    ];
-
-  currentStroke.points.push(p);
-
-  drawSegment(
-    previous,
-    p,
-    currentStroke
+  return saved.some(item=>
+    item.url===result.url &&
+    item.title===result.title
   );
 }
 
+function saveResult(result){
 
-function stopDrawing(){
+  if(!result)return;
 
-  drawing = false;
-  currentStroke = null;
-}
+  if(isSaved(result)){
 
-
-canvas.addEventListener(
-  "pointerdown",
-  startDrawing
-);
-
-canvas.addEventListener(
-  "pointermove",
-  continueDrawing
-);
-
-canvas.addEventListener(
-  "pointerup",
-  stopDrawing
-);
-
-canvas.addEventListener(
-  "pointercancel",
-  stopDrawing
-);
-
-canvas.addEventListener(
-  "pointerleave",
-  stopDrawing
-);
-
-
-/* =========================
-   DRAW SEGMENT
-========================= */
-
-function drawSegment(
-  a,
-  b,
-  stroke
-){
-
-  ctx.save();
-
-  ctx.lineWidth =
-    stroke.size;
-
-  ctx.lineCap =
-    "round";
-
-  ctx.lineJoin =
-    "round";
-
-  if(stroke.eraser){
-
-    ctx.globalCompositeOperation =
-      "destination-out";
+    saved=saved.filter(item=>!(
+      item.url===result.url &&
+      item.title===result.title
+    ));
 
   }else{
 
-    ctx.globalCompositeOperation =
-      "source-over";
+    saved.unshift({
+      ...result,
+      savedAt:Date.now()
+    });
 
-    ctx.strokeStyle =
-      stroke.color;
   }
 
-  ctx.beginPath();
+  saved=saved.slice(0,100);
 
-  ctx.moveTo(
-    a.x,
-    a.y
+  setJSON(
+    STORAGE.saved,
+    saved
   );
 
-  ctx.lineTo(
-    b.x,
-    b.y
-  );
-
-  ctx.stroke();
-
-  ctx.restore();
+  renderSaved();
 }
 
+function renderSaved(){
 
-/* =========================
-   RENDER STROKES
-========================= */
+  const box=$("savedList");
 
-function render(){
+  if(!box)return;
 
-  const rect =
-    canvas.getBoundingClientRect();
+  if(!saved.length){
 
-  ctx.clearRect(
-    0,
-    0,
-    rect.width,
-    rect.height
-  );
-
-  const now =
-    performance.now();
-
-  strokes =
-    strokes.filter(
-      stroke =>
-        stroke.expires > now
-    );
-
-  for(const stroke of strokes){
-
-    if(stroke.points.length === 1){
-
-      const p =
-        stroke.points[0];
-
-      ctx.save();
-
-      ctx.lineWidth =
-        stroke.size;
-
-      if(stroke.eraser){
-
-        ctx.globalCompositeOperation =
-          "destination-out";
-
-      }else{
-
-        ctx.globalCompositeOperation =
-          "source-over";
-
-        ctx.fillStyle =
-          stroke.color;
-      }
-
-      ctx.beginPath();
-
-      ctx.arc(
-        p.x,
-        p.y,
-        stroke.size / 2,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fill();
-
-      ctx.restore();
-
-      continue;
-    }
-
-    ctx.save();
-
-    ctx.lineWidth =
-      stroke.size;
-
-    ctx.lineCap =
-      "round";
-
-    ctx.lineJoin =
-      "round";
-
-    if(stroke.eraser){
-
-      ctx.globalCompositeOperation =
-        "destination-out";
-
-    }else{
-
-      ctx.globalCompositeOperation =
-        "source-over";
-
-      ctx.strokeStyle =
-        stroke.color;
-    }
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      stroke.points[0].x,
-      stroke.points[0].y
-    );
-
-    for(
-      let i = 1;
-      i < stroke.points.length;
-      i++
-    ){
-
-      ctx.lineTo(
-        stroke.points[i].x,
-        stroke.points[i].y
-      );
-    }
-
-    ctx.stroke();
-
-    ctx.restore();
-  }
-
-  requestAnimationFrame(render);
-}
-
-
-/* =========================
-   CLICK MODE
-========================= */
-
-function enableClickMode(){
-
-  clickMode = true;
-
-  viewer.classList.add(
-    "clickMode"
-  );
-
-  clickModeButton.classList.add(
-    "active"
-  );
-
-  penButton.classList.remove(
-    "active"
-  );
-
-  eraserButton.classList.remove(
-    "active"
-  );
-
-  strokeInfo.textContent =
-    "Click mode — interact with the website";
-
-  strokeInfo.classList.add(
-    "show"
-  );
-
-  clearTimeout(infoTimeout);
-
-  infoTimeout =
-    setTimeout(()=>{
-      strokeInfo.classList.remove(
-        "show"
-      );
-    },1800);
-}
-
-
-function enableDrawMode(){
-
-  clickMode = false;
-
-  viewer.classList.remove(
-    "clickMode"
-  );
-
-  clickModeButton.classList.remove(
-    "active"
-  );
-
-  penButton.classList.add(
-    "active"
-  );
-
-  eraserButton.classList.remove(
-    "active"
-  );
-
-  erasing = false;
-}
-
-
-clickModeButton.addEventListener(
-  "click",
-  enableClickMode
-);
-
-
-penButton.addEventListener(
-  "click",
-  ()=>{
-    enableDrawMode();
-  }
-);
-
-
-eraserButton.addEventListener(
-  "click",
-  ()=>{
-
-    enableDrawMode();
-
-    erasing = true;
-
-    eraserButton.classList.add(
-      "active"
-    );
-
-    penButton.classList.remove(
-      "active"
-    );
-  }
-);
-
-
-/* =========================
-   CLEAR
-========================= */
-
-clearButton.addEventListener(
-  "click",
-  ()=>{
-
-    strokes = [];
-
-    ctx.clearRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-  }
-);
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showStrokeMessage(){
-
-  strokeInfo.textContent =
-    "Drawing disappears after 7 seconds";
-
-  strokeInfo.classList.add(
-    "show"
-  );
-
-  clearTimeout(infoTimeout);
-
-  infoTimeout =
-    setTimeout(()=>{
-      strokeInfo.classList.remove(
-        "show"
-      );
-    },1800);
-}
-
-
-/* =========================
-   URL
-========================= */
-
-function normalizeURL(value){
-
-  value =
-    value.trim();
-
-  if(!value){
-    return null;
-  }
-
-  if(
-    !/^https?:\/\//i.test(value)
-  ){
-
-    value =
-      "https://" + value;
-  }
-
-  try{
-
-    const url =
-      new URL(value);
-
-    if(
-      url.protocol !== "http:" &&
-      url.protocol !== "https:"
-    ){
-      return null;
-    }
-
-    return url.href;
-
-  }catch{
-
-    return null;
-  }
-}
-
-
-function loadWebsite(){
-
-  const url =
-    normalizeURL(
-      urlInput.value
-    );
-
-  if(!url){
-
-    urlInput.focus();
+    box.innerHTML=`
+      <div class="empty">
+        Nothing saved yet.
+      </div>
+    `;
 
     return;
   }
 
-  blocked.style.display =
-    "none";
+  box.innerHTML=saved.map((item,index)=>`
 
-  loaded = false;
+    <div class="listItem">
 
-  loading.style.display =
-    "flex";
+      <div class="listMain">
 
-  clearTimeout(loadTimer);
+        <div class="listTitle">
+          ${escapeHTML(item.title)}
+        </div>
 
-  strokes = [];
+        <div class="listSub">
+          ${escapeHTML(item.sourceName||"")}
+          ·
+          ${formatDate(item.savedAt)}
+        </div>
 
-  website.src =
-    url;
+      </div>
 
-  /*
-    Some blocked iframe pages never provide
-    a useful load event.
-  */
+      <div class="cardActions">
 
-  loadTimer =
-    setTimeout(()=>{
+        <button
+          class="smallBtn primary"
+          data-open-saved="${index}">
+          Open
+        </button>
 
-      if(!loaded){
+        <button
+          class="smallBtn danger"
+          data-delete-saved="${index}">
+          Delete
+        </button>
 
-        loading.style.display =
-          "none";
+      </div>
 
-        blocked.style.display =
-          "flex";
+    </div>
+
+  `).join("");
+
+  box.querySelectorAll(
+    "[data-open-saved]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        saved[
+          Number(button.dataset.openSaved)
+        ];
+
+      if(item?.url){
+
+        window.open(
+          safeURL(item.url),
+          "_blank",
+          "noopener"
+        );
+
       }
 
-    },8000);
+    });
+
+  });
+
+  box.querySelectorAll(
+    "[data-delete-saved]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      saved.splice(
+        Number(button.dataset.deleteSaved),
+        1
+      );
+
+      setJSON(
+        STORAGE.saved,
+        saved
+      );
+
+      renderSaved();
+    });
+
+  });
 }
 
+/* FETCH */
 
-goButton.addEventListener(
-  "click",
-  loadWebsite
-);
+async function fetchJSON(url){
 
+  const controller=
+    new AbortController();
 
-urlInput.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-      loadWebsite();
-    }
-  }
-);
-
-
-website.addEventListener(
-  "load",
-  ()=>{
-
-    loaded = true;
-
-    clearTimeout(loadTimer);
-
-    loading.style.display =
-      "none";
-  }
-);
-
-
-tryAgain.addEventListener(
-  "click",
-  loadWebsite
-);
-
-
-/* =========================
-   FULLSCREEN
-========================= */
-
-async function enterFullscreen(){
-
-  document.body.classList.add(
-    "fullscreen"
-  );
+  const timeout=
+    setTimeout(
+      ()=>controller.abort(),
+      14000
+    );
 
   try{
 
-    if(
-      document.documentElement
-        .requestFullscreen
-    ){
+    const response=
+      await fetch(
+        url,
+        {
+          signal:controller.signal,
+          headers:{
+            "Accept":"application/json"
+          }
+        }
+      );
 
-      await document.documentElement
-        .requestFullscreen();
+    if(!response.ok){
+      throw new Error(
+        "HTTP "+response.status
+      );
     }
+
+    return await response.json();
+
+  }finally{
+
+    clearTimeout(timeout);
+
+  }
+}
+
+/* WIKIMEDIA */
+
+async function searchWiki(source,query){
+
+  const domain=
+    SOURCE_INFO[source].domain;
+
+  const url=
+    "https://"+domain+
+    "/w/api.php?action=query"+
+    "&list=search"+
+    "&srsearch="+encodeURIComponent(query)+
+    "&srlimit=8"+
+    "&format=json"+
+    "&origin=*";
+
+  const data=
+    await fetchJSON(url);
+
+  const items=
+    data?.query?.search||[];
+
+  return items.map(item=>({
+
+    title:item.title,
+
+    snippet:
+      stripHTML(
+        item.snippet||""
+      ),
+
+    url:
+      "https://"+domain+
+      "/wiki/"+
+      encodeURIComponent(
+        item.title.replace(/ /g,"_")
+      ),
+
+    source,
+    sourceName:
+      SOURCE_INFO[source].name
+
+  }));
+
+}
+
+async function wikiOverview(source,title){
+
+  const domain=
+    SOURCE_INFO[source].domain;
+
+  try{
+
+    const url=
+      "https://"+domain+
+      "/w/api.php?action=query"+
+      "&prop=extracts"+
+      "&exintro=1"+
+      "&explaintext=1"+
+      "&redirects=1"+
+      "&titles="+encodeURIComponent(title)+
+      "&format=json"+
+      "&origin=*";
+
+    const data=
+      await fetchJSON(url);
+
+    const pages=
+      data?.query?.pages||{};
+
+    const page=
+      Object.values(pages)[0];
+
+    return page?.extract||"";
+
+  }catch(e){
+
+    return "";
+
+  }
+}
+
+/* GITHUB */
+
+async function searchGitHub(query){
+
+  const url=
+    "https://api.github.com/search/repositories"+
+    "?q="+encodeURIComponent(query)+
+    "&per_page=8";
+
+  const data=
+    await fetchJSON(url);
+
+  return (data.items||[]).map(item=>({
+
+    title:item.full_name,
+
+    snippet:
+      item.description||
+      "GitHub repository.",
+
+    url:item.html_url,
+
+    source:"github",
+
+    sourceName:"GitHub",
+
+    meta:
+      "Stars: "+
+      (item.stargazers_count||0)+
+      " · "+
+      (item.language||"No language")
+
+  }));
+
+}
+
+/* STACK OVERFLOW */
+
+async function searchStackOverflow(query){
+
+  const url=
+    "https://api.stackexchange.com/2.3/search/advanced"+
+    "?order=desc"+
+    "&sort=relevance"+
+    "&site=stackoverflow"+
+    "&pagesize=8"+
+    "&q="+encodeURIComponent(query);
+
+  const data=
+    await fetchJSON(url);
+
+  return (data.items||[]).map(item=>({
+
+    title:item.title,
+
+    snippet:
+      "Answers: "+
+      (item.answer_count||0)+
+      " · Score: "+
+      (item.score||0),
+
+    url:item.link,
+
+    source:"stackoverflow",
+
+    sourceName:"Stack Overflow"
+
+  }));
+
+}
+
+/* ARXIV DISABLED */
+
+async function searchArxiv(){
+
+  throw new Error(
+    "arXiv is disabled."
+  );
+
+}
+
+/* PUBMED */
+
+async function searchPubMed(query){
+
+  const searchURL=
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"+
+    "?db=pubmed"+
+    "&retmode=json"+
+    "&retmax=8"+
+    "&term="+encodeURIComponent(query);
+
+  const searchData=
+    await fetchJSON(searchURL);
+
+  const ids=
+    searchData?.esearchresult?.idlist||[];
+
+  if(!ids.length){
+    return [];
+  }
+
+  const summaryURL=
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"+
+    "?db=pubmed"+
+    "&retmode=json"+
+    "&id="+ids.join(",");
+
+  const summary=
+    await fetchJSON(summaryURL);
+
+  return ids.map(id=>{
+
+    const item=
+      summary?.result?.[id]||{};
+
+    return {
+
+      title:
+        item.title||
+        ("PubMed article "+id),
+
+      snippet:
+        item.sortfirstauthor
+          ?"Author: "+item.sortfirstauthor
+          :"PubMed research article",
+
+      url:
+        "https://pubmed.ncbi.nlm.nih.gov/"+
+        id+"/",
+
+      source:"pubmed",
+
+      sourceName:"PubMed"
+
+    };
+
+  });
+
+}
+
+/* NASA */
+
+async function searchNASA(query){
+
+  const url=
+    "https://images-api.nasa.gov/search"+
+    "?q="+encodeURIComponent(query)+
+    "&media_type=image";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.collection?.items||[]
+  ).slice(0,8).map(item=>{
+
+    const info=
+      item.data?.[0]||{};
+
+    const preview=
+      item.links?.find(
+        x=>x.rel==="preview"
+      );
+
+    return {
+
+      title:
+        info.title||
+        "NASA image",
+
+      snippet:
+        truncate(
+          info.description||
+          "NASA image and media result.",
+          300
+        ),
+
+      url:
+        item.href||
+        "https://images.nasa.gov/",
+
+      image:
+        preview?.href||"",
+
+      source:"nasa",
+
+      sourceName:"NASA"
+
+    };
+
+  });
+
+}
+
+/* INTERNET ARCHIVE */
+
+async function searchArchive(query){
+
+  const url=
+    "https://archive.org/advancedsearch.php"+
+    "?q="+encodeURIComponent(query)+
+    "&fl[]=identifier"+
+    "&fl[]=title"+
+    "&fl[]=description"+
+    "&rows=8"+
+    "&page=1"+
+    "&output=json";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.response?.docs||[]
+  ).map(item=>{
+
+    const identifier=
+      item.identifier;
+
+    return {
+
+      title:
+        item.title||
+        identifier,
+
+      snippet:
+        truncate(
+          Array.isArray(item.description)
+            ?item.description.join(" ")
+            :(item.description||
+              "Internet Archive item"),
+          300
+        ),
+
+      url:
+        "https://archive.org/details/"+
+        encodeURIComponent(identifier),
+
+      source:"archive",
+
+      sourceName:"Internet Archive"
+
+    };
+
+  });
+
+}
+
+/* LIBRARY OF CONGRESS */
+
+async function searchLOC(query){
+
+  const url=
+    "https://www.loc.gov/search/"+
+    "?q="+encodeURIComponent(query)+
+    "&fo=json"+
+    "&c=8";
+
+  const data=
+    await fetchJSON(url);
+
+  return (
+    data?.results||[]
+  ).map(item=>({
+
+    title:
+      item.title||
+      "Library of Congress result",
+
+    snippet:
+      truncate(
+        item.description||
+        "Library of Congress collection item.",
+        300
+      ),
+
+    url:
+      item.id||
+      "https://www.loc.gov/",
+
+    source:"loc",
+
+    sourceName:"Library of Congress"
+
+  }));
+
+}
+
+/* ESPN GAME SEARCH */
+
+async function getGamesFromLeague(
+  sport,
+  league,
+  label
+){
+
+  const url=
+    "https://site.api.espn.com/apis/site/v2/sports/"+
+    sport+"/"+league+"/scoreboard";
+
+  try{
+
+    const data=
+      await fetchJSON(url);
+
+    return (data.events||[]).map(event=>{
+
+      const competition=
+        event.competitions?.[0];
+
+      const competitors=
+        competition?.competitors||[];
+
+      const teams=
+        competitors.map(team=>({
+
+          name:
+            team.team?.displayName||
+            team.team?.shortDisplayName||
+            "Team",
+
+          score:
+            team.score??"",
+
+          abbreviation:
+            team.team?.abbreviation||
+            ""
+
+        }));
+
+      return {
+
+        league:label,
+
+        name:
+          event.name||"",
+
+        teams,
+
+        status:
+          event.status?.type?.shortDetail||
+          event.status?.type?.detail||
+          "Scheduled",
+
+        state:
+          event.status?.type?.state||
+          "pre",
+
+        date:
+          event.date||"",
+
+        url:
+          "https://www.espn.com/"
+
+      };
+
+    });
 
   }catch(error){
 
-    /*
-      CSS fullscreen still works if the
-      browser doesn't permit native fullscreen.
-    */
+    console.warn(
+      "Could not load "+label,
+      error
+    );
+
+    return [];
+
   }
+
 }
 
+function gameMatchesQuery(game,query){
 
-async function leaveFullscreen(){
+  const q=
+    query.toLowerCase()
+    .trim();
 
-  document.body.classList.remove(
-    "fullscreen"
+  if(!q)return true;
+
+  const text=[
+    game.league,
+    game.name,
+    ...(game.teams||[]).map(team=>team.name),
+    ...(game.teams||[]).map(team=>team.abbreviation)
+  ]
+  .join(" ")
+  .toLowerCase();
+
+  const words=
+    q.split(/\s+/)
+    .filter(Boolean);
+
+  return words.every(word=>
+    text.includes(word)
   );
+}
+
+async function searchGames(query){
+
+  const responses=
+    await Promise.all(
+      ESPN_LEAGUES.map(item=>
+        getGamesFromLeague(
+          item[0],
+          item[1],
+          item[2]
+        )
+      )
+    );
+
+  let games=
+    responses.flat();
+
+  const matched=
+    games.filter(
+      game=>gameMatchesQuery(game,query)
+    );
+
+  games=matched;
+
+  games.sort((a,b)=>{
+
+    if(a.state==="in"&&b.state!=="in"){
+      return -1;
+    }
+
+    if(a.state!=="in"&&b.state==="in"){
+      return 1;
+    }
+
+    return new Date(a.date||0)-
+           new Date(b.date||0);
+
+  });
+
+  return games.slice(0,30);
+
+}
+
+function renderGameResults(games,query){
+
+  const box=$("results");
+
+  if(!box)return;
+
+  if(!games.length){
+
+    box.innerHTML=`
+
+      <div class="empty">
+
+        <strong>No matching games found.</strong>
+
+        <br><br>
+
+        Try a team, league or sport name.
+
+        <br><br>
+
+        Examples: Lakers, Yankees, Chiefs, NFL, NBA, MLB
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  const best=games[0];
+
+  const bestTeams=best.teams||[];
+
+  box.innerHTML=`
+
+    <div class="card bestCard">
+
+      <span class="bestBadge">
+        BEST MATCH
+      </span>
+
+      <h3 class="bestTitle">
+        ${escapeHTML(best.name)}
+      </h3>
+
+      <div class="bestOverview">
+
+        ${bestTeams.map(team=>`
+
+          <div class="team">
+
+            <span>
+              ${escapeHTML(team.name)}
+            </span>
+
+            <span class="teamScore">
+              ${escapeHTML(team.score)}
+            </span>
+
+          </div>
+
+        `).join("")}
+
+        <div class="gameStatus">
+          ${escapeHTML(best.league)}
+          ·
+          ${escapeHTML(best.status)}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="resultGrid">
+
+      ${games.slice(1).map(game=>`
+
+        <div class="card">
+
+          <div class="cardMeta">
+            ${escapeHTML(game.league)}
+          </div>
+
+          <h3>
+            ${escapeHTML(game.name)}
+          </h3>
+
+          ${(game.teams||[]).map(team=>`
+
+            <div class="team">
+
+              <span>
+                ${escapeHTML(team.name)}
+              </span>
+
+              <span class="teamScore">
+                ${escapeHTML(team.score)}
+              </span>
+
+            </div>
+
+          `).join("")}
+
+          <div class="gameStatus">
+            ${escapeHTML(game.status)}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+}
+
+/* MAIN SEARCH */
+
+async function performSearch(rawQuery){
+
+  const query=
+    String(rawQuery||"").trim();
+
+  if(!query)return;
+
+  if(isSearching)return;
+
+  isSearching=true;
+
+  addHistory(
+    query,
+    currentSource
+  );
+
+  const status=$("status");
+  const results=$("results");
+
+  if(currentSource==="games"){
+
+    if(status){
+      status.textContent=
+        "Searching live and scheduled games for "+
+        query+"...";
+    }
+
+    results.innerHTML=`
+
+      <div class="loading">
+
+        <div class="spinner"></div>
+
+        Searching games...
+
+      </div>
+
+    `;
+
+    try{
+
+      const games=
+        await searchGames(query);
+
+      if(games.length){
+
+        status.textContent=
+          games.length+
+          " matching game"+
+          (games.length===1?"":"s")+
+          " found.";
+
+      }else{
+
+        status.textContent=
+          "No matching games found.";
+
+      }
+
+      renderGameResults(
+        games,
+        query
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      status.textContent=
+        "Game search could not be completed.";
+
+      results.innerHTML=`
+
+        <div class="empty">
+
+          The game sources could not be reached.
+          Try again in a moment.
+
+        </div>
+
+      `;
+
+    }finally{
+
+      isSearching=false;
+
+    }
+
+    return;
+  }
+
+  const sourceName=
+    SOURCE_INFO[currentSource].name;
+
+  if(status){
+    status.textContent=
+      "Searching "+sourceName+"...";
+  }
+
+  results.innerHTML=`
+
+    <div class="loading">
+
+      <div class="spinner"></div>
+
+      Searching ${escapeHTML(sourceName)}...
+
+    </div>
+
+  `;
 
   try{
 
-    if(document.fullscreenElement){
+    let resultsData=[];
 
-      await document.exitFullscreen();
+    switch(currentSource){
+
+      case "wikipedia":
+      case "wiktionary":
+      case "wikisource":
+      case "wikibooks":
+      case "wikiversity":
+        resultsData=
+          await searchWiki(
+            currentSource,
+            query
+          );
+        break;
+
+      case "github":
+        resultsData=
+          await searchGitHub(query);
+        break;
+
+      case "stackoverflow":
+        resultsData=
+          await searchStackOverflow(query);
+        break;
+
+      case "arxiv":
+        throw new Error("arXiv is disabled.");
+        break;
+
+      case "pubmed":
+        resultsData=
+          await searchPubMed(query);
+        break;
+
+      case "nasa":
+        resultsData=
+          await searchNASA(query);
+        break;
+
+      case "archive":
+        resultsData=
+          await searchArchive(query);
+        break;
+
+      case "loc":
+        resultsData=
+          await searchLOC(query);
+        break;
+
     }
 
-  }catch(error){}
+    if(!resultsData.length){
+
+      status.textContent=
+        "No results found.";
+
+      results.innerHTML=`
+
+        <div class="empty">
+
+          <strong>No results found.</strong>
+
+          <br><br>
+
+          Try a different search or switch sources.
+
+        </div>
+
+      `;
+
+      return;
+    }
+
+    status.textContent=
+      resultsData.length+
+      " result"+
+      (resultsData.length===1?"":"s")+
+      " found from "+
+      sourceName+".";
+
+    window.currentResults=
+      resultsData;
+
+    let overview="";
+
+    if(currentSource==="wikipedia"||
+       currentSource==="wiktionary"||
+       currentSource==="wikisource"||
+       currentSource==="wikibooks"||
+       currentSource==="wikiversity"){
+
+      overview=
+        await wikiOverview(
+          currentSource,
+          resultsData[0].title
+        );
+
+      if(overview){
+        resultsData[0].overview=
+          overview;
+      }
+    }
+
+    renderNormalResults(
+      resultsData,
+      query
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    status.textContent=
+      "The source could not be reached.";
+
+    results.innerHTML=`
+
+      <div class="empty">
+
+        <strong>Search could not be completed.</strong>
+
+        <br><br>
+
+        The selected source may be temporarily unavailable
+        or may block browser requests.
+
+        <br><br>
+
+        Try another source.
+
+      </div>
+
+    `;
+
+  }finally{
+
+    isSearching=false;
+
+  }
 }
 
+function renderNormalResults(resultsData,query){
 
-fullscreenButton.addEventListener(
-  "click",
-  async()=>{
+  const box=$("results");
 
-    if(
-      document.body.classList.contains(
-        "fullscreen"
-      )
-    ){
+  const best=resultsData[0];
 
-      await leaveFullscreen();
+  const overview=
+    best.overview||
+    best.snippet||
+    "No overview was returned by this source.";
 
-    }else{
+  box.innerHTML=`
 
-      await enterFullscreen();
+    <div class="card bestCard">
+
+      <span class="bestBadge">
+        BEST MATCH
+      </span>
+
+      <h3 class="bestTitle">
+        ${escapeHTML(best.title)}
+      </h3>
+
+      <div class="bestOverview">
+        ${escapeHTML(overview)}
+      </div>
+
+      <div class="cardMeta">
+        ${escapeHTML(best.sourceName||"")}
+      </div>
+
+      <div class="cardActions">
+
+        <button
+          class="smallBtn primary"
+          id="bestOpenBtn">
+          Open Result
+        </button>
+
+        <button
+          class="smallBtn"
+          id="bestSaveBtn">
+          ${isSaved(best)?"Saved":"Save"}
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="resultGrid">
+
+      ${resultsData.slice(1).map((item,index)=>`
+
+        <div class="card">
+
+          <h3>
+            ${escapeHTML(item.title)}
+          </h3>
+
+          ${
+            item.image
+            ?`
+              <img
+                src="${safeURL(item.image)}"
+                alt=""
+                loading="lazy"
+                style="
+                  width:100%;
+                  max-height:180px;
+                  object-fit:cover;
+                  border-radius:11px;
+                  margin:4px 0 10px
+                "
+                onerror="this.style.display='none'"
+              >
+            `
+            :""
+          }
+
+          <p>
+            ${escapeHTML(
+              item.snippet||
+              "No description available."
+            )}
+          </p>
+
+          <div class="cardMeta">
+            ${escapeHTML(
+              item.meta||
+              item.sourceName||
+              ""
+            )}
+          </div>
+
+          <div class="cardActions">
+
+            <button
+              class="smallBtn primary"
+              data-open-result="${index+1}">
+              Open
+            </button>
+
+            <button
+              class="smallBtn"
+              data-save-result="${index+1}">
+              ${isSaved(item)?"Saved":"Save"}
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+  $("bestOpenBtn")?.addEventListener(
+    "click",
+    ()=>{
+      if(best.url){
+        window.open(
+          safeURL(best.url),
+          "_blank",
+          "noopener"
+        );
+      }
     }
+  );
+
+  $("bestSaveBtn")?.addEventListener(
+    "click",
+    ()=>{
+      saveResult(best);
+
+      $("bestSaveBtn").textContent=
+        isSaved(best)
+        ?"Saved"
+        :"Save";
+    }
+  );
+
+  box.querySelectorAll(
+    "[data-open-result]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        resultsData[
+          Number(button.dataset.openResult)
+        ];
+
+      if(item?.url){
+
+        window.open(
+          safeURL(item.url),
+          "_blank",
+          "noopener"
+        );
+
+      }
+
+    });
+
+  });
+
+  box.querySelectorAll(
+    "[data-save-result]"
+  ).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const item=
+        resultsData[
+          Number(button.dataset.saveResult)
+        ];
+
+      if(!item)return;
+
+      saveResult(item);
+
+      button.textContent=
+        isSaved(item)
+        ?"Saved"
+        :"Save";
+
+    });
+
+  });
+
+}
+
+/* SETTINGS */
+
+function openSettings(){
+  $("settingsModal")?.classList.add("show");
+}
+
+function closeSettings(){
+  $("settingsModal")?.classList.remove("show");
+}
+
+/* ANNOUNCEMENT */
+
+function setupAnnouncement(){
+
+  if(
+    getStorage(
+      STORAGE.announcement,
+      "0"
+    )==="1"
+  ){
+    return;
   }
-);
 
+  $("announcementBack")
+    ?.classList.add("show");
+}
 
-/* =========================
-   START
-========================= */
+function closeAnnouncement(){
 
-setTimeout(()=>{
+  $("announcementBack")
+    ?.classList.remove("show");
 
-  resizeCanvas();
+}
 
-  render();
+function neverShowAnnouncement(){
 
-},50);
+  setStorage(
+    STORAGE.announcement,
+    "1"
+  );
 
+  closeAnnouncement();
+}
+
+/* COOKIE */
+
+function setupCookie(){
+
+  if(
+    getStorage(
+      STORAGE.cookies,
+      "0"
+    )==="1"
+  ){
+
+    $("cookieBanner")
+      .style.display="none";
+
+  }
+
+}
+
+function acceptCookie(){
+
+  setStorage(
+    STORAGE.cookies,
+    "1"
+  );
+
+  $("cookieBanner")
+    .style.display="none";
+
+}
+
+/* SECRET DODGE GAME */
+
+function positionPlayer(){
+
+  const board=$("gameBoard");
+  const player=$("playerDot");
+
+  if(!board||!player)return;
+
+  player.style.left=playerX+"%";
+  player.style.top=playerY+"%";
+}
+
+function resetGame(){
+
+  cancelAnimationFrame(dodgeAnimation);
+
+  dodgeRunning=false;
+  dodgeEnemies=[];
+  dodgeScore=0;
+  dodgeSpeed=1;
+  dodgeSpawnTimer=0;
+  dodgeLastTime=0;
+
+  playerX=50;
+  playerY=82;
+
+  $("gameScore").textContent="0";
+  $("finalScore").textContent="0";
+
+  $("gameOverlay").classList.remove("show");
+
+  document.querySelectorAll(".enemyDot").forEach(dot=>{
+    dot.remove();
+  });
+
+  positionPlayer();
+}
+
+function startGame(){
+
+  resetGame();
+
+  dodgeRunning=true;
+  dodgeLastTime=performance.now();
+
+  gameLoop(dodgeLastTime);
+}
+
+function spawnEnemy(){
+
+  const board=$("gameBoard");
+
+  if(!board)return;
+
+  const enemy=
+    document.createElement("div");
+
+  enemy.className="enemyDot";
+
+  const x=
+    5+
+    Math.random()*90;
+
+  const y=-5;
+
+  enemy.style.left=x+"%";
+  enemy.style.top=y+"%";
+
+  board.appendChild(enemy);
+
+  dodgeEnemies.push({
+    element:enemy,
+    x,
+    y,
+    speed:
+      13+
+      Math.random()*9+
+      dodgeSpeed*2
+  });
+}
+
+function endGame(){
+
+  dodgeRunning=false;
+
+  cancelAnimationFrame(dodgeAnimation);
+
+  $("finalScore").textContent=
+    Math.floor(dodgeScore);
+
+  $("gameOverlay").classList.add("show");
+}
+
+function gameLoop(time){
+
+  if(!dodgeRunning)return;
+
+  const delta=
+    Math.min(
+      0.04,
+      (time-dodgeLastTime)/1000
+    );
+
+  dodgeLastTime=time;
+
+  dodgeScore+=delta*10;
+
+  $("gameScore").textContent=
+    Math.floor(dodgeScore);
+
+  dodgeSpeed=
+    1+
+    Math.floor(dodgeScore/100)/2;
+
+  dodgeSpawnTimer+=delta;
+
+  const spawnEvery=
+    Math.max(
+      .22,
+      .8-(dodgeScore/300)
+    );
+
+  if(dodgeSpawnTimer>=spawnEvery){
+
+    dodgeSpawnTimer=0;
+
+    spawnEnemy();
+
+    if(dodgeScore>80&&Math.random()<.3){
+      spawnEnemy();
+    }
+
+  }
+
+  const board=$("gameBoard");
+
+  const playerRadius=14;
+
+  for(let i=dodgeEnemies.length-1;i>=0;i--){
+
+    const enemy=dodgeEnemies[i];
+
+    enemy.y+=
+      enemy.speed*
+      delta/
+      Math.max(1,board.clientHeight/100);
+
+    enemy.element.style.top=
+      enemy.y+"%";
+
+    const dx=
+      (enemy.x-playerX)*
+      board.clientWidth/
+      100;
+
+    const dy=
+      (enemy.y-playerY)*
+      board.clientHeight/
+      100;
+
+    const distance=
+      Math.sqrt(
+        dx*dx+
+        dy*dy
+      );
+
+    if(distance<
+       playerRadius+10){
+
+      endGame();
+      return;
+    }
+
+    if(enemy.y>108){
+
+      enemy.element.remove();
+
+      dodgeEnemies.splice(i,1);
+
+    }
+
+  }
+
+  dodgeAnimation=
+    requestAnimationFrame(gameLoop);
+}
+
+function movePlayer(clientX,clientY){
+
+  if(!draggingPlayer)return;
+
+  const board=$("gameBoard");
+
+  if(!board)return;
+
+  const rect=
+    board.getBoundingClientRect();
+
+  let x=
+    ((clientX-rect.left)/
+    rect.width)*
+    100;
+
+  let y=
+    ((clientY-rect.top)/
+    rect.height)*
+    100;
+
+  x=Math.max(4,Math.min(96,x));
+  y=Math.max(4,Math.min(96,y));
+
+  playerX=x;
+  playerY=y;
+
+  positionPlayer();
+}
+
+function setupDodgeGame(){
+
+  const board=$("gameBoard");
+  const player=$("playerDot");
+
+  if(!board||!player)return;
+
+  positionPlayer();
+
+  player.addEventListener(
+    "pointerdown",
+    event=>{
+
+      event.preventDefault();
+
+      draggingPlayer=true;
+
+      player.setPointerCapture?.(
+        event.pointerId
+      );
+
+      movePlayer(
+        event.clientX,
+        event.clientY
+      );
+
+    }
+  );
+
+  board.addEventListener(
+    "pointermove",
+    event=>{
+
+      if(!draggingPlayer)return;
+
+      movePlayer(
+        event.clientX,
+        event.clientY
+      );
+
+    }
+  );
+
+  board.addEventListener(
+    "pointerup",
+    ()=>{
+      draggingPlayer=false;
+    }
+  );
+
+  board.addEventListener(
+    "pointercancel",
+    ()=>{
+      draggingPlayer=false;
+    }
+  );
+
+  $("startGame")
+    ?.addEventListener(
+      "click",
+      startGame
+    );
+
+  $("restartGame")
+    ?.addEventListener(
+      "click",
+      startGame
+    );
+
+  $("secretTrigger")
+    ?.addEventListener(
+      "click",
+      ()=>{
+
+        $("secretGame")
+          .classList.toggle("hiddenGame");
+
+        if(
+          !$("secretGame")
+            .classList.contains("hiddenGame")
+        ){
+
+          $("secretGame")
+            .scrollIntoView({
+              behavior:"smooth",
+              block:"center"
+            });
+
+        }
+
+      }
+    );
+
+}
+
+/* EVENTS */
+
+function setupEvents(){
+
+  $("sidebarToggle")
+    ?.addEventListener(
+      "click",
+      toggleSidebar
+    );
+
+  $("sidebarOverlay")
+    ?.addEventListener(
+      "click",
+      ()=>setSidebar(false)
+    );
+
+  document.querySelectorAll(
+    ".navBtn"
+  ).forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+        showPage(
+          button.dataset.page
+        );
+      }
+    );
+
+  });
+
+  $("themeBtn")
+    ?.addEventListener(
+      "click",
+      cycleTheme
+    );
+
+  $("settingsBtn")
+    ?.addEventListener(
+      "click",
+      openSettings
+    );
+
+  $("closeSettings")
+    ?.addEventListener(
+      "click",
+      closeSettings
+    );
+
+  $("settingsModal")
+    ?.addEventListener(
+      "click",
+      event=>{
+        if(
+          event.target===
+          $("settingsModal")
+        ){
+          closeSettings();
+        }
+      }
+    );
+
+  $("themeSelect")
+    ?.addEventListener(
+      "change",
+      event=>{
+        applyTheme(
+          event.target.value
+        );
+      }
+    );
+
+  $("defaultSourceSelect")
+    ?.addEventListener(
+      "change",
+      event=>{
+
+        if(
+          event.target.value==="arxiv"
+        ){
+          event.target.value=
+            currentSource==="arxiv"
+            ?"wikipedia"
+            :currentSource;
+
+          return;
+        }
+
+        selectSource(
+          event.target.value
+        );
+      }
+    );
+
+  document.querySelectorAll(
+    ".sourceChip"
+  ).forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        if(button.disabled||
+           button.dataset.source==="arxiv"){
+          return;
+        }
+
+        selectSource(
+          button.dataset.source
+        );
+
+        const query=
+          $("searchInput")
+          ?.value
+          .trim();
+
+        if(query){
+          performSearch(query);
+        }
+      }
+    );
+
+  });
+
+  $("searchForm")
+    ?.addEventListener(
+      "submit",
+      event=>{
+
+        event.preventDefault();
+
+        const query=
+          $("searchInput")
+          ?.value
+          .trim();
+
+        if(query){
+          performSearch(query);
+        }
+
+      }
+    );
+
+  $("clearSearchBtn")
+    ?.addEventListener(
+      "click",
+      ()=>{
+
+        $("searchInput").value="";
+
+        $("status").textContent="";
+
+        $("results").innerHTML=`
+
+          <div class="empty">
+            Search for something to see results.
+          </div>
+
+        `;
+
+        $("searchInput").focus();
+
+      }
+    );
+
+  $("clearHistoryBtn")
+    ?.addEventListener(
+      "click",
+      ()=>{
+
+        history=[];
+
+        setJSON(
+          STORAGE.history,
+          history
+        );
+
+        renderHistory();
+
+      }
+    );
+
+  $("announcementClose")
+    ?.addEventListener(
+      "click",
+      closeAnnouncement
+    );
+
+  $("announcementNever")
+    ?.addEventListener(
+      "click",
+      neverShowAnnouncement
+    );
+
+  $("cookieOk")
+    ?.addEventListener(
+      "click",
+      acceptCookie
+    );
+
+  setupBottomLinks();
+
+  setupDodgeGame();
+
+  document.addEventListener(
+    "keydown",
+    event=>{
+
+      if(
+        event.key==="/" &&
+        document.activeElement?.tagName!=="INPUT" &&
+        document.activeElement?.tagName!=="TEXTAREA"
+      ){
+
+        event.preventDefault();
+
+        $("searchInput")?.focus();
+
+      }
+
+      if(event.key==="Escape"){
+
+        closeSettings();
+        closeAnnouncement();
+        setSidebar(false);
+
+      }
+
+    }
+  );
+
+}
+
+/* START */
+
+function startApp(){
+
+  try{
+
+    loadData();
+
+    const storedTheme=
+      getStorage(
+        STORAGE.theme,
+        "light"
+      );
+
+    applyTheme(
+      THEMES[storedTheme]
+      ?storedTheme
+      :"light"
+    );
+
+    const storedSource=
+      getStorage(
+        STORAGE.source,
+        "wikipedia"
+      );
+
+    /* ARXIV CAN NO LONGER BE THE SAVED SOURCE */
+    selectSource(
+      storedSource==="games"||
+      (
+        storedSource!=="arxiv" &&
+        SOURCE_INFO[storedSource]
+      )
+      ?storedSource
+      :"wikipedia"
+    );
+
+    setSidebar(false);
+
+    renderHistory();
+    renderSaved();
+
+    setupCookie();
+    setupAnnouncement();
+    setupEvents();
+
+  }catch(error){
+
+    console.error(
+      "Mystarsnight startup error:",
+      error
+    );
+
+  }
+
+}
+
+if(
+  document.readyState==="loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    startApp
+  );
+
+}else{
+
+  startApp();
+
+}
 </script>
 
 </body>
